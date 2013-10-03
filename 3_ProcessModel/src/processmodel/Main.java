@@ -36,6 +36,10 @@ public class Main {
                 + "Day: 0"
                 + "     k1:6 lamda:4"
                 + "Day: 1"
-                + "	k1:15";
+                + "	k1:15"
+                + "Day: 2"
+                + "	k1:4"
+                + "Day: 3"
+                + "	k1:1";
     }
 }
