@@ -137,7 +137,7 @@ public class KimProcess {
 
         DecimalFormat df = new DecimalFormat("###.##");
         
-        for (int i = statList.size()-1; count > 0; i--) {
+        for (int i = statList.size()-1; count > 0 && i>=0; i--) {
             count--;
             Integer repeats = statList.get(i).getPoint();
             System.out.println(statList.get(i).getDescription());

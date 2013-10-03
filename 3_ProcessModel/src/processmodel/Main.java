@@ -34,8 +34,8 @@ public class Main {
     private static String getAPreload() {
         return ""
                 + "Day: 0"
-                + "     X:12;"
+                + "     k1:6 lamda:4"
                 + "Day: 1"
-                + "	X:3;";
+                + "	k1:15";
     }
 }

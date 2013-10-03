@@ -56,7 +56,7 @@ public class Workshop extends Department {
         if (staticstic[day] == null) {
             staticstic[day] = "";
         }
-        staticstic[day] += "\t" + ident + ":" + spendPower + ";\n";
+        staticstic[day] += "\t" + ident + ":" + spendPower + " ";
     }
 
     public String getStatistic() {
@@ -66,6 +66,7 @@ public class Workshop extends Department {
             if (staticstic[i] != null) {
                 sb.append("Day: " + i + "\n");
                 sb.append(staticstic[i]);
+                sb.append("\n");
             }
         }
         return sb.toString();
@@ -75,13 +76,11 @@ public class Workshop extends Department {
         for (String dayInfo : stat.split("Day:")) {
             Scanner sc = new Scanner(dayInfo);
             try {
-                
                 Integer dayNumber = sc.nextInt();
                 while (sc.hasNext()){
-                    String oneInfo = sc.next(Pattern.compile("[a-zA-Z]+:[0-9]+;"));
-                    String[] data = oneInfo.split("[a-zA-Z0-9]+");
+                    String[] data = sc.next().split(":");
                     String ident = data[0];
-                    Integer power = Integer.parseInt(data[1]);
+                    Integer power = Integer.valueOf(data[1]);
                     
                     spendPower(dayNumber,power,ident);
                 }
