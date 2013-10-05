@@ -60,7 +60,7 @@ public class WorkshopKimMethod extends KimMethod{
 
     @Override
     public int getResultPoint() {
-        return Plant.getPlant().counting.getCash();
+        return Plant.getPlant().counting.getBalance();
     }
 
     @Override

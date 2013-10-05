@@ -10,23 +10,31 @@ package processmodel.department;
  */
 public class Counting extends Department{
     
-    int cash;
-
     public Counting() {
-        cash = 0;
+    }
+    
+    public void addCash(int add, int day){
+        shedule[day] += add;
+    }
+    
+    public void spendCash(int spend, int day){
+        shedule[day] -= spend;
     }
     
     
-    public void addCash(int add){
-        cash += add;
+    public int getBalance(){
+        int cash = 0;
+        for (int i=0;i<SHEDULE_DEEP;++i){
+            cash += shedule[i];
+        }
+        return cash;
     }
     
-    public void spendCash(int spend){
-        cash -=spend;
-    }
-    
-    
-    public int getCash(){
+    public int getBalance(int day){
+        int cash = 0;
+        for (int i=0;i<=day;++i){
+            cash += shedule[i];
+        }
         return cash;
     }
 }

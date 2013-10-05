@@ -18,8 +18,11 @@ public class WorkshopMethod extends SimpleMethod {
     WorkshopOrder order;
     int day;
     int powerLimit;
+    int spendPower;
     public static Float coeffSimp[] = new Float[]{4f, 3f, 1.5f, 0.2f};
 
+    CountingMethod cm;
+    
     public WorkshopMethod(WorkshopOrder order, int day, int powerLimit) {
         this.order = order;
         this.day = day;
@@ -31,11 +34,15 @@ public class WorkshopMethod extends SimpleMethod {
         Workshop workshop = Plant.getPlant().workshop;
 
         int reservedPower = workshop.getFreePower(day + 1, order.getEndDay());
-        int spendPower = Math.min(Math.min(powerLimit, order.getLeftPower()), workshop.getFreePower(day));
+        spendPower = Math.min(Math.min(powerLimit, order.getLeftPower()), workshop.getFreePower(day));
 
         // проверка на принципиальную исполнимость заказа после исполнения данного едйствия
-        return reservedPower >= (order.getLeftPower() - spendPower);
-
+        boolean hasPower = reservedPower >= (order.getLeftPower() - spendPower);
+        
+        // проверка на начиличе денег на выполнение
+        cm = new CountingMethod(workshop.getMoneyForProduce(spendPower), order.getSellCost(), day);
+        
+        return hasPower && cm.isAllow();
 
     }
 
@@ -47,16 +54,16 @@ public class WorkshopMethod extends SimpleMethod {
     @Override
     public void execute() {
         Workshop workshop = Plant.getPlant().workshop;
-        int spendPower = Math.min(powerLimit, order.getLeftPower());
         order.addSpendPower(spendPower);
         workshop.spendPower(day, spendPower, order.getIdentName());
+        cm.execute();
 
         if (KimProcess.printDetail) {
             System.out.println("\tWorkshop  Order:" + order.getIdentName() + " spend_power:" + spendPower);
         }
 
         if (order.isComplete() && order.isSelled()) {
-            Plant.getPlant().counting.addCash(order.getSellCost());
+            Plant.getPlant().counting.addCash(order.getSellCost(), day);
             order.selled();
         }
     }

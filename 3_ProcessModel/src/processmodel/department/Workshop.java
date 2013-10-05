@@ -4,10 +4,8 @@
  */
 package processmodel.department;
 
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 import processmodel.data.WorkshopOrder;
 import processmodel.simplest.SimpleMethod;
 import processmodel.simplest.WorkshopMethod;
@@ -18,14 +16,9 @@ import processmodel.simplest.WorkshopMethod;
  */
 public class Workshop extends Department {
 
-    private int[] shedule;
-    private String[] staticstic;
     private static final Integer MAX_DAILY_POWER = 12;
-    private static final int SHEDULE_DEEP = 1000;
-
+    
     public Workshop() {
-        shedule = new int[SHEDULE_DEEP];
-        staticstic = new String[SHEDULE_DEEP];
     }
 
     public Integer getMaxPower() {
@@ -59,35 +52,29 @@ public class Workshop extends Department {
         staticstic[day] += "\t" + ident + ":" + spendPower + " ";
     }
 
-    public String getStatistic() {
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < SHEDULE_DEEP; ++i) {
-            if (staticstic[i] != null) {
-                sb.append("Day: " + i + "\n");
-                sb.append(staticstic[i]);
-                sb.append("\n");
-            }
-        }
-        return sb.toString();
-    }
-
     public void addByStatistic(String stat) {
         for (String dayInfo : stat.split("Day:")) {
             Scanner sc = new Scanner(dayInfo);
             try {
                 Integer dayNumber = sc.nextInt();
-                while (sc.hasNext()){
+                while (sc.hasNext()) {
                     String[] data = sc.next().split(":");
                     String ident = data[0];
                     Integer power = Integer.valueOf(data[1]);
-                    
-                    spendPower(dayNumber,power,ident);
+
+                    spendPower(dayNumber, power, ident);
                 }
             } catch (NoSuchElementException nsee) {
                 // пустая строка
-            } catch (IllegalStateException ise){
+            } catch (IllegalStateException ise) {
             }
         }
+    }
+    
+    /* сколько потребуется денег на поддержание производства нужных мощностей.
+     * Потом нужно усложнить и учесть детали со склада, з/п рабочим, может воду, элекстричество.
+     */
+    public int getMoneyForProduce(int power){
+        return power*25;
     }
 }

@@ -23,7 +23,7 @@ public class Main {
         WorkshopOrder order = WorkshopOrder.getXOrder();
 
         KimProcess process = new KimProcess();
-        KimProcess.printDetail = true;
+        //KimProcess.printDetail = true;
         WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
         kimMethod.addPreload(getAPreload());
 
@@ -35,12 +35,15 @@ public class Main {
     private static String getAPreload() {
         return ""
                 + "Day: 0"
-                + "     k1:6 lamda:4"
+                + "    workshop: "
+                + "     k1:6 lamda:2"   //4
+                + "    counting:"
+                + "     k1:-60 k2:300 "
                 + "Day: 1"
-                + "	k1:12"
+                + "	k1:11"
                 + "Day: 2"
-                + "	k1:4"
+                + "	k1:6"   //6
                 + "Day: 3"
-                + "	k1:1";
+                + "	k1:8";  //4
     }
 }
