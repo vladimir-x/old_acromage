@@ -6,6 +6,8 @@ package processmodel.kimmethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import processmodel.Plant;
 import processmodel.data.WorkshopOrder;
 import processmodel.department.Workshop;
@@ -15,16 +17,16 @@ import processmodel.simplest.SimpleMethod;
  *
  * @author Dude
  */
-public class WorkshopKimMethod extends KimMethod{
+public class WorkshopKimMethod extends KimMethod {
 
     WorkshopOrder order;
     List<String> preloadList;
-    
+
     public WorkshopKimMethod(WorkshopOrder order) {
         this.order = order;
         preloadList = new ArrayList<String>();
     }
-    
+
     @Override
     public int getStartDate() {
         return order.getStartDay();
@@ -39,14 +41,14 @@ public class WorkshopKimMethod extends KimMethod{
     public List<SimpleMethod> getDailySimpleMethods(int day) {
         Workshop workshop = Plant.getPlant().workshop;
         Integer maxPower = workshop.getMaxPower();
-        
+
         List<SimpleMethod> res = new ArrayList<SimpleMethod>();
-        
-        res.add(workshop.getProduceMethod(order,day,maxPower));
-        res.add(workshop.getProduceMethod(order,day,maxPower/2));
-        res.add(workshop.getProduceMethod(order,day,1));
-        res.add(workshop.getProduceMethod(order,day,0));
-        
+
+        res.add(workshop.getProduceMethod(order, day, maxPower));
+        res.add(workshop.getProduceMethod(order, day, maxPower / 2));
+        res.add(workshop.getProduceMethod(order, day, 1));
+        res.add(workshop.getProduceMethod(order, day, 0));
+
         return res;
     }
 
@@ -54,7 +56,7 @@ public class WorkshopKimMethod extends KimMethod{
     public void init() {
         order.init();
         for (String preload :preloadList){
-            Plant.getPlant().workshop.addByStatistic(preload);
+            Plant.getPlant().addByStatistic(preload);
         }
     }
 
@@ -76,5 +78,4 @@ public class WorkshopKimMethod extends KimMethod{
     public void addPreload(String string) {
         preloadList.add(string);
     }
-    
 }

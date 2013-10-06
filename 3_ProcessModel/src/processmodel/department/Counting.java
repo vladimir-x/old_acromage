@@ -11,6 +11,7 @@ package processmodel.department;
 public class Counting extends Department{
     
     public Counting() {
+        //addCash(10000,0);
     }
     
     public void addCash(int add, int day){

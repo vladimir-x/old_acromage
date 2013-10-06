@@ -32,4 +32,8 @@ public class Plant {
     public static Plant getPlant() {
         return plant;
     }
+
+    public void addByStatistic(String preload) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

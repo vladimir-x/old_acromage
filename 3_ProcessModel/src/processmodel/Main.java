@@ -4,6 +4,9 @@
  */
 package processmodel;
 
+import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
+import java.io.FileWriter;
+import java.io.Writer;
 import processmodel.data.WorkshopOrder;
 import processmodel.kimmethod.KimMethod;
 import processmodel.kimmethod.WorkshopKimMethod;
@@ -25,10 +28,11 @@ public class Main {
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
         WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
-        kimMethod.addPreload(getAPreload());
+        //kimMethod.addPreload(getAPreload());
 
         process.modele(kimMethod, 50);
         process.printStatistic();
+
 
     }
 
@@ -36,13 +40,13 @@ public class Main {
         return ""
                 + "Day: 0"
                 + "    workshop: "
-                + "     k1:6 lamda:2"   //4
+                + "     k1:6 lamda:2" //4
                 + "    counting:"
                 + "     k1:-60 k2:300 "
                 + "Day: 1"
                 + "	k1:11"
                 + "Day: 2"
-                + "	k1:6"   //6
+                + "	k1:6" //6
                 + "Day: 3"
                 + "	k1:8";  //4
     }

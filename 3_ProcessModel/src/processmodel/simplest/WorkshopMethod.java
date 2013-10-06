@@ -40,9 +40,12 @@ public class WorkshopMethod extends SimpleMethod {
         boolean hasPower = reservedPower >= (order.getLeftPower() - spendPower);
         
         // проверка на начиличе денег на выполнение
+        // в текущий ход
         cm = new CountingMethod(workshop.getMoneyForProduce(spendPower), order.getSellCost(), day);
+        // на всё прозводство
+        CountingMethod cmAll = new CountingMethod(workshop.getMoneyForProduce(order.getLeftPower() - spendPower), order.getSellCost(), order.getEndDay());
         
-        return hasPower && cm.isAllow();
+        return hasPower && cm.isAllow() && cmAll.isAllow();
 
     }
 
