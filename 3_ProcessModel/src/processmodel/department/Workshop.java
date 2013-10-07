@@ -4,6 +4,7 @@
  */
 package processmodel.department;
 
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import processmodel.data.WorkshopOrder;
@@ -27,7 +28,7 @@ public class Workshop extends Department {
 
     public int getFreePower(int day) {
         if (day < SHEDULE_DEEP && day >= 0) {
-            return getMaxPower() - shedule[day];
+            return getMaxPower() - getShedule(day);
         }
         return 0;
     }
@@ -35,7 +36,7 @@ public class Workshop extends Department {
     public int getFreePower(int start, int end) {
         int res = 0;
         for (int i = start; i <= end; ++i) {
-            res += getMaxPower() - shedule[i];
+            res += getMaxPower() - getShedule(i);
         }
         return res;
     }
@@ -45,7 +46,7 @@ public class Workshop extends Department {
     }
 
     public void spendPower(int day, int spendPower, String ident) {
-        shedule[day] += spendPower;
+        addShedule(day, spendPower);
         if (staticstic[day] == null) {
             staticstic[day] = "";
         }

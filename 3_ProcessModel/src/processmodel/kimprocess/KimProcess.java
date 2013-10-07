@@ -86,8 +86,9 @@ public class KimProcess {
 
             if (maxPoints < currPoints) {
                 statisticMap.clear();
+                maxPoints = currPoints;
             }
-            String currStat = kimMethod.getResultDetailedStat();
+            String currStat = Plant.getStatistic();
 
             Integer count = statisticMap.get(currStat);
             statisticMap.put(currStat, count != null ? count + 1 : 1);
@@ -114,7 +115,7 @@ public class KimProcess {
         }
     }
 
-    public void printStatistic() {
+    public void printKimStatistic() {
 
 
         int count = 10;

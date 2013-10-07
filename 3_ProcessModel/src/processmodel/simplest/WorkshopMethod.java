@@ -41,11 +41,11 @@ public class WorkshopMethod extends SimpleMethod {
         
         // проверка на начиличе денег на выполнение
         // в текущий ход
-        cm = new CountingMethod(workshop.getMoneyForProduce(spendPower), order.getSellCost(), day);
+        //cm = new CountingMethod(workshop.getMoneyForProduce(spendPower), order.getSellCost(), day);
         // на всё прозводство
-        CountingMethod cmAll = new CountingMethod(workshop.getMoneyForProduce(order.getLeftPower() - spendPower), order.getSellCost(), order.getEndDay());
+        //CountingMethod cmAll = new CountingMethod(workshop.getMoneyForProduce(order.getLeftPower() - spendPower), order.getSellCost(), order.getEndDay());
         
-        return hasPower && cm.isAllow() && cmAll.isAllow();
+        return hasPower;// && cm.isAllow() && cmAll.isAllow();
 
     }
 
@@ -59,7 +59,7 @@ public class WorkshopMethod extends SimpleMethod {
         Workshop workshop = Plant.getPlant().workshop;
         order.addSpendPower(spendPower);
         workshop.spendPower(day, spendPower, order.getIdentName());
-        cm.execute();
+        //cm.execute();
 
         if (KimProcess.printDetail) {
             System.out.println("\tWorkshop  Order:" + order.getIdentName() + " spend_power:" + spendPower);

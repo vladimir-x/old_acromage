@@ -66,11 +66,6 @@ public class WorkshopKimMethod extends KimMethod {
     }
 
     @Override
-    public String getResultDetailedStat() {
-        return Plant.getPlant().workshop.getStatistic();
-    }
-
-    @Override
     public long getResultHash() {
         return Plant.getPlant().workshop.getStatistic().hashCode();
     }

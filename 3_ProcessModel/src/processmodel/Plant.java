@@ -4,6 +4,15 @@
  */
 package processmodel;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import processmodel.department.Counting;
 import processmodel.department.Delivery;
 import processmodel.department.Workshop;
@@ -31,6 +40,22 @@ public class Plant {
 
     public static Plant getPlant() {
         return plant;
+    }
+    
+
+    public static String getStatistic() {
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            return om.writeValueAsString(plant);
+
+        } catch (JsonProcessingException jpe) {
+            System.err.println(jpe);
+        } catch (IOException ex) {
+            Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+
     }
 
     public void addByStatistic(String preload) {

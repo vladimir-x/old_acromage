@@ -39,11 +39,6 @@ public class DeliveryKimMethod extends KimMethod{
     }
 
     @Override
-    public String getResultDetailedStat() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public long getResultHash() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

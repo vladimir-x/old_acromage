@@ -4,11 +4,7 @@
  */
 package processmodel;
 
-import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
-import java.io.FileWriter;
-import java.io.Writer;
 import processmodel.data.WorkshopOrder;
-import processmodel.kimmethod.KimMethod;
 import processmodel.kimmethod.WorkshopKimMethod;
 import processmodel.kimprocess.KimProcess;
 
@@ -18,10 +14,13 @@ import processmodel.kimprocess.KimProcess;
  */
 public class Main {
 
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+  
 
         WorkshopOrder order = WorkshopOrder.getXOrder();
 
@@ -31,7 +30,7 @@ public class Main {
         //kimMethod.addPreload(getAPreload());
 
         process.modele(kimMethod, 50);
-        process.printStatistic();
+        process.printKimStatistic();
 
 
     }
