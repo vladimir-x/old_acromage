@@ -4,7 +4,21 @@
  */
 package processmodel;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import processmodel.data.WorkshopOrder;
+import processmodel.department.Counting;
+import processmodel.department.Department;
+import processmodel.department.Workshop;
 import processmodel.kimmethod.WorkshopKimMethod;
 import processmodel.kimprocess.KimProcess;
 
@@ -14,20 +28,19 @@ import processmodel.kimprocess.KimProcess;
  */
 public class Main {
 
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-  
+
 
         WorkshopOrder order = WorkshopOrder.getXOrder();
 
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
         WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
-        //kimMethod.addPreload(getAPreload());
+        kimMethod.addPreload(getJSONPreload());
 
         process.modele(kimMethod, 50);
         process.printKimStatistic();
@@ -35,18 +48,25 @@ public class Main {
 
     }
 
-    private static String getAPreload() {
-        return ""
-                + "Day: 0"
-                + "    workshop: "
-                + "     k1:6 lamda:2" //4
-                + "    counting:"
-                + "     k1:-60 k2:300 "
-                + "Day: 1"
-                + "	k1:11"
-                + "Day: 2"
-                + "	k1:6" //6
-                + "Day: 3"
-                + "	k1:8";  //4
+    private static String getJSONPreload() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("plant.json"));
+            StringBuilder sb = new StringBuilder();
+            String r = "";
+            do {
+                 r = reader.readLine();
+                 sb.append(r);
+            } while (r != null);
+                    
+            reader.close();
+            return sb.toString();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";
     }
+
 }

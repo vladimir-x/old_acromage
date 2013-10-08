@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package processmodel.department;
+package processmodel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashMap;
@@ -10,19 +10,21 @@ import java.util.Map;
 
 /**
  *
- * @author Dude
+ * @author elduderino
  */
-public class Department {
+public class Jtest {
 
     public Map<Integer, Integer> shedule;
     protected static Integer SHEDULE_DEEP = 1000;
-    public String[] staticstic;
+    protected String[] staticstic;
 
-    public Department() {
+    public Jtest() {
         shedule = new HashMap<Integer, Integer>();
         staticstic = new String[SHEDULE_DEEP];
     }
+     
 
+    @JsonIgnore
     protected Integer getShedule(int day) {
         Integer res = shedule.get(day);
         if (res == null) {
@@ -31,10 +33,12 @@ public class Department {
         return res;
     }
 
+    @JsonIgnore
     protected void setShedule(int day, int value) {
         shedule.put(day, value);
     }
 
+    @JsonIgnore
     protected void addShedule(int day, int value) {
         Integer res = shedule.get(String.valueOf(day));
         if (res == null) {
@@ -57,4 +61,5 @@ public class Department {
         }
         return sb.toString();
     }
+
 }

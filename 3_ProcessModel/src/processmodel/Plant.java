@@ -4,12 +4,9 @@
  */
 package processmodel;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import java.io.File;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +44,8 @@ public class Plant {
 
         ObjectMapper om = new ObjectMapper();
         try {
-            return om.writeValueAsString(plant);
+            ObjectWriter writer = om.writer().withDefaultPrettyPrinter();
+            return writer.writeValueAsString(plant);
 
         } catch (JsonProcessingException jpe) {
             System.err.println(jpe);
@@ -58,7 +56,14 @@ public class Plant {
 
     }
 
-    public void addByStatistic(String preload) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public static void loadByStatistic(String preload) {
+        ObjectMapper om = new ObjectMapper();
+        try {
+            plant = om.readValue(preload, Plant.class);
+        } catch (JsonProcessingException jpe) {
+            System.err.println(jpe);
+        } catch (IOException ex) {
+            Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

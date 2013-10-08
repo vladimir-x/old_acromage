@@ -4,6 +4,9 @@
  */
 package processmodel.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  *
  * @author Dude
@@ -53,6 +56,7 @@ public class WorkshopOrder {
      * Завершено ?
      * @return 
      */
+    @JsonIgnore
     public boolean isComplete() {
         return spendPower == powerAll;
     }
@@ -61,6 +65,7 @@ public class WorkshopOrder {
      * Сколько соталось до завершения
      * @return 
      */
+    @JsonIgnore
     public int getLeftPower() {
         return powerAll - spendPower;
     }

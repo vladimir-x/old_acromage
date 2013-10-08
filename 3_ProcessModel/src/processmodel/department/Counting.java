@@ -4,6 +4,8 @@
  */
 package processmodel.department;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author Dude
@@ -22,6 +24,7 @@ public class Counting extends Department {
         addShedule(day, -spend);
     }
 
+    @JsonIgnore
     public int getBalance() {
         return getBalance(SHEDULE_DEEP-1);
     }

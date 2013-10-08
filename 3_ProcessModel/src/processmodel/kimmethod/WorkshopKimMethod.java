@@ -56,7 +56,7 @@ public class WorkshopKimMethod extends KimMethod {
     public void init() {
         order.init();
         for (String preload :preloadList){
-            Plant.getPlant().addByStatistic(preload);
+            Plant.getPlant().loadByStatistic(preload);
         }
     }
 
@@ -67,7 +67,7 @@ public class WorkshopKimMethod extends KimMethod {
 
     @Override
     public long getResultHash() {
-        return Plant.getPlant().workshop.getStatistic().hashCode();
+        return Plant.getPlant().workshop.getStatisticInfo().hashCode();
     }
 
     public void addPreload(String string) {

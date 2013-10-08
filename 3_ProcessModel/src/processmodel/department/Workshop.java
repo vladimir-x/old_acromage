@@ -4,6 +4,7 @@
  */
 package processmodel.department;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -17,11 +18,12 @@ import processmodel.simplest.WorkshopMethod;
  */
 public class Workshop extends Department {
 
-    private static final Integer MAX_DAILY_POWER = 12;
+    public static final Integer MAX_DAILY_POWER = 12;
     
     public Workshop() {
     }
 
+    @JsonIgnore
     public Integer getMaxPower() {
         return MAX_DAILY_POWER;
     }
