@@ -35,7 +35,7 @@ public class Main {
 
 
 
-        WorkshopOrder order = WorkshopOrder.getXOrder();
+        WorkshopOrder order = WorkshopOrder.getNamedOrder("Z");
 
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
@@ -54,10 +54,12 @@ public class Main {
             StringBuilder sb = new StringBuilder();
             String r = "";
             do {
-                 r = reader.readLine();
-                 sb.append(r);
+                r = reader.readLine();
+                if (r != null) {
+                    sb.append(r);
+                }
             } while (r != null);
-                    
+
             reader.close();
             return sb.toString();
         } catch (FileNotFoundException ex) {
@@ -65,8 +67,7 @@ public class Main {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return "";
     }
-
 }

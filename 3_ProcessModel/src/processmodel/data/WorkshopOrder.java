@@ -26,10 +26,10 @@ public class WorkshopOrder {
     public WorkshopOrder() {
     }
 
-    public static WorkshopOrder getXOrder() {
+    public static WorkshopOrder getNamedOrder(String name) {
         WorkshopOrder order = new WorkshopOrder();
 
-        order.identName = "X";
+        order.identName = name;
         order.startDay = 0;
         order.endDay = 3;
         order.powerAll = 15;

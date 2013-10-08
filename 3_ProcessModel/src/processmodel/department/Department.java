@@ -5,7 +5,9 @@
 package processmodel.department;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,11 +18,11 @@ public class Department {
 
     public Map<Integer, Integer> shedule;
     protected static Integer SHEDULE_DEEP = 1000;
-    public String[] staticstic;
+    public Map<Integer, List<String>> staticstic;
 
     public Department() {
         shedule = new HashMap<Integer, Integer>();
-        staticstic = new String[SHEDULE_DEEP];
+        staticstic = new HashMap<Integer, List<String>>();
     }
 
     protected Integer getShedule(int day) {
@@ -36,7 +38,7 @@ public class Department {
     }
 
     protected void addShedule(int day, int value) {
-        Integer res = shedule.get(String.valueOf(day));
+        Integer res = shedule.get(day);
         if (res == null) {
             shedule.put(day, value);
         } else {
@@ -44,17 +46,12 @@ public class Department {
         }
     }
 
-    @JsonIgnore
-    public String getStatisticInfo() {
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < SHEDULE_DEEP; ++i) {
-            if (staticstic[i] != null) {
-                sb.append("Day: " + i + " ");
-                sb.append(staticstic[i]);
-                sb.append(";");
-            }
+    protected void addStatistic(int day, String StatStr) {
+        List<String> list = staticstic.get(day);
+        if (list == null){
+            list = new ArrayList<String>();
+            staticstic.put(day, list);
         }
-        return sb.toString();
+        list.add(StatStr);
     }
 }

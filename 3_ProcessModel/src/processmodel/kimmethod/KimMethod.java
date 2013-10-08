@@ -28,8 +28,5 @@ public abstract class KimMethod {
     
     // статистическая выписка по выполенному плану
     //abstract public String getResultDetailedStat();
-    
-    // хэш результата, для обозначения уникальности результата
-    abstract public long getResultHash();
 
 }

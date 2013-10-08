@@ -38,7 +38,6 @@ public class Plant {
     public static Plant getPlant() {
         return plant;
     }
-    
 
     public static String getStatistic() {
 
@@ -57,13 +56,15 @@ public class Plant {
     }
 
     public static void loadByStatistic(String preload) {
-        ObjectMapper om = new ObjectMapper();
-        try {
-            plant = om.readValue(preload, Plant.class);
-        } catch (JsonProcessingException jpe) {
-            System.err.println(jpe);
-        } catch (IOException ex) {
-            Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
+        if (!preload.isEmpty()) {
+            ObjectMapper om = new ObjectMapper();
+            try {
+                plant = om.readValue(preload, Plant.class);
+            } catch (JsonProcessingException jpe) {
+                System.err.println(jpe);
+            } catch (IOException ex) {
+                Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

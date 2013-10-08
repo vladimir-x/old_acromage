@@ -49,10 +49,7 @@ public class Workshop extends Department {
 
     public void spendPower(int day, int spendPower, String ident) {
         addShedule(day, spendPower);
-        if (staticstic[day] == null) {
-            staticstic[day] = "";
-        }
-        staticstic[day] += "\t" + ident + ":" + spendPower + " ";
+        addStatistic(day,ident + ":" + spendPower);
     }
 
     public void addByStatistic(String stat) {
@@ -80,4 +77,6 @@ public class Workshop extends Department {
     public int getMoneyForProduce(int power){
         return power*25;
     }
+
+
 }

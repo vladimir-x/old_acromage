@@ -6,8 +6,6 @@ package processmodel.kimmethod;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import processmodel.Plant;
 import processmodel.data.WorkshopOrder;
 import processmodel.department.Workshop;
@@ -63,11 +61,6 @@ public class WorkshopKimMethod extends KimMethod {
     @Override
     public int getResultPoint() {
         return Plant.getPlant().counting.getBalance();
-    }
-
-    @Override
-    public long getResultHash() {
-        return Plant.getPlant().workshop.getStatisticInfo().hashCode();
     }
 
     public void addPreload(String string) {
