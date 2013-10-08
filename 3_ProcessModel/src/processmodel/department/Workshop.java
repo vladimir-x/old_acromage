@@ -75,7 +75,7 @@ public class Workshop extends Department {
      * Потом нужно усложнить и учесть детали со склада, з/п рабочим, может воду, элекстричество.
      */
     public int getMoneyForProduce(int power){
-        return power*25;
+        return power*10;
     }
 
 

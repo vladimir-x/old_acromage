@@ -16,12 +16,14 @@ public class CountingMethod extends SimpleMethod {
     int profit;
     int cash;
     int day;
+    String comment;
     public static Float coeffSimp[] = new Float[]{1f, 0.3f};
 
-    public CountingMethod(int cashSpend , int profit, int day) {
+    public CountingMethod(int cashSpend , int profit, int day,String comment) {
         this.cash = cashSpend;
         this.day = day;
         this.profit = profit;
+        this.comment = comment;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class CountingMethod extends SimpleMethod {
     @Override
     public void execute() {
         Counting counting = Plant.getPlant().counting;
-        counting.spendCash(cash, day);
+        counting.spendCash(cash, day,comment);
     }
 
     // вариант функции оценки

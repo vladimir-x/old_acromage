@@ -16,12 +16,14 @@ public class Counting extends Department {
         //addCash(10000,0);
     }
 
-    public void addCash(int add, int day) {
+    public void addCash(int add, int day,String comment) {
         addShedule(day, add);
+        addStatistic(day, comment);
     }
 
-    public void spendCash(int spend, int day) {
+    public void spendCash(int spend, int day,String comment) {
         addShedule(day, -spend);
+        addStatistic(day, comment + ":" + (-spend));
     }
 
     @JsonIgnore

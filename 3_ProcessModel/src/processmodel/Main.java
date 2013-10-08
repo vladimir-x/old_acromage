@@ -4,21 +4,13 @@
  */
 package processmodel;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import processmodel.data.WorkshopOrder;
-import processmodel.department.Counting;
-import processmodel.department.Department;
-import processmodel.department.Workshop;
 import processmodel.kimmethod.WorkshopKimMethod;
 import processmodel.kimprocess.KimProcess;
 
@@ -35,7 +27,7 @@ public class Main {
 
 
 
-        WorkshopOrder order = WorkshopOrder.getNamedOrder("Z");
+        WorkshopOrder order = WorkshopOrder.getNamedOrder("A1");
 
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
