@@ -4,8 +4,7 @@
  */
 package processmodel.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 /**
  *
@@ -20,6 +19,8 @@ public class WorkshopOrder {
     int spendPower;     //потраченная мощность
     int prioritet;
     int sellCost;
+    
+    List<OrderPart> parts;
     
     boolean selled; // продан ли заказ (получены ли деньги за исполненный заказ)
 
@@ -56,7 +57,6 @@ public class WorkshopOrder {
      * Завершено ?
      * @return 
      */
-    @JsonIgnore
     public boolean isComplete() {
         return spendPower == powerAll;
     }
@@ -65,7 +65,6 @@ public class WorkshopOrder {
      * Сколько соталось до завершения
      * @return 
      */
-    @JsonIgnore
     public int getLeftPower() {
         return powerAll - spendPower;
     }
@@ -137,6 +136,5 @@ public class WorkshopOrder {
     public void selled() {
         this.selled = true;
     }
-    
     
 }
