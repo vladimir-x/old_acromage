@@ -67,4 +67,16 @@ public class Plant {
             }
         }
     }
+
+    /**
+     * Оценка состояния всех производственных единиц
+     * @return 
+     */
+    public int calcState() {
+
+        float[] coeff = new float[]{1f, 1f, 1f};
+        float res = workshop.getState() * coeff[0] + delivery.getState() * coeff[1] + counting.getState() * coeff[2];
+
+        return (int) res;
+    }
 }

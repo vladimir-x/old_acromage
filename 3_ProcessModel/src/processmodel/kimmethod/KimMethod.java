@@ -23,8 +23,11 @@ public abstract class KimMethod {
     // инициализация структурных едениц предпрятия
     abstract public void init();
     
-    // оценка выполеннного плана
-    abstract public int getResultPoint();
+    // тактическая(краткосрочная) оценка выполеннного плана
+    abstract public int getResultTacticPoint();
+    
+    // стратегическя(долгосрочная) оценка выполеннного плана
+    abstract public int getResultStrategicPoint();
     
     // статистическая выписка по выполенному плану
     //abstract public String getResultDetailedStat();

@@ -14,10 +14,10 @@ import java.util.Map;
  *
  * @author Dude
  */
-public class Department {
+public abstract class Department {
 
     public Map<Integer, Integer> shedule;
-    protected static Integer SHEDULE_DEEP = 1000;
+    protected static Integer lastDay = 0;
     public Map<Integer, List<String>> staticstic;
 
     public Department() {
@@ -30,11 +30,13 @@ public class Department {
         if (res == null) {
             return 0;
         }
+        lastDay = Math.max(lastDay, day);
         return res;
     }
 
     protected void setShedule(int day, int value) {
         shedule.put(day, value);
+        lastDay = Math.max(lastDay, day);
     }
 
     protected void addShedule(int day, int value) {
@@ -48,10 +50,20 @@ public class Department {
 
     protected void addStatistic(int day, String StatStr) {
         List<String> list = staticstic.get(day);
-        if (list == null){
+        if (list == null) {
             list = new ArrayList<String>();
             staticstic.put(day, list);
         }
         list.add(StatStr);
     }
+    
+    protected Integer getLastDay(){
+        return lastDay;
+    }
+
+    /**
+     * Оценка состояния производственной единицы
+     * @return 
+     */
+    public abstract int getState();
 }

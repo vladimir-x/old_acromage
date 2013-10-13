@@ -81,7 +81,7 @@ public class KimProcess {
 
     void saveStatistic() {
 
-        int currPoints = kimMethod.getResultPoint();
+        int currPoints = kimMethod.getResultTacticPoint();
         if (maxPoints <= currPoints) {
 
             if (maxPoints < currPoints) {

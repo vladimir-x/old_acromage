@@ -28,7 +28,7 @@ public class Counting extends Department {
 
     @JsonIgnore
     public int getBalance() {
-        return getBalance(SHEDULE_DEEP-1);
+        return getBalance(getLastDay());
     }
 
     public int getBalance(int day) {
@@ -37,5 +37,12 @@ public class Counting extends Department {
             cash += getShedule(i);
         }
         return cash;
+    }
+
+    
+    
+    @Override
+    public int getState() {
+        return getBalance();
     }
 }

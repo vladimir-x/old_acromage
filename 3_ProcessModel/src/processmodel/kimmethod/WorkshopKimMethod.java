@@ -59,11 +59,16 @@ public class WorkshopKimMethod extends KimMethod {
     }
 
     @Override
-    public int getResultPoint() {
+    public int getResultTacticPoint() {
         return Plant.getPlant().counting.getBalance();
     }
 
     public void addPreload(String string) {
         preloadList.add(string);
+    }
+
+    @Override
+    public int getResultStrategicPoint() {
+        return Plant.getPlant().calcState();
     }
 }

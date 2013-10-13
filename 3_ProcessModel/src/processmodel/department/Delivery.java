@@ -9,5 +9,10 @@ package processmodel.department;
  * @author Dude
  */
 public class Delivery extends Department{
+
+    @Override
+    public int getState() {
+        return 0;
+    }
     
 }

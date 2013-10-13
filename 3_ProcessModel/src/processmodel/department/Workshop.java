@@ -29,7 +29,7 @@ public class Workshop extends Department {
     }
 
     public int getFreePower(int day) {
-        if (day < SHEDULE_DEEP && day >= 0) {
+        if (day >= 0) {
             return getMaxPower() - getShedule(day);
         }
         return 0;
@@ -78,5 +78,15 @@ public class Workshop extends Department {
         return power*10;
     }
 
-
+    @Override
+    public int getState() {
+        // будем считать что чем ближе ежедневная нагрузка к указанному проказателю (к сердей загрузке например),
+        // тем лучше состояние производства
+        
+        float res = 0f;
+        for (int i =0 ; i<= getLastDay();++i){
+            
+        }
+        return 
+    }
 }
