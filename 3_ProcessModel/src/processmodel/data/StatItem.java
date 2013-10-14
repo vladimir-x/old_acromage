@@ -12,6 +12,7 @@ public class StatItem {
     
     String description;
     Integer point;
+    Integer count;
 
     public String getDescription() {
         return description;
@@ -28,4 +29,13 @@ public class StatItem {
     public void setPoint(Integer point) {
         this.point = point;
     }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+    
 }

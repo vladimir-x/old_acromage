@@ -27,13 +27,21 @@ public class KimProcess {
 
     public static boolean printDetail = false;
     KimMethod kimMethod;
-    Integer maxPoints;  //максимальная оценка итераций
     Integer iterationCount; //Количество итераций
-    Map<String, Integer> statisticMap;  // результат итераций с максимальнйо оценкой
+    Integer maxTacticPoints;  //максимальная тактическая оценка итераций
+    Integer maxStrategicPoints;  //максимальная стратегическая оценка итераций
+    Map<Integer, String> statisticTacticMap;  // результат итераций с максимальной тактической оценкой
+    Map<Integer, String> statisticStrategicMap;  // результат итераций с максимальной стратегической оценкой
+    Map<Integer, Integer> statisticCountTacticMap;
+    Map<Integer, Integer> statisticCountStrategicMap;
 
     public KimProcess() {
-        statisticMap = new HashMap<String, Integer>();
-        maxPoints = 0;
+        statisticTacticMap = new HashMap<Integer, String>();
+        statisticStrategicMap = new HashMap<Integer, String>();
+        statisticCountTacticMap = new HashMap<Integer, Integer>();
+        statisticCountStrategicMap = new HashMap<Integer, Integer>();
+        maxTacticPoints = 0;
+        maxStrategicPoints = 0;
     }
 
     private void dayModele(int day) {
@@ -81,17 +89,40 @@ public class KimProcess {
 
     void saveStatistic() {
 
-        int currPoints = kimMethod.getResultTacticPoint();
-        if (maxPoints <= currPoints) {
+        int currPoints;
+        String currStat = Plant.getStatistic();
+        Integer hash = currStat.hashCode();
 
-            if (maxPoints < currPoints) {
-                statisticMap.clear();
-                maxPoints = currPoints;
+        currPoints = kimMethod.getResultTacticPoint();
+        if (maxTacticPoints <= currPoints) {
+
+            if (maxTacticPoints < currPoints) {
+                statisticTacticMap.clear();
+                maxTacticPoints = currPoints;
             }
-            String currStat = Plant.getStatistic();
 
-            Integer count = statisticMap.get(currStat);
-            statisticMap.put(currStat, count != null ? count + 1 : 1);
+            if (!statisticTacticMap.containsKey(hash)) {
+                statisticTacticMap.put(hash, currStat);
+            }
+
+            Integer count = statisticCountTacticMap.get(hash);
+            statisticCountTacticMap.put(hash, count != null ? count + 1 : 1);
+        }
+
+        currPoints = kimMethod.getResultStrategicPoint();
+        if (maxStrategicPoints <= currPoints) {
+
+            if (maxStrategicPoints < currPoints) {
+                statisticStrategicMap.clear();
+                maxStrategicPoints = currPoints;
+            }
+
+            if (!statisticStrategicMap.containsKey(hash)) {
+                statisticStrategicMap.put(hash, currStat);
+            }
+
+            Integer count = statisticCountStrategicMap.get(hash);
+            statisticCountStrategicMap.put(hash, count != null ? count + 1 : 1);
         }
     }
     private static long starter = 0;//System.currentTimeMillis();
@@ -118,32 +149,71 @@ public class KimProcess {
     public void printKimStatistic() {
 
 
-        int count = 10;
-        
-        List<StatItem> statList = new ArrayList<StatItem>();
-        for (String key : statisticMap.keySet()) {
+        int count;
+        DecimalFormat df = new DecimalFormat("###.##");
+
+
+        List<StatItem> statTacticList = new ArrayList<StatItem>();
+        for (Integer hash : statisticTacticMap.keySet()) {
             StatItem si = new StatItem();
-            si.setDescription(key);
-            si.setPoint(statisticMap.get(key));
-            statList.add(si);
+            si.setDescription(statisticTacticMap.get(hash));
+            si.setCount(statisticCountTacticMap.get(hash));
+            si.setPoint(maxTacticPoints);
+            statTacticList.add(si);
         }
 
-        Collections.sort(statList, new Comparator<StatItem>() {
-
+        Collections.sort(statTacticList, new Comparator<StatItem>() {
             @Override
             public int compare(StatItem o1, StatItem o2) {
-                return o1.getPoint().compareTo(o2.getPoint());
+                return o1.getCount().compareTo(o2.getCount());
             }
         });
 
-        DecimalFormat df = new DecimalFormat("###.##");
-        
-        for (int i = statList.size()-1; count > 0 && i>=0; i--) {
+
+
+        count = 3;
+
+        System.out.println("------------------------------------------");
+        System.out.println("Tactick plans: points=" + maxTacticPoints + " count=" + statTacticList.size() + ";\n");
+
+        for (int i = statTacticList.size() - 1; count > 0 && i >= 0; i--) {
             count--;
-            Integer repeats = statList.get(i).getPoint();
-            System.out.println(statList.get(i).getDescription());
-            System.out.println(df.format(repeats * 100d / iterationCount) + "% (" + repeats + "/" + iterationCount + ")");
+            Integer repeats = statTacticList.get(i).getCount();
             System.out.println("--------------");
+            System.out.println(statTacticList.get(i).getDescription());
+            System.out.println(df.format(repeats * 100d / iterationCount) + "% (" + repeats + "/" + iterationCount + ")");
         }
+
+
+        List<StatItem> statStrategicList = new ArrayList<StatItem>();
+        for (Integer hash : statisticStrategicMap.keySet()) {
+            StatItem si = new StatItem();
+            si.setDescription(statisticStrategicMap.get(hash));
+            si.setCount(statisticCountStrategicMap.get(hash));
+            si.setPoint(maxStrategicPoints);
+            statStrategicList.add(si);
+        }
+
+        Collections.sort(statStrategicList, new Comparator<StatItem>() {
+            @Override
+            public int compare(StatItem o1, StatItem o2) {
+                return o1.getCount().compareTo(o2.getCount());
+            }
+        });
+
+
+        count = 3;
+        System.out.println("------------------------------------------");
+        System.out.println("Strategic plans: points=" + maxStrategicPoints + " count=" + statStrategicList.size() + ";\n");
+        for (int i = statStrategicList.size() - 1; count > 0 && i >= 0; i--) {
+            count--;
+            Integer repeats = statStrategicList.get(i).getCount();
+            System.out.println("--------------");
+            System.out.println(statStrategicList.get(i).getDescription());
+            System.out.println(df.format(repeats * 100d / iterationCount) + "% (" + repeats + "/" + iterationCount + ")");
+        }
+
+        System.out.println("------------------------------------------");
+        System.out.println("END.");
     }
 }

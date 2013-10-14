@@ -19,7 +19,7 @@ import processmodel.simplest.WorkshopMethod;
 public class Workshop extends Department {
 
     public static final Integer MAX_DAILY_POWER = 12;
-    
+
     public Workshop() {
     }
 
@@ -49,7 +49,7 @@ public class Workshop extends Department {
 
     public void spendPower(int day, int spendPower, String ident) {
         addShedule(day, spendPower);
-        addStatistic(day,ident + ":" + spendPower);
+        addStatistic(day, ident + ":" + spendPower);
     }
 
     public void addByStatistic(String stat) {
@@ -70,23 +70,25 @@ public class Workshop extends Department {
             }
         }
     }
-    
+
     /* сколько потребуется денег на поддержание производства нужных мощностей.
      * Потом нужно усложнить и учесть детали со склада, з/п рабочим, может воду, элекстричество.
      */
-    public int getMoneyForProduce(int power){
-        return power*10;
+    public int getMoneyForProduce(int power) {
+        return power * 10;
     }
 
     @Override
     public int getState() {
         // будем считать что чем ближе ежедневная нагрузка к указанному проказателю (к сердей загрузке например),
         // тем лучше состояние производства
-        
-        float res = 0f;
-        for (int i =0 ; i<= getLastDay();++i){
-            
+
+        int res = 0;
+        int goodFreePart = (int) (MAX_DAILY_POWER * 0.6f);
+        for (int i = 0; i <= getLastDay(); ++i) {
+            int delta = Math.abs(goodFreePart - getFreePower(i));
+            res += (MAX_DAILY_POWER - delta) * 10;
         }
-        return 
+        return res;
     }
 }
