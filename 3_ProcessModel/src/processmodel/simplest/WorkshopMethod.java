@@ -65,7 +65,7 @@ public class WorkshopMethod extends SimpleMethod {
             System.out.println("\tWorkshop  Order:" + order.getIdentName() + " spend_power:" + spendPower);
         }
 
-        if (order.isComplete() && order.isSelled()) {
+        if (order.isComplete() && !order.isSelled()) {
             Plant.getPlant().counting.addCash(order.getSellCost(), day,order.getIdentName());
             order.selled();
         }
