@@ -13,17 +13,16 @@ import processmodel.kimprocess.KimProcess;
  *
  * @author Dude
  */
-public class WorkshopMethod extends SimpleMethod {
+public class WorkshopProduceMethod extends SimpleMethod {
 
     WorkshopOrder order;
     int day;
     int powerLimit;
     int spendPower;
     public static Float coeffSimp[] = new Float[]{4f, 3f, 1.5f, 0.2f};
+    WorkshopStartMethod wsm;
 
-    CountingMethod cm;
-    
-    public WorkshopMethod(WorkshopOrder order, int day, int powerLimit) {
+    public WorkshopProduceMethod(WorkshopOrder order, int day, int powerLimit) {
         this.order = order;
         this.day = day;
         this.powerLimit = powerLimit;
@@ -38,15 +37,12 @@ public class WorkshopMethod extends SimpleMethod {
 
         // проверка на принципиальную исполнимость заказа после исполнения данного едйствия
         boolean hasPower = reservedPower >= (order.getLeftPower() - spendPower);
-        
-        // проверка на начиличе денег на выполнение
-        // в текущий ход
-        cm = new CountingMethod(workshop.getMoneyForProduce(spendPower), order.getSellCost(), day,order.getIdentName());
-        // на всё прозводство
-        CountingMethod cmAll = new CountingMethod(workshop.getMoneyForProduce(order.getLeftPower() - spendPower), order.getSellCost(), order.getEndDay(),order.getIdentName());
-        
-        return hasPower && cm.isAllow() && cmAll.isAllow();
 
+        if (!order.isStarted()) {
+            wsm = new WorkshopStartMethod(order, day);
+        }
+
+        return hasPower && (order.isStarted() || wsm.isAllow());// && cm.isAllow() && cmAll.isAllow();
     }
 
     @Override
@@ -56,17 +52,20 @@ public class WorkshopMethod extends SimpleMethod {
 
     @Override
     public void execute() {
+        if (!order.isStarted()) {
+            wsm.execute();
+        }
+        
         Workshop workshop = Plant.getPlant().workshop;
         order.addSpendPower(spendPower);
         workshop.spendPower(day, spendPower, order.getIdentName());
-        cm.execute();
 
         if (KimProcess.printDetail) {
             System.out.println("\tWorkshop  Order:" + order.getIdentName() + " spend_power:" + spendPower);
         }
 
         if (order.isComplete() && !order.isSelled()) {
-            Plant.getPlant().counting.addCash(order.getSellCost(), day,order.getIdentName());
+            Plant.getPlant().counting.addCash(order.getSellCost(), day, order.getIdentName());
             order.selled();
         }
     }

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * @author Dude
  */
-public class Counting extends Department {
+public class Counting extends Department<Integer> {
 
     public Counting() {
         //addCash(10000,0);
@@ -44,5 +44,15 @@ public class Counting extends Department {
     @Override
     public int getState() {
         return getBalance();
+    }
+
+    @Override
+    protected Integer getZero() {
+        return 0;
+    }
+
+    @Override
+    protected Integer sum(Integer o1, Integer o2) {
+        return o1+ o2;
     }
 }

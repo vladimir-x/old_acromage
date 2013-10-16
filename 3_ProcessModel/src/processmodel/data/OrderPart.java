@@ -27,7 +27,7 @@ public class OrderPart {
     }
     
     public static OrderPart getSteel(){
-        return new OrderPart("steel", 100);
+        return new OrderPart("steel ", 100);
     }
     
     public String getIdent() {

@@ -14,37 +14,49 @@ import java.util.Map;
  *
  * @author Dude
  */
-public abstract class Department {
+public abstract class Department<T> {
 
-    public Map<Integer, Integer> shedule;
+    public Map<Integer, T >shedule;
     protected static Integer lastDay = 0;
     public Map<Integer, List<String>> staticstic;
+    
+    protected T register;
 
     public Department() {
-        shedule = new HashMap<Integer, Integer>();
+        shedule = new HashMap<Integer, T>();
         staticstic = new HashMap<Integer, List<String>>();
     }
+    
+    
+    protected T getRegister(){
+        return register;
+    }
+    
+    protected void addRegister(T value){
+        
+    }
 
-    protected Integer getShedule(int day) {
-        Integer res = shedule.get(day);
+    protected T getShedule(int day) {
+        T res = shedule.get(day);
         if (res == null) {
-            return 0;
+            return getZero();
         }
         lastDay = Math.max(lastDay, day);
         return res;
     }
 
-    protected void setShedule(int day, int value) {
+    protected void setShedule(int day, T value) {
         shedule.put(day, value);
         lastDay = Math.max(lastDay, day);
     }
 
-    protected void addShedule(int day, int value) {
-        Integer res = shedule.get(day);
+    protected void addShedule(int day, T value) {
+        T res = shedule.get(day);
         if (res == null) {
             shedule.put(day, value);
         } else {
-            shedule.put(day, res + value);
+            
+            shedule.put(day, sum(res, value));
         }
     }
 
@@ -60,10 +72,15 @@ public abstract class Department {
     protected Integer getLastDay(){
         return lastDay;
     }
+    
+    protected abstract T getZero();
+    
+    protected abstract T sum(T o1,T o2);
 
     /**
      * Оценка состояния производственной единицы
      * @return 
      */
+    @JsonIgnore
     public abstract int getState();
 }

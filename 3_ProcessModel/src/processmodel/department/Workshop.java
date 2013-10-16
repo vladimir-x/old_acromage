@@ -10,13 +10,13 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import processmodel.data.WorkshopOrder;
 import processmodel.simplest.SimpleMethod;
-import processmodel.simplest.WorkshopMethod;
+import processmodel.simplest.WorkshopProduceMethod;
 
 /**
  *
  * @author Dude
  */
-public class Workshop extends Department {
+public class Workshop extends Department<Integer> {
 
     public static final Integer MAX_DAILY_POWER = 12;
 
@@ -44,7 +44,7 @@ public class Workshop extends Department {
     }
 
     public SimpleMethod getProduceMethod(WorkshopOrder order, int day, Integer powerLimit) {
-        return new WorkshopMethod(order, day, powerLimit);
+        return new WorkshopProduceMethod(order, day, powerLimit);
     }
 
     public void spendPower(int day, int spendPower, String ident) {
@@ -90,5 +90,15 @@ public class Workshop extends Department {
             res += (MAX_DAILY_POWER - delta) * 10;
         }
         return res;
+    }
+
+    @Override
+    protected Integer getZero() {
+        return 0;
+    }
+
+    @Override
+    protected Integer sum(Integer o1, Integer o2) {
+        return o1 + o2;
     }
 }

@@ -4,7 +4,10 @@
  */
 package processmodel.data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,12 +22,12 @@ public class WorkshopOrder {
     int spendPower;     //потраченная мощность
     int prioritet;
     int sellCost;
-    
-    List<OrderPart> parts;
-    
+    Map<OrderPart, Integer> parts;
     boolean selled; // продан ли заказ (получены ли деньги за исполненный заказ)
+    boolean started;//начато ли производство заказа. при старте производства - со склада изымаются все необходимые для производства детали
 
     public WorkshopOrder() {
+        parts = new HashMap<OrderPart, Integer>();
     }
 
     public static WorkshopOrder getNamedOrder(String name) {
@@ -38,14 +41,17 @@ public class WorkshopOrder {
         order.prioritet = 1;
         order.sellCost = 3000;
 
+        order.parts.put(OrderPart.getBolt(), 3);
+        order.parts.put(OrderPart.getSteel(), 2);
+
         return order;
     }
-   
-    public void init(){
+
+    public void init() {
         spendPower = 0;
         selled = false;
+        started = false;
     }
-   
 
     /**
      * Просрочено ?
@@ -56,7 +62,8 @@ public class WorkshopOrder {
 
     /**
      * Завершено ?
-     * @return 
+     *
+     * @return
      */
     public boolean isComplete() {
         return spendPower == powerAll;
@@ -64,7 +71,8 @@ public class WorkshopOrder {
 
     /**
      * Сколько соталось до завершения
-     * @return 
+     *
+     * @return
      */
     public int getLeftPower() {
         return powerAll - spendPower;
@@ -127,7 +135,7 @@ public class WorkshopOrder {
     }
 
     public void addSpendPower(int spendPower) {
-        this.spendPower+=spendPower;
+        this.spendPower += spendPower;
     }
 
     public boolean isSelled() {
@@ -137,5 +145,20 @@ public class WorkshopOrder {
     public void selled() {
         this.selled = true;
     }
-    
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void start() {
+        this.started = true;
+    }
+
+    public Map<OrderPart, Integer> getParts() {
+        return parts;
+    }
+
+    public void setParts(Map<OrderPart, Integer> parts) {
+        this.parts = parts;
+    }
 }

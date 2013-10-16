@@ -24,6 +24,7 @@ public class Plant {
     public Delivery delivery;
     public Counting counting;
     private static Plant plant = new Plant();
+    private int day;
 
     public Plant() {
         workshop = new Workshop();
@@ -31,8 +32,9 @@ public class Plant {
         counting = new Counting();
     }
 
-    public void init() {
+    public void init(int day) {
         plant = new Plant();
+        this.day = day;
     }
 
     public static Plant getPlant() {
@@ -78,5 +80,9 @@ public class Plant {
         float res = workshop.getState() * coeff[0] + delivery.getState() * coeff[1] + counting.getState() * coeff[2];
 
         return (int) res;
+    }
+
+    public int getDay() {
+        return day;
     }
 }
