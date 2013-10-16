@@ -18,7 +18,7 @@ public class Counting extends Department {
 
     public void addCash(int add, int day,String comment) {
         addShedule(day, add);
-        addStatistic(day, comment);
+        addStatistic(day, comment + ":"+add);
     }
 
     public void spendCash(int spend, int day,String comment) {

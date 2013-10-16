@@ -36,13 +36,14 @@ public class WorkshopOrder {
         order.powerAll = 15;
         order.spendPower = 0;
         order.prioritet = 1;
-        order.sellCost = 100;
+        order.sellCost = 3000;
 
         return order;
     }
    
     public void init(){
         spendPower = 0;
+        selled = false;
     }
    
 

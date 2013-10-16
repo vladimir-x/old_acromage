@@ -25,7 +25,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        WorkshopOrder order = WorkshopOrder.getNamedOrder("A1");
+        WorkshopOrder order = WorkshopOrder.getNamedOrder("X");
 
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
