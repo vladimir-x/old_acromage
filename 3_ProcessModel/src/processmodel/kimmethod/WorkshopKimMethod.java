@@ -36,8 +36,9 @@ public class WorkshopKimMethod extends KimMethod {
     }
 
     @Override
-    public List<SimpleMethod> getDailySimpleMethods(int day) {
+    public List<SimpleMethod> getDailySimpleMethods() {
         Workshop workshop = Plant.getPlant().workshop;
+        int day = Plant.getPlant().getDay();
         Integer maxPower = workshop.getMaxPower();
 
         List<SimpleMethod> res = new ArrayList<SimpleMethod>();

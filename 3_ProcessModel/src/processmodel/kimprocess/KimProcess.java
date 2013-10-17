@@ -45,7 +45,9 @@ public class KimProcess {
     }
 
     private void dayModele(int day) {
-        List<SimpleMethod> simpleMethods = kimMethod.getDailySimpleMethods(day);
+        Plant.getPlant().setDay(day);
+        
+        List<SimpleMethod> simpleMethods = kimMethod.getDailySimpleMethods();
 
         SimpleMethod selectSimpMethod = selectMethod(simpleMethods);
 

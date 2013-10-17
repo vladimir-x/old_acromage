@@ -32,9 +32,8 @@ public class Plant {
         counting = new Counting();
     }
 
-    public void init(int day) {
+    public void init() {
         plant = new Plant();
-        this.day = day;
     }
 
     public static Plant getPlant() {
@@ -80,6 +79,10 @@ public class Plant {
         float res = workshop.getState() * coeff[0] + delivery.getState() * coeff[1] + counting.getState() * coeff[2];
 
         return (int) res;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 
     public int getDay() {

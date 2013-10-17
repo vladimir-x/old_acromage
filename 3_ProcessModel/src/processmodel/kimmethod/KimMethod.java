@@ -18,7 +18,7 @@ public abstract class KimMethod {
     
     abstract public int getEndDate();
 
-    abstract public List<SimpleMethod> getDailySimpleMethods(int day);
+    abstract public List<SimpleMethod> getDailySimpleMethods();
 
     // инициализация структурных едениц предпрятия
     abstract public void init();
