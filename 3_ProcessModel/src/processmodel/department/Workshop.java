@@ -28,14 +28,14 @@ public class Workshop extends Department<Integer> {
         return MAX_DAILY_POWER;
     }
 
-    public int getFreePower(int day) {
+    public int getFreePower(Integer day) {
         if (day >= 0) {
             return getMaxPower() - getShedule(day);
         }
         return 0;
     }
 
-    public int getFreePower(int start, int end) {
+    public int getFreePower(Integer start, Integer end) {
         int res = 0;
         for (int i = start; i <= end; ++i) {
             res += getMaxPower() - getShedule(i);
@@ -43,11 +43,11 @@ public class Workshop extends Department<Integer> {
         return res;
     }
 
-    public SimpleMethod getProduceMethod(WorkshopOrder order, int day, Integer powerLimit) {
+    public SimpleMethod getProduceMethod(WorkshopOrder order, Integer day, Integer powerLimit) {
         return new WorkshopProduceMethod(order, day, powerLimit);
     }
 
-    public void spendPower(int day, int spendPower, String ident) {
+    public void spendPower(Integer day, Integer spendPower, String ident) {
         addShedule(day, spendPower);
         addStatistic(day, ident + ":" + spendPower);
     }
@@ -69,13 +69,6 @@ public class Workshop extends Department<Integer> {
             } catch (IllegalStateException ise) {
             }
         }
-    }
-
-    /* сколько потребуется денег на поддержание производства нужных мощностей.
-     * Потом нужно усложнить и учесть детали со склада, з/п рабочим, может воду, элекстричество.
-     */
-    public int getMoneyForProduce(int power) {
-        return power * 10;
     }
 
     @Override

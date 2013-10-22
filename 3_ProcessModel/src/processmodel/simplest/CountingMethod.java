@@ -13,13 +13,13 @@ import processmodel.department.Counting;
  */
 public class CountingMethod extends SimpleMethod {
 
-    int profit;
-    int cash;
-    int day;
+    Integer profit;
+    Integer cash;
+    Integer day;
     String comment;
     public static Float coeffSimp[] = new Float[]{1f, 0.3f};
 
-    public CountingMethod(int cashSpend , int profit, int day,String comment) {
+    public CountingMethod(Integer cashSpend , Integer profit, Integer day,String comment) {
         this.cash = cashSpend;
         this.day = day;
         this.profit = profit;

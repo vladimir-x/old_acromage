@@ -16,13 +16,13 @@ import processmodel.kimprocess.KimProcess;
 public class WorkshopProduceMethod extends SimpleMethod {
 
     WorkshopOrder order;
-    int day;
-    int powerLimit;
-    int spendPower;
+    Integer day;
+    Integer powerLimit;
+    Integer spendPower;
     public static Float coeffSimp[] = new Float[]{4f, 3f, 1.5f, 0.2f};
     WorkshopStartMethod wsm;
 
-    public WorkshopProduceMethod(WorkshopOrder order, int day, int powerLimit) {
+    public WorkshopProduceMethod(WorkshopOrder order, Integer day, Integer powerLimit) {
         this.order = order;
         this.day = day;
         this.powerLimit = powerLimit;

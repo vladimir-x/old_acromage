@@ -16,9 +16,9 @@ import processmodel.data.WorkshopOrder;
 public class WorkshopStartMethod extends SimpleMethod {
 
     WorkshopOrder order;
-    int day;
+    Integer day;
 
-    public WorkshopStartMethod(WorkshopOrder order, int day) {
+    public WorkshopStartMethod(WorkshopOrder order, Integer day) {
         this.order = order;
         this.day = day;
     }

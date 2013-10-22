@@ -20,13 +20,12 @@ public abstract class Department<T> {
     protected static Integer lastDay = 0;
     public Map<Integer, List<String>> staticstic;
     
-    protected T register;
+    protected T register;   // пока что не используется. потом подумать как его использовать
 
     public Department() {
         shedule = new HashMap<Integer, T>();
         staticstic = new HashMap<Integer, List<String>>();
     }
-    
     
     protected T getRegister(){
         return register;
