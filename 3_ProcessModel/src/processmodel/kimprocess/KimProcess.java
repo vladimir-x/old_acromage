@@ -87,6 +87,8 @@ public class KimProcess {
     void init() {
         Plant.getPlant().init();
         kimMethod.init();
+        
+        //Plant.getPlant().counting.addCash(1000, 0, "initial");
     }
 
     void saveStatistic() {

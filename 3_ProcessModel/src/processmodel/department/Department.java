@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -35,16 +36,16 @@ public abstract class Department<T> {
         
     }
 
-    protected T getShedule(int day) {
+    protected T getShedule(Integer day) {
         T res = shedule.get(day);
         if (res == null) {
-            return getZero();
-        }
+            res = getZero();
+        } 
         lastDay = Math.max(lastDay, day);
         return res;
     }
 
-    protected void setShedule(int day, T value) {
+    protected void setShedule(Integer day, T value) {
         shedule.put(day, value);
         lastDay = Math.max(lastDay, day);
     }

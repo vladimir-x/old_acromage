@@ -36,12 +36,23 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
         return res;
     }
 
-    public Integer getDailyPartCount(OrderPart key, int day) {
-        Integer dailyCount = getShedule(day).get(key);
-        if (dailyCount == null) {
-            return 0;
+    /**
+     * Количество деталей к текущему дню
+     *
+     * @param key
+     * @param day
+     * @return
+     */
+    @JsonIgnore
+    public Integer getDailyPartCount(OrderPart key, Integer day) {
+        int res = 0;
+        for (int i = 0; i <= day ; ++i) {
+            Integer dailyCount = getShedule(i).get(key);
+            if (dailyCount != null) {
+                res +=dailyCount;
+            }
         }
-        return dailyCount;
+        return res;
     }
 
     /**
@@ -52,11 +63,20 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
      * @param day
      */
     public void decreasePartCount(OrderPart key, Integer value, int day) {
-        Map<OrderPart, Integer> dailyMap = getShedule(day);
-        Integer dailyCount = dailyMap.get(key);
-        if (dailyCount != null) {
-            dailyMap.put(key, dailyCount - value);
+
+        for (int i = 0; i <= day && value > 0; ++i) {
+            Map<OrderPart, Integer> dailyMap = getShedule(day);
+            Integer dailyCount = dailyMap.get(key);
+            if (dailyCount != null) {
+                if (dailyCount <= value) {
+                    dailyMap.remove(key);
+                } else {
+                    dailyMap.put(key, dailyCount - value);
+                }
+                value -= Math.min(dailyCount, value);
+            }
         }
+
     }
 
     @JsonIgnore
@@ -79,6 +99,13 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
         return day;// пока что моментальная доставка
     }
 
+    /**
+     * Пришла посылка
+     *
+     * @param orderPart
+     * @param count
+     * @param deliverDay
+     */
     public void incomeDeliver(OrderPart orderPart, Integer count, Integer deliverDay) {
         Map<OrderPart, Integer> dailyMap = getShedule(deliverDay);
         Integer dailyCount = dailyMap.get(orderPart);
@@ -86,5 +113,7 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
             dailyCount = 0;
         }
         dailyMap.put(orderPart, dailyCount + count);
+        addShedule(deliverDay, dailyMap);
+        
     }
 }

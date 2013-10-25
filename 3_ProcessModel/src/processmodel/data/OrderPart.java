@@ -4,6 +4,8 @@
  */
 package processmodel.data;
 
+import java.io.Serializable;
+
 /**
  * Деталь для заказа в workshop
  *
@@ -14,6 +16,14 @@ public class OrderPart {
     private String ident;   // идентификатор
     private int cost;       //стоимость покупки
 
+    public OrderPart(String ident_Const) {
+        String[] parst = ident_Const.split("_");
+        if (parst.length == 2){
+            this.ident = parst[0];
+            this.cost = Integer.parseInt(parst[1]);
+        }
+    }
+
     public OrderPart() {
     }
 
@@ -22,14 +32,14 @@ public class OrderPart {
         this.cost = cost;
     }
 
-    public static OrderPart getBolt(){
+    public static OrderPart getBolt() {
         return new OrderPart("bolt", 5);
     }
-    
-    public static OrderPart getSteel(){
+
+    public static OrderPart getSteel() {
         return new OrderPart("steel ", 100);
     }
-    
+
     public String getIdent() {
         return ident;
     }
@@ -45,4 +55,12 @@ public class OrderPart {
     public void setCost(int cost) {
         this.cost = cost;
     }
+
+    @Override
+    public String toString() {
+        return ident;
+        //return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

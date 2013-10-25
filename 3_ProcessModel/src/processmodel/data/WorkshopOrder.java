@@ -4,6 +4,7 @@
  */
 package processmodel.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -158,6 +159,7 @@ public class WorkshopOrder {
         return parts;
     }
 
+    
     public void setParts(Map<OrderPart, Integer> parts) {
         this.parts = parts;
     }

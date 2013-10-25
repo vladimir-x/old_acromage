@@ -24,11 +24,11 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     /**
      *
      * @param orderPart
-     * @param day - текущий день
-     * @param deliverDay - день доставки ("к этому дню")
      * @param count
+     * @param day текущий день
+     * @param deliverDay день доставки ("к этому дню")
      */
-    public DeliveryBookPartMethod(OrderPart orderPart, Integer day, Integer deliverDayBefore, Integer count) {
+    public DeliveryBookPartMethod(OrderPart orderPart, Integer count, Integer day, Integer deliverDayBefore) {
         this.orderPart = orderPart;
         this.day = day;
         this.deliverDayBefore = deliverDayBefore;
@@ -50,7 +50,7 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     @Override
     public int getWeight() {
         Integer currCount = Plant.getPlant().delivery.getDailyPartCount(orderPart, day);
-        return (int) ((count * coeff[0] + currCount * coeff[1]) / coeff[2] * deliverSpace);
+        return (int) ((count * coeff[0] + currCount * coeff[1]) / (coeff[2] * deliverSpace + 1));
 
     }
 

@@ -32,7 +32,7 @@ public class Main {
         WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
         kimMethod.addPreload(getJSONPreload());
 
-        process.modele(kimMethod, 50);
+        process.modele(kimMethod, 100);
         process.printKimStatistic();
 
 

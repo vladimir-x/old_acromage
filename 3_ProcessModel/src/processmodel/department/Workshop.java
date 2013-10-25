@@ -87,7 +87,7 @@ public class Workshop extends Department<Integer> {
 
     @Override
     protected Integer getZero() {
-        return 0;
+        return new Integer(0);
     }
 
     @Override

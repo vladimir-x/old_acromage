@@ -1,0 +1,18 @@
+{
+  "workshop" : {
+    "shedule" : { },
+    "staticstic" : { }
+  },
+  "delivery" : {
+    "shedule" : { },
+    "staticstic" : { }
+  },
+  "counting" : {
+    "shedule" : {
+      "0" : 1000
+    },
+    "staticstic" : {
+      "0" : [ "initial:1000" ]
+    }
+  }
+}

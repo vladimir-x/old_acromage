@@ -40,6 +40,10 @@ public class WorkshopProduceMethod extends SimpleMethod {
 
         if (!order.isStarted()) {
             wsm = new WorkshopStartMethod(order, day);
+            
+            if (!wsm.isAllow()){
+                wsm.bookMaterials();
+            }
         }
 
         return hasPower && (order.isStarted() || wsm.isAllow());// && cm.isAllow() && cmAll.isAllow();
