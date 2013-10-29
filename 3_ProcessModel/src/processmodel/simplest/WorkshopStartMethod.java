@@ -48,7 +48,7 @@ public class WorkshopStartMethod extends SimpleMethod {
     }
 
     @Override
-    public int getWeight() {
+    public float getWeight() {
         return 0;
     }
 

@@ -133,8 +133,8 @@ public class KimProcess {
     // рандомизированный розыгрыш срели все допустимых решений
 
     public static SimpleMethod selectMethod(List<SimpleMethod> simpleMethods) {
-        TreeMap<Integer, SimpleMethod> weightMap = new TreeMap<Integer, SimpleMethod>();
-        int weightSum = 0;
+        TreeMap<Float, SimpleMethod> weightMap = new TreeMap<Float, SimpleMethod>();
+        Float weightSum = 0f;
         for (SimpleMethod sMethod : simpleMethods) {
             if (sMethod.isAllow()) {
                 weightSum += sMethod.getWeight();
@@ -142,7 +142,7 @@ public class KimProcess {
             }
         }
         if (weightSum > 0) {
-            int rand = random.nextInt(weightSum);
+            float rand = random.nextFloat() * weightSum;
             return weightMap.higherEntry(rand).getValue();
         } else {
             return null;

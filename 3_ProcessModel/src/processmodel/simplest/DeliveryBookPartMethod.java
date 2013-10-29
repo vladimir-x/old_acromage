@@ -23,7 +23,7 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     Integer day;
     Integer count;
     Integer deliverDayBefore;
-    float[] coeff = new float[]{1, 1, 1};
+    float[] coeff = new float[]{5, 4, .1f};
 
     public DeliveryBookPartMethod() {
         delivery = Plant.getPlant().delivery;
@@ -61,10 +61,9 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     }
 
     @Override
-    public int getWeight() {
+    public float getWeight() {
         Integer currCount = delivery.getDailyPartCount(orderPartIdent, day);
-        return (int) ((count * coeff[0] + currCount * coeff[1])
-                / (coeff[2] * deliverData.storeSpace + 1));
+        return (count * coeff[0] + currCount * coeff[1]) / (coeff[2] * deliverData.storeSpace + 1);
 
     }
 

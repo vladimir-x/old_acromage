@@ -34,7 +34,7 @@ public class CountingMethod extends SimpleMethod {
     }
 
     @Override
-    public int getWeight() {
+    public float getWeight() {
         return getWeightA(coeffSimp);
     }
 
@@ -45,8 +45,8 @@ public class CountingMethod extends SimpleMethod {
     }
 
     // вариант функции оценки
-    protected int getWeightA(Float coeff[]) {
+    protected float getWeightA(Float coeff[]) {
         Float resF = (coeff[0] * profit ) / ((cash+1) * coeff[1]);
-        return resF.intValue();
+        return resF;
     }
 }

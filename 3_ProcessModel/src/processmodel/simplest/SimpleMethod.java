@@ -12,7 +12,7 @@ public abstract class SimpleMethod {
 
     abstract public boolean isAllow();
     
-    abstract public int getWeight();
+    abstract public float getWeight();
 
     abstract public void execute();
 }
