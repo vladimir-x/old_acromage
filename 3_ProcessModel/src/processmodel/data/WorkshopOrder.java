@@ -23,12 +23,12 @@ public class WorkshopOrder {
     int spendPower;     //потраченная мощность
     int prioritet;
     int sellCost;
-    Map<OrderPart, Integer> parts;
+    Map<String, Integer> parts; //детали из которых состоит изделие: идентификатор - количество
     boolean selled; // продан ли заказ (получены ли деньги за исполненный заказ)
     boolean started;//начато ли производство заказа. при старте производства - со склада изымаются все необходимые для производства детали
 
     public WorkshopOrder() {
-        parts = new HashMap<OrderPart, Integer>();
+        parts = new HashMap<String, Integer>();
     }
 
     public static WorkshopOrder getNamedOrder(String name) {
@@ -42,8 +42,8 @@ public class WorkshopOrder {
         order.prioritet = 1;
         order.sellCost = 3000;
 
-        order.parts.put(OrderPart.getBolt(), 3);
-        order.parts.put(OrderPart.getSteel(), 2);
+        order.parts.put("bolt", 3);
+        order.parts.put("steel", 2);
 
         return order;
     }
@@ -155,12 +155,12 @@ public class WorkshopOrder {
         this.started = true;
     }
 
-    public Map<OrderPart, Integer> getParts() {
+    public Map<String, Integer> getParts() {
         return parts;
     }
 
     
-    public void setParts(Map<OrderPart, Integer> parts) {
+    public void setParts(Map<String, Integer> parts) {
         this.parts = parts;
     }
 }

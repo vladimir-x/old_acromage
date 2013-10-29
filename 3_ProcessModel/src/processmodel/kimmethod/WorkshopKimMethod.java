@@ -18,11 +18,9 @@ import processmodel.simplest.SimpleMethod;
 public class WorkshopKimMethod extends KimMethod {
 
     WorkshopOrder order;
-    List<String> preloadList;
 
     public WorkshopKimMethod(WorkshopOrder order) {
         this.order = order;
-        preloadList = new ArrayList<String>();
     }
 
     @Override
@@ -54,18 +52,11 @@ public class WorkshopKimMethod extends KimMethod {
     @Override
     public void init() {
         order.init();
-        for (String preload :preloadList){
-            Plant.getPlant().loadByStatistic(preload);
-        }
     }
 
     @Override
     public int getResultTacticPoint() {
         return Plant.getPlant().counting.getBalance();
-    }
-
-    public void addPreload(String string) {
-        preloadList.add(string);
     }
 
     @Override

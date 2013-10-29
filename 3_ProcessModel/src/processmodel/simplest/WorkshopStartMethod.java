@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import processmodel.Plant;
-import processmodel.data.OrderPart;
 import processmodel.data.WorkshopOrder;
 import processmodel.kimprocess.KimProcess;
 
@@ -31,15 +30,17 @@ public class WorkshopStartMethod extends SimpleMethod {
     @Override
     public boolean isAllow() {
         boolean res = true;
-        for (Map.Entry<OrderPart, Integer> en : order.getParts().entrySet()) {
+        for (Map.Entry<String, Integer> en : order.getParts().entrySet()) {
             boolean currDetail = Plant.getPlant().delivery.getDailyPartCount(en.getKey(), day) >= en.getValue();
             if (!currDetail) {
+                Integer lastDayForProduce = Plant.getPlant().workshop.getLastDayForStartProduce(order,day);
                 List<SimpleMethod> currList = new ArrayList<SimpleMethod>();
-                currList.add(new DeliveryBookPartMethod(en.getKey(), 0, day, day));
-                currList.add(new DeliveryBookPartMethod(en.getKey(), en.getValue(), day, day));
-                currList.add(new DeliveryBookPartMethod(en.getKey(), 2 * en.getValue(), day, day));
+                currList.add(new DeliveryBookPartMethod(en.getKey(), 0, day, lastDayForProduce));
+                currList.add(new DeliveryBookPartMethod(en.getKey(), en.getValue(), day, lastDayForProduce));
+                currList.add(new DeliveryBookPartMethod(en.getKey(), 2 * en.getValue(), day, lastDayForProduce));
 
-                dbpmList.add(KimProcess.selectMethod(currList));
+                SimpleMethod sm = KimProcess.selectMethod(currList);
+                dbpmList.add(sm);
             }
             res &= currDetail;
         }
@@ -54,7 +55,7 @@ public class WorkshopStartMethod extends SimpleMethod {
     @Override
     public void execute() {
 
-        for (Map.Entry<OrderPart, Integer> en : order.getParts().entrySet()) {
+        for (Map.Entry<String, Integer> en : order.getParts().entrySet()) {
             Plant.getPlant().delivery.decreasePartCount(en.getKey(), en.getValue(), day);
         }
         order.start();

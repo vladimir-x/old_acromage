@@ -78,7 +78,7 @@ public abstract class Department<T> {
     protected abstract T sum(T o1,T o2);
 
     /**
-     * Оценка состояния производственной единицы
+     * Оценка состояния производственной единицы, для стратегического планирования
      * @return 
      */
     @JsonIgnore

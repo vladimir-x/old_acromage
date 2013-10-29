@@ -30,34 +30,8 @@ public class Main {
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
         WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
-        kimMethod.addPreload(getJSONPreload());
 
-        process.modele(kimMethod, 100);
+        process.modele(kimMethod, 50);
         process.printKimStatistic();
-
-
-    }
-
-    private static String getJSONPreload() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("plant.json"));
-            StringBuilder sb = new StringBuilder();
-            String r = "";
-            do {
-                r = reader.readLine();
-                if (r != null) {
-                    sb.append(r);
-                }
-            } while (r != null);
-
-            reader.close();
-            return sb.toString();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return "";
     }
 }

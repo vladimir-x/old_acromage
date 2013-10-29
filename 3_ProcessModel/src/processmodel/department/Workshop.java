@@ -94,4 +94,24 @@ public class Workshop extends Department<Integer> {
     protected Integer sum(Integer o1, Integer o2) {
         return o1 + o2;
     }
+
+    /**
+     * Возвращает последний день, в который возможно начать производство, чтобы успеть его в срок.
+     * @param order
+     * @param day
+     * @return № дня с которого начнётся производсво, или -1 - произвести не хватает мощностей
+     */
+    public Integer getLastDayForStartProduce(WorkshopOrder order, Integer day) {
+        int freePower = 0;
+        int cday = order.getEndDay();
+        while (cday >= day && freePower < order.getPowerAll()){
+            freePower += getFreePower(cday);
+            cday--;
+        }
+        if (freePower >= order.getPowerAll()){
+            return cday;
+        } else {
+            return -1;
+        }
+    }
 }

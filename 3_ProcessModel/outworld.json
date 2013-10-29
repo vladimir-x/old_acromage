@@ -1,0 +1,27 @@
+{
+    "detailList": [{
+            "ident": "bolt",
+            "space": 5
+        },
+        {
+            "ident": "steel",
+            "space": 20
+        }],
+    "shopList": [{
+            "name": "TATA",
+            "workTime": "EWERYDAY",
+            "price": {
+                "bolt": 5,
+                "steel ": 100
+            },
+            "bookTime": 1
+        }, {
+            "name": "MODEST",
+            "workTime": "WORKDAY",
+            "price": {
+                "bolt": 5,
+                "steel ": 100
+            },
+            "bookTime": 0
+        }]
+}

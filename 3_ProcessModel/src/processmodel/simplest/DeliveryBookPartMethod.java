@@ -4,8 +4,10 @@
  */
 package processmodel.simplest;
 
+import processmodel.data.DeliverData;
 import processmodel.Plant;
-import processmodel.data.OrderPart;
+import processmodel.department.Counting;
+import processmodel.department.Delivery;
 
 /**
  *
@@ -13,13 +15,20 @@ import processmodel.data.OrderPart;
  */
 public class DeliveryBookPartMethod extends SimpleMethod {
 
-    OrderPart orderPart;
+    Delivery delivery;
+    Counting counting;
+
+    DeliverData deliverData;
+    String orderPartIdent;
     Integer day;
     Integer count;
-    Integer deliverSpace;
-    Integer deliverDay;
     Integer deliverDayBefore;
     float[] coeff = new float[]{1, 1, 1};
+
+    public DeliveryBookPartMethod() {
+        delivery = Plant.getPlant().delivery;
+        counting = Plant.getPlant().counting;
+    }
 
     /**
      *
@@ -28,8 +37,10 @@ public class DeliveryBookPartMethod extends SimpleMethod {
      * @param day текущий день
      * @param deliverDay день доставки ("к этому дню")
      */
-    public DeliveryBookPartMethod(OrderPart orderPart, Integer count, Integer day, Integer deliverDayBefore) {
-        this.orderPart = orderPart;
+    public DeliveryBookPartMethod(String orderPartIdent, Integer count, Integer day, Integer deliverDayBefore) {
+        this();
+        this.orderPartIdent = orderPartIdent;
+
         this.day = day;
         this.deliverDayBefore = deliverDayBefore;
         this.count = count;
@@ -38,26 +49,30 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     @Override
     public boolean isAllow() {
 
-        deliverSpace = Plant.getPlant().delivery.getSpace(orderPart, count);
-        deliverDay = Plant.getPlant().delivery.getDeliverDay(orderPart, count,day);
-        
-        boolean hasMoney = Plant.getPlant().counting.getBalance(day) >= orderPart.getCost() * count;
-        boolean hasSpace = Plant.getPlant().delivery.getFreeSpace() >= deliverSpace;
-        boolean hasInTime = deliverDayBefore >=  deliverDay;
-        return hasMoney && hasSpace && hasInTime;
+        deliverData = delivery.getDeliverData(orderPartIdent, count, day);
+
+        if (deliverData != null) {
+            boolean hasMoney = counting.getBalance(day) >= deliverData.cost;
+            boolean hasSpace = delivery.getFreeSpace() >= deliverData.storeSpace;
+            boolean hasInTime = deliverDayBefore >= deliverData.bookDay;
+            return hasMoney && hasSpace && hasInTime;
+        }
+        return false;
     }
 
     @Override
     public int getWeight() {
-        Integer currCount = Plant.getPlant().delivery.getDailyPartCount(orderPart, day);
-        return (int) ((count * coeff[0] + currCount * coeff[1]) / (coeff[2] * deliverSpace + 1));
+        Integer currCount = delivery.getDailyPartCount(orderPartIdent, day);
+        return (int) ((count * coeff[0] + currCount * coeff[1])
+                / (coeff[2] * deliverData.storeSpace + 1));
 
     }
 
     @Override
     public void execute() {
-        Plant.getPlant().counting.spendCash(orderPart.getCost() * count, day, orderPart.getIdent() + ":" + count);
-        Plant.getPlant().delivery.incomeDeliver(orderPart,count,deliverDay);
-        
+        counting.spendCash(deliverData.cost, day, orderPartIdent + ":" + count);
+        delivery.incomeDeliver(orderPartIdent, count, deliverData.bookDay);
+
     }
+
 }

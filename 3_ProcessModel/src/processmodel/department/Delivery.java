@@ -7,16 +7,20 @@ package processmodel.department;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashMap;
 import java.util.Map;
-import processmodel.data.OrderPart;
+import processmodel.OutWorld;
+import processmodel.data.DeliverData;
+import processmodel.data.Detail;
+import processmodel.data.Shop;
 import processmodel.data.WorkshopOrder;
 import processmodel.simplest.DeliveryBookPartMethod;
 import processmodel.simplest.SimpleMethod;
 
 /**
+ * Склад и доставка
  *
  * @author Dude
  */
-public class Delivery extends Department<Map<OrderPart, Integer>> {
+public class Delivery extends Department<Map<String, Integer>> {
 
     @Override
     public int getState() {
@@ -24,32 +28,42 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
     }
 
     @Override
-    protected Map<OrderPart, Integer> getZero() {
-        return new HashMap<OrderPart, Integer>();
+    protected Map<String, Integer> getZero() {
+        return new HashMap<String, Integer>();
     }
 
     @Override
-    protected Map<OrderPart, Integer> sum(Map<OrderPart, Integer> o1, Map<OrderPart, Integer> o2) {
-        Map<OrderPart, Integer> res = new HashMap<OrderPart, Integer>();
-        res.putAll(o1);
-        res.putAll(o2);
+    protected Map<String, Integer> sum(Map<String, Integer> o1, Map<String, Integer> o2) {
+        Map<String, Integer> res = new HashMap<String, Integer>();
+        for (String k1 : o1.keySet()) {
+            if (o2.containsKey(k1)) {
+                res.put(k1, o1.get(k1) + o2.get(k1));
+            } else {
+                res.put(k1, o1.get(k1));
+            }
+        }
+        for (String k2 : o2.keySet()) {
+            if (!o1.containsKey(k2)) {
+                res.put(k2, o2.get(k2));
+            }
+        }
         return res;
     }
 
     /**
      * Количество деталей к текущему дню
      *
-     * @param key
+     * @param partIdent
      * @param day
      * @return
      */
     @JsonIgnore
-    public Integer getDailyPartCount(OrderPart key, Integer day) {
+    public Integer getDailyPartCount(String partIdent, Integer day) {
         int res = 0;
-        for (int i = 0; i <= day ; ++i) {
-            Integer dailyCount = getShedule(i).get(key);
+        for (int i = 0; i <= day; ++i) {
+            Integer dailyCount = getShedule(i).get(partIdent);
             if (dailyCount != null) {
-                res +=dailyCount;
+                res += dailyCount;
             }
         }
         return res;
@@ -58,20 +72,20 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
     /**
      * Потратить детали
      *
-     * @param key
+     * @param partIdent
      * @param value
      * @param day
      */
-    public void decreasePartCount(OrderPart key, Integer value, int day) {
+    public void decreasePartCount(String partIdent, Integer value, int day) {
 
         for (int i = 0; i <= day && value > 0; ++i) {
-            Map<OrderPart, Integer> dailyMap = getShedule(day);
-            Integer dailyCount = dailyMap.get(key);
+            Map<String, Integer> dailyMap = getShedule(day);
+            Integer dailyCount = dailyMap.get(partIdent);
             if (dailyCount != null) {
                 if (dailyCount <= value) {
-                    dailyMap.remove(key);
+                    dailyMap.remove(partIdent);
                 } else {
-                    dailyMap.put(key, dailyCount - value);
+                    dailyMap.put(partIdent, dailyCount - value);
                 }
                 value -= Math.min(dailyCount, value);
             }
@@ -80,40 +94,54 @@ public class Delivery extends Department<Map<OrderPart, Integer>> {
     }
 
     @JsonIgnore
-    public SimpleMethod getBookPartMethod(OrderPart orderPart, Integer day, Integer count) {
+    public SimpleMethod getBookPartMethod(String orderPart, Integer day, Integer count) {
         return new DeliveryBookPartMethod(orderPart, day, day, count);
     }
 
     @JsonIgnore
     public Integer getFreeSpace() {
-        return 1;//пока что 
+        return 9999999;//пока что 
     }
 
-    @JsonIgnore
-    public Integer getSpace(OrderPart orderPart, Integer count) {
-        return 0;//безразмерные детали пока что
-    }
-
-    @JsonIgnore
-    public Integer getDeliverDay(OrderPart orderPart, Integer count, Integer day) {
-        return day;// пока что моментальная доставка
-    }
 
     /**
      * Пришла посылка
      *
-     * @param orderPart
+     * @param orderPartIdent
      * @param count
      * @param deliverDay
      */
-    public void incomeDeliver(OrderPart orderPart, Integer count, Integer deliverDay) {
-        Map<OrderPart, Integer> dailyMap = getShedule(deliverDay);
-        Integer dailyCount = dailyMap.get(orderPart);
+    public void incomeDeliver(String orderPartIdent, Integer count, Integer deliverDay) {
+        Map<String, Integer> dailyMap = getShedule(deliverDay);
+        Integer dailyCount = dailyMap.get(orderPartIdent);
         if (dailyCount == null) {
             dailyCount = 0;
         }
-        dailyMap.put(orderPart, dailyCount + count);
+        dailyMap.put(orderPartIdent, dailyCount + count);
         addShedule(deliverDay, dailyMap);
-        
+
+    }
+
+    /**
+     * Подготовить информацию для заказа
+     *
+     * @return
+     */
+    public DeliverData getDeliverData(String orderPartIdent, Integer count, Integer day) {
+
+        Shop shop = OutWorld.getOutWorld().getShop(orderPartIdent, day);
+        Detail detail = OutWorld.getOutWorld().getDetail(orderPartIdent);
+        DeliverData res = null;
+
+        if (shop != null && detail!=null) {
+            res = new DeliverData();
+            
+            res.bookDay = day + shop.bookTime;
+            res.cost = count * shop.price.get(orderPartIdent);
+            res.count = count;
+            res.ident = orderPartIdent;
+            res.storeSpace = count * detail.space;
+        }
+        return res;
     }
 }

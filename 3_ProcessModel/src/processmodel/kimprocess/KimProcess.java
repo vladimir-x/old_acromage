@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+import processmodel.OutWorld;
 import processmodel.Plant;
 import processmodel.data.StatItem;
 import processmodel.kimmethod.KimMethod;
@@ -42,15 +43,15 @@ public class KimProcess {
         statisticCountStrategicMap = new HashMap<Integer, Integer>();
         maxTacticPoints = 0;
         maxStrategicPoints = 0;
+        OutWorld.loadByFile();
     }
 
     private void dayModele(int day) {
         Plant.getPlant().setDay(day);
-        
+
         List<SimpleMethod> simpleMethods = kimMethod.getDailySimpleMethods();
 
         SimpleMethod selectSimpMethod = selectMethod(simpleMethods);
-
 
         if (printDetail) {
             System.out.println("Day:" + day);
@@ -87,8 +88,6 @@ public class KimProcess {
     void init() {
         Plant.getPlant().init();
         kimMethod.init();
-        
-        //Plant.getPlant().counting.addCash(1000, 0, "initial");
     }
 
     void saveStatistic() {
@@ -152,10 +151,8 @@ public class KimProcess {
 
     public void printKimStatistic() {
 
-
         int count;
         DecimalFormat df = new DecimalFormat("###.##");
-
 
         List<StatItem> statTacticList = new ArrayList<StatItem>();
         for (Integer hash : statisticTacticMap.keySet()) {
@@ -173,8 +170,6 @@ public class KimProcess {
             }
         });
 
-
-
         count = 3;
 
         System.out.println("------------------------------------------");
@@ -187,7 +182,6 @@ public class KimProcess {
             System.out.println(statTacticList.get(i).getDescription());
             System.out.println(df.format(repeats * 100d / iterationCount) + "% (" + repeats + "/" + iterationCount + ")");
         }
-
 
         List<StatItem> statStrategicList = new ArrayList<StatItem>();
         for (Integer hash : statisticStrategicMap.keySet()) {
@@ -204,7 +198,6 @@ public class KimProcess {
                 return o1.getCount().compareTo(o2.getCount());
             }
         });
-
 
         count = 3;
         System.out.println("------------------------------------------");

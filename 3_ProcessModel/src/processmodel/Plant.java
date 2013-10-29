@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +35,7 @@ public class Plant {
     }
 
     public void init() {
-        plant = new Plant();
+        loadByStatistic();
     }
 
     public static Plant getPlant() {
@@ -57,22 +58,21 @@ public class Plant {
 
     }
 
-    public static void loadByStatistic(String preload) {
-        if (!preload.isEmpty()) {
-            ObjectMapper om = new ObjectMapper();
-            try {
-                plant = om.readValue(preload, Plant.class);
-            } catch (JsonProcessingException jpe) {
-                System.err.println(jpe);
-            } catch (IOException ex) {
-                Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    private static void loadByStatistic() {
+        ObjectMapper om = new ObjectMapper();
+        try {
+            plant = om.readValue(new File("plant.json"), Plant.class);
+        } catch (JsonProcessingException jpe) {
+            System.err.println(jpe);
+        } catch (IOException ex) {
+            Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Оценка состояния всех производственных единиц
-     * @return 
+     *
+     * @return
      */
     public int calcState() {
 

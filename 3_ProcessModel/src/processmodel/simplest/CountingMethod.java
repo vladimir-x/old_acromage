@@ -20,6 +20,7 @@ public class CountingMethod extends SimpleMethod {
     public static Float coeffSimp[] = new Float[]{1f, 0.3f};
 
     public CountingMethod(Integer cashSpend , Integer profit, Integer day,String comment) {
+        
         this.cash = cashSpend;
         this.day = day;
         this.profit = profit;

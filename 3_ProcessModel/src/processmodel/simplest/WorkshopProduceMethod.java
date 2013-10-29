@@ -27,7 +27,7 @@ public class WorkshopProduceMethod extends SimpleMethod {
         this.day = day;
         this.powerLimit = powerLimit;
     }
-
+    
     @Override
     public boolean isAllow() {
         Workshop workshop = Plant.getPlant().workshop;
@@ -35,7 +35,7 @@ public class WorkshopProduceMethod extends SimpleMethod {
         int reservedPower = workshop.getFreePower(day + 1, order.getEndDay());
         spendPower = Math.min(Math.min(powerLimit, order.getLeftPower()), workshop.getFreePower(day));
 
-        // проверка на принципиальную исполнимость заказа после исполнения данного едйствия
+        // проверка на принципиальную исполнимость заказа после исполнения данного действия
         boolean hasPower = reservedPower >= (order.getLeftPower() - spendPower);
 
         if (!order.isStarted()) {
