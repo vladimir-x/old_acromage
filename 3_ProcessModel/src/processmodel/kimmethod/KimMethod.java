@@ -14,9 +14,9 @@ import processmodel.simplest.SimpleMethod;
 public abstract class KimMethod {
     
     
-    abstract public int getStartDate();
+    abstract public Integer getStartDate();
     
-    abstract public int getEndDate();
+    abstract public Integer getEndDate();
 
     abstract public List<SimpleMethod> getDailySimpleMethods();
 
@@ -24,10 +24,10 @@ public abstract class KimMethod {
     abstract public void init();
     
     // тактическая(краткосрочная) оценка выполеннного плана
-    abstract public int getResultTacticPoint();
+    abstract public Integer getResultTacticPoint();
     
     // стратегическя(долгосрочная) оценка выполеннного плана
-    abstract public int getResultStrategicPoint();
+    abstract public Integer getResultStrategicPoint();
     
     // статистическая выписка по выполенному плану
     //abstract public String getResultDetailedStat();

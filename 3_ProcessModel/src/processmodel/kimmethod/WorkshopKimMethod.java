@@ -24,12 +24,12 @@ public class WorkshopKimMethod extends KimMethod {
     }
 
     @Override
-    public int getStartDate() {
+    public Integer getStartDate() {
         return order.getStartDay();
     }
 
     @Override
-    public int getEndDate() {
+    public Integer getEndDate() {
         return order.getEndDay();
     }
 
@@ -41,10 +41,10 @@ public class WorkshopKimMethod extends KimMethod {
 
         List<SimpleMethod> res = new ArrayList<SimpleMethod>();
 
-        res.add(workshop.getProduceMethod(order, day, maxPower));
-        res.add(workshop.getProduceMethod(order, day, maxPower / 2));
-        res.add(workshop.getProduceMethod(order, day, 1));
         res.add(workshop.getProduceMethod(order, day, 0));
+        res.add(workshop.getProduceMethod(order, day, 1));
+        res.add(workshop.getProduceMethod(order, day, maxPower / 2));
+        res.add(workshop.getProduceMethod(order, day, maxPower));
 
         return res;
     }
@@ -55,12 +55,12 @@ public class WorkshopKimMethod extends KimMethod {
     }
 
     @Override
-    public int getResultTacticPoint() {
+    public Integer getResultTacticPoint() {
         return Plant.getPlant().counting.getBalance();
     }
 
     @Override
-    public int getResultStrategicPoint() {
+    public Integer getResultStrategicPoint() {
         return Plant.getPlant().calcState();
     }
 }

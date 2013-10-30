@@ -1,7 +1,7 @@
 {
     "detailList": [{
             "ident": "bolt",
-            "space": 5
+            "space": 1
         },
         {
             "ident": "steel",
@@ -12,16 +12,17 @@
             "workTime": "EWERYDAY",
             "price": {
                 "bolt": 5,
-                "steel ": 100
+                "steel": 100
             },
             "bookTime": 0
-        }, {
-            "name": "MODEST",
+        },
+        {
+            "name": "TATA",
             "workTime": "WORKDAY",
             "price": {
                 "bolt": 5,
-                "steel ": 100
+                "steel": 80
             },
-            "bookTime": 0
+            "bookTime": 2
         }]
 }

@@ -63,8 +63,8 @@ public class KimProcess {
 
     private void iteration() {
 
-        int start = kimMethod.getStartDate();
-        int end = kimMethod.getEndDate();
+        Integer start = kimMethod.getStartDate();
+        Integer end = kimMethod.getEndDate();
 
         for (int i = start; i <= end; ++i) {
             dayModele(i);

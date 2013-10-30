@@ -31,7 +31,7 @@ public class Main {
         //KimProcess.printDetail = true;
         WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
 
-        process.modele(kimMethod, 50);
+        process.modele(kimMethod, 1);
         process.printKimStatistic();
     }
 }
