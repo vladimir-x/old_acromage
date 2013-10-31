@@ -79,12 +79,12 @@ public class OutWorld {
      * @param day
      * @return
      */
-    public Shop getShop(String ident, Integer day) {
+    public Shop getShop(String ident, Integer day, Integer deliverDayBefore) {
         Shop res = null;
         Integer resCost = null;
 
         for (Shop shop : shopList) {
-            if (shop.isWork(day) && shop.price.containsKey(ident)) {
+            if (shop.isWork(day) && shop.price.containsKey(ident) && (day + shop.bookTime <= deliverDayBefore)) {
                 Integer curCost = shop.price.get(ident);
                 if (resCost == null || resCost > curCost) {
                     resCost = curCost;

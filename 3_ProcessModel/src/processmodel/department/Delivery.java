@@ -127,9 +127,9 @@ public class Delivery extends Department<Map<String, Integer>> {
      *
      * @return
      */
-    public DeliverData getDeliverData(String orderPartIdent, Integer count, Integer day) {
+    public DeliverData getDeliverData(String orderPartIdent, Integer count, Integer day,Integer deliverDayBefore) {
 
-        Shop shop = OutWorld.getOutWorld().getShop(orderPartIdent, day);
+        Shop shop = OutWorld.getOutWorld().getShop(orderPartIdent, day,deliverDayBefore);
         Detail detail = OutWorld.getOutWorld().getDetail(orderPartIdent);
         DeliverData res = null;
 

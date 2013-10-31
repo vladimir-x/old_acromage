@@ -49,7 +49,7 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     @Override
     public boolean isAllow() {
 
-        deliverData = delivery.getDeliverData(orderPartIdent, count, day);
+        deliverData = delivery.getDeliverData(orderPartIdent, count, day,deliverDayBefore);
 
         if (deliverData != null) {
             boolean hasMoney = counting.getBalance(day) >= deliverData.cost;
