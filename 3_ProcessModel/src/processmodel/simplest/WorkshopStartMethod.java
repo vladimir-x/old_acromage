@@ -32,6 +32,7 @@ public class WorkshopStartMethod extends SimpleMethod {
         boolean res = true;
         for (Map.Entry<String, Integer> en : order.getParts().entrySet()) {
             boolean currDetail = Plant.getPlant().delivery.getDailyPartCount(en.getKey(), day) >= en.getValue();
+            /*
             if (!currDetail) {
                 Integer lastDayForProduce = Plant.getPlant().workshop.getLastDayForStartProduce(order,day);
                 List<SimpleMethod> currList = new ArrayList<SimpleMethod>();
@@ -42,6 +43,7 @@ public class WorkshopStartMethod extends SimpleMethod {
                 SimpleMethod sm = KimProcess.selectMethod(currList);
                 dbpmList.add(sm);
             }
+            */
             res &= currDetail;
         }
         return res;

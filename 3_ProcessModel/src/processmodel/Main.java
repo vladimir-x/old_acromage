@@ -8,9 +8,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import processmodel.data.DeliverBookOrder;
 import processmodel.data.WorkshopOrder;
+import processmodel.kimmethod.DeliveryDetailKimMethod;
+import processmodel.kimmethod.KimMethod;
 import processmodel.kimmethod.WorkshopKimMethod;
 import processmodel.kimprocess.KimProcess;
 
@@ -25,13 +30,27 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        WorkshopOrder order = WorkshopOrder.getNamedOrder("X");
-
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
-        WorkshopKimMethod kimMethod = new WorkshopKimMethod(order);
+        for (KimMethod kimMethod : getKimMethods()) {
+            process.modele(kimMethod, 100);
+            process.fixBestStrategickPlan();
+        }
 
-        process.modele(kimMethod, 1);
-        process.printKimStatistic();
+    }
+
+    private static List<KimMethod> getKimMethods() {
+
+        DeliverBookOrder dOrder = new DeliverBookOrder(0, 0, "bolt", 50);
+        DeliverBookOrder sOrder = new DeliverBookOrder(0, 0, "steel", 10);
+
+        WorkshopOrder wOrder = WorkshopOrder.getNamedOrder("X");
+
+        List<KimMethod> res = new ArrayList();
+        res.add(new DeliveryDetailKimMethod(dOrder));
+        res.add(new DeliveryDetailKimMethod(sOrder));
+        res.add(new WorkshopKimMethod(wOrder));
+        return res;
+
     }
 }

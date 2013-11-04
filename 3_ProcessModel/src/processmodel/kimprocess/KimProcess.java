@@ -213,4 +213,26 @@ public class KimProcess {
         System.out.println("------------------------------------------");
         System.out.println("END.");
     }
+
+    /**
+     * Сохраняет первый лучший стратегический план - как исходное значение для
+     * последующих вызовов метода process
+     */
+    public void fixBestStrategickPlan() {
+
+        if (statisticStrategicMap.size() > 0) {
+            String firstPlan = statisticStrategicMap.values().iterator().next();
+            Plant.saveFromStatistic(firstPlan);
+            System.out.println("------------------------------------------");
+            System.out.println(firstPlan);
+            System.out.println("END.");
+        }
+
+        statisticTacticMap = new HashMap<Integer, String>();
+        statisticStrategicMap = new HashMap<Integer, String>();
+        statisticCountTacticMap = new HashMap<Integer, Integer>();
+        statisticCountStrategicMap = new HashMap<Integer, Integer>();
+        maxTacticPoints = 0;
+        maxStrategicPoints = 0;
+    }
 }

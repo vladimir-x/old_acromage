@@ -1,11 +1,13 @@
 {
     "detailList": [{
             "ident": "bolt",
-            "space": 1
+            "space": 1,
+            "normStore": 30
         },
         {
             "ident": "steel",
-            "space": 20
+            "space": 20,
+            "normStore": 10
         }],
     "shopList": [{
             "name": "TATA",
@@ -17,7 +19,7 @@
             "bookTime": 0
         },
         {
-            "name": "TATA",
+            "name": "MODE",
             "workTime": "WORKDAY",
             "price": {
                 "bolt": 5,

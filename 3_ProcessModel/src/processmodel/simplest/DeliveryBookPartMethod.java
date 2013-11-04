@@ -4,6 +4,7 @@
  */
 package processmodel.simplest;
 
+import processmodel.OutWorld;
 import processmodel.data.DeliverData;
 import processmodel.Plant;
 import processmodel.department.Counting;
@@ -19,11 +20,11 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     Counting counting;
 
     DeliverData deliverData;
-    String orderPartIdent;
+    String detailIdent;
     Integer day;
     Integer count;
     Integer deliverDayBefore;
-    float[] coeff = new float[]{5, 4, .1f};
+    float[] coeff = new float[]{5, 4, .2f, 1};
 
     public DeliveryBookPartMethod() {
         delivery = Plant.getPlant().delivery;
@@ -37,9 +38,9 @@ public class DeliveryBookPartMethod extends SimpleMethod {
      * @param day текущий день
      * @param deliverDay день доставки ("к этому дню")
      */
-    public DeliveryBookPartMethod(String orderPartIdent, Integer count, Integer day, Integer deliverDayBefore) {
+    public DeliveryBookPartMethod(String detailIdent, Integer count, Integer day, Integer deliverDayBefore) {
         this();
-        this.orderPartIdent = orderPartIdent;
+        this.detailIdent = detailIdent;
 
         this.day = day;
         this.deliverDayBefore = deliverDayBefore;
@@ -49,7 +50,7 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     @Override
     public boolean isAllow() {
 
-        deliverData = delivery.getDeliverData(orderPartIdent, count, day,deliverDayBefore);
+        deliverData = delivery.getDeliverData(detailIdent, count, day,deliverDayBefore);
 
         if (deliverData != null) {
             boolean hasMoney = counting.getBalance(day) >= deliverData.cost;
@@ -62,15 +63,16 @@ public class DeliveryBookPartMethod extends SimpleMethod {
 
     @Override
     public float getWeight() {
-        Integer currCount = delivery.getDailyPartCount(orderPartIdent, day);
-        return (count * coeff[0] + currCount * coeff[1]) / (coeff[2] * deliverData.storeSpace + 1);
+        Integer currCount = delivery.getDailyPartCount(detailIdent, day);
+        Integer normStore = OutWorld.getOutWorld().getDetail(detailIdent).normStore;
+        return (count * coeff[0] + normStore * coeff[1]) / (coeff[2] * deliverData.storeSpace + coeff[3]*currCount+ 1);
 
     }
 
     @Override
     public void execute() {
-        counting.spendCash(deliverData.cost, day, orderPartIdent + ":" + count);
-        delivery.incomeDeliver(orderPartIdent, count, deliverData.bookDay);
+        counting.spendCash(deliverData.cost, day, detailIdent + ":" + count);
+        delivery.incomeDeliver(detailIdent, count, deliverData.bookDay);
 
     }
 

@@ -93,9 +93,17 @@ public class Delivery extends Department<Map<String, Integer>> {
 
     }
 
-    @JsonIgnore
-    public SimpleMethod getBookPartMethod(String orderPart, Integer day, Integer count) {
-        return new DeliveryBookPartMethod(orderPart, day, day, count);
+    //@JsonIgnore
+    /**
+     * Метод заказа детали.
+     *
+     * @param detailIdent
+     * @param day
+     * @param count
+     * @return
+     */
+    public SimpleMethod getBookPartMethod(String detailIdent, Integer day, Integer count) {
+        return new DeliveryBookPartMethod(detailIdent, count, day, day);
     }
 
     @JsonIgnore
@@ -103,21 +111,20 @@ public class Delivery extends Department<Map<String, Integer>> {
         return 9999999;//пока что 
     }
 
-
     /**
      * Пришла посылка
      *
-     * @param orderPartIdent
+     * @param detailIdent
      * @param count
      * @param deliverDay
      */
-    public void incomeDeliver(String orderPartIdent, Integer count, Integer deliverDay) {
+    public void incomeDeliver(String detailIdent, Integer count, Integer deliverDay) {
         Map<String, Integer> dailyMap = getShedule(deliverDay);
-        Integer dailyCount = dailyMap.get(orderPartIdent);
+        Integer dailyCount = dailyMap.get(detailIdent);
         if (dailyCount == null) {
             dailyCount = 0;
         }
-        dailyMap.put(orderPartIdent, dailyCount + count);
+        dailyMap.put(detailIdent, dailyCount + count);
         addShedule(deliverDay, dailyMap);
 
     }
@@ -127,19 +134,19 @@ public class Delivery extends Department<Map<String, Integer>> {
      *
      * @return
      */
-    public DeliverData getDeliverData(String orderPartIdent, Integer count, Integer day,Integer deliverDayBefore) {
+    public DeliverData getDeliverData(String detailIdent, Integer count, Integer day, Integer deliverDayBefore) {
 
-        Shop shop = OutWorld.getOutWorld().getShop(orderPartIdent, day,deliverDayBefore);
-        Detail detail = OutWorld.getOutWorld().getDetail(orderPartIdent);
+        Shop shop = OutWorld.getOutWorld().getShop(detailIdent, day, deliverDayBefore);
+        Detail detail = OutWorld.getOutWorld().getDetail(detailIdent);
         DeliverData res = null;
 
-        if (shop != null && detail!=null) {
+        if (shop != null && detail != null) {
             res = new DeliverData();
-            
+
             res.bookDay = day + shop.bookTime;
-            res.cost = count * shop.price.get(orderPartIdent);
+            res.cost = count * shop.price.get(detailIdent);
             res.count = count;
-            res.ident = orderPartIdent;
+            res.ident = detailIdent;
             res.storeSpace = count * detail.space;
         }
         return res;

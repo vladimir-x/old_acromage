@@ -26,6 +26,7 @@ public class Plant {
     public Delivery delivery;
     public Counting counting;
     private static Plant plant = new Plant();
+    private static String fixPlan;
     private int day;
 
     public Plant() {
@@ -61,12 +62,22 @@ public class Plant {
     private static void loadByStatistic() {
         ObjectMapper om = new ObjectMapper();
         try {
-            plant = om.readValue(new File("plant.json"), Plant.class);
+            if (fixPlan != null && !fixPlan.isEmpty()) {
+                // инициализирующее значение сохранено
+                plant = om.readValue(fixPlan, Plant.class);
+            } else {
+                // моделируется первый метод
+                plant = om.readValue(new File("plant.json"), Plant.class);
+            }
         } catch (JsonProcessingException jpe) {
             System.err.println(jpe);
         } catch (IOException ex) {
             Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void saveFromStatistic(String statistic) {
+        fixPlan = statistic;
     }
 
     /**
