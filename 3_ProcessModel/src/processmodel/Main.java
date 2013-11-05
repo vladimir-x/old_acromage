@@ -33,7 +33,7 @@ public class Main {
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
         for (KimMethod kimMethod : getKimMethods()) {
-            process.modele(kimMethod, 100);
+            process.modele(kimMethod, 3);
             process.fixBestStrategickPlan();
         }
 

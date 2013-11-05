@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashMap;
 import java.util.Map;
 import processmodel.OutWorld;
+import processmodel.Plant;
 import processmodel.data.DeliverData;
 import processmodel.data.Detail;
 import processmodel.data.Shop;
@@ -22,9 +23,29 @@ import processmodel.simplest.SimpleMethod;
  */
 public class Delivery extends Department<Map<String, Integer>> {
 
+    private static float stateCoeff[] = new float[]{100.f, 10.f};
+
     @Override
     public int getState() {
-        return 0;
+        int diff = 0;
+        for (Detail detail : OutWorld.getOutWorld().detailList) {
+            Integer currCnt = getDailyPartCount(detail.ident, Plant.getPlant().getDay());
+            int cd = Math.abs(detail.normStore - currCnt);
+            if (cd == 0) {
+                diff += stateCoeff[0];
+            } else {
+                diff += stateCoeff[0] / cd;
+            }
+        }
+        
+        int freeLast = getFreeSpace(Plant.getPlant().getDay());
+        int free = 0;
+        if (freeLast == 0){
+            free += stateCoeff[1];
+        } else {
+            free += stateCoeff[1]/freeLast;
+        }
+        return diff - free;
     }
 
     @Override
@@ -107,7 +128,7 @@ public class Delivery extends Department<Map<String, Integer>> {
     }
 
     @JsonIgnore
-    public Integer getFreeSpace() {
+    public Integer getFreeSpace(Integer day) {
         return 9999999;//пока что 
     }
 

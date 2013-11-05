@@ -24,7 +24,7 @@ public class DeliveryBookPartMethod extends SimpleMethod {
     Integer day;
     Integer count;
     Integer deliverDayBefore;
-    float[] coeff = new float[]{5, 4, .2f, 1};
+    float[] coeff = new float[]{5, 2, .2f, .5f};
 
     public DeliveryBookPartMethod() {
         delivery = Plant.getPlant().delivery;
@@ -54,7 +54,7 @@ public class DeliveryBookPartMethod extends SimpleMethod {
 
         if (deliverData != null) {
             boolean hasMoney = counting.getBalance(day) >= deliverData.cost;
-            boolean hasSpace = delivery.getFreeSpace() >= deliverData.storeSpace;
+            boolean hasSpace = delivery.getFreeSpace(day) >= deliverData.storeSpace;
             boolean hasInTime = deliverDayBefore >= deliverData.bookDay;
             return hasMoney && hasSpace && hasInTime;
         }
