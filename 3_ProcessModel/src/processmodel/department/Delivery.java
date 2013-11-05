@@ -37,13 +37,13 @@ public class Delivery extends Department<Map<String, Integer>> {
                 diff += stateCoeff[0] / cd;
             }
         }
-        
+
         int freeLast = getFreeSpace(Plant.getPlant().getDay());
         int free = 0;
-        if (freeLast == 0){
+        if (freeLast == 0) {
             free += stateCoeff[1];
         } else {
-            free += stateCoeff[1]/freeLast;
+            free += stateCoeff[1] / freeLast;
         }
         return diff - free;
     }
@@ -144,9 +144,9 @@ public class Delivery extends Department<Map<String, Integer>> {
         Integer dailyCount = dailyMap.get(detailIdent);
         if (dailyCount == null) {
             dailyCount = 0;
+            setShedule(deliverDay, dailyMap);
         }
         dailyMap.put(detailIdent, dailyCount + count);
-        addShedule(deliverDay, dailyMap);
 
     }
 

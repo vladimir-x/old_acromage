@@ -6,7 +6,7 @@
         },
         {
             "ident": "steel",
-            "space": 20,
+            "space": 5,
             "normStore": 10
         }],
     "shopList": [{

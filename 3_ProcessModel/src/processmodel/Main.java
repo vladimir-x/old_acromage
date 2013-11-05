@@ -33,7 +33,7 @@ public class Main {
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
         for (KimMethod kimMethod : getKimMethods()) {
-            process.modele(kimMethod, 3);
+            process.modele(kimMethod, 1);
             process.fixBestStrategickPlan();
         }
 
@@ -42,7 +42,7 @@ public class Main {
     private static List<KimMethod> getKimMethods() {
 
         DeliverBookOrder dOrder = new DeliverBookOrder(0, 0, "bolt", 50);
-        DeliverBookOrder sOrder = new DeliverBookOrder(0, 0, "steel", 10);
+        DeliverBookOrder sOrder = new DeliverBookOrder(0, 0, "steel", 6);
 
         WorkshopOrder wOrder = WorkshopOrder.getNamedOrder("X");
 

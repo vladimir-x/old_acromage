@@ -9,10 +9,10 @@
   },
   "counting" : {
     "shedule" : {
-      "0" : 1000
+      "0" : 10000
     },
     "staticstic" : {
-      "0" : [ "initial:1000" ]
+      "0" : [ "initial:10000" ]
     }
   }
 }
