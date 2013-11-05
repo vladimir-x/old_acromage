@@ -1,0 +1,43 @@
+[ {
+  "dailySimpleMethods" : [ {
+    "allow" : true,
+    "weight" : 60.0
+  }, {
+    "allow" : false,
+    "weight" : 28.181818
+  } ],
+  "startDate" : 0,
+  "endDate" : 0,
+  "resultTacticPoint" : 0,
+  "resultStrategicPoint" : 83
+}, {
+  "dailySimpleMethods" : [ {
+    "allow" : true,
+    "weight" : 20.0
+  }, {
+    "allow" : false,
+    "weight" : 7.142857
+  } ],
+  "startDate" : 0,
+  "endDate" : 0,
+  "resultTacticPoint" : 0,
+  "resultStrategicPoint" : 83
+}, {
+  "dailySimpleMethods" : [ {
+    "allow" : false,
+    "weight" : 400.0
+  }, {
+    "allow" : false,
+    "weight" : 396.0
+  }, {
+    "allow" : false,
+    "weight" : 379.0
+  }, {
+    "allow" : false,
+    "weight" : 361.0
+  } ],
+  "startDate" : 0,
+  "endDate" : 3,
+  "resultTacticPoint" : 0,
+  "resultStrategicPoint" : 293
+} ]

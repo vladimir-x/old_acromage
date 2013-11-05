@@ -4,7 +4,11 @@
  */
 package processmodel;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,7 +36,9 @@ public class Main {
 
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
-        for (KimMethod kimMethod : getKimMethods()) {
+        List<KimMethod> kimMethods = getKimMethods();
+        saveMethodsList(kimMethods);
+        for (KimMethod kimMethod : kimMethods) {
             process.modele(kimMethod, 1);
             process.fixBestStrategickPlan();
         }
@@ -52,5 +58,18 @@ public class Main {
         res.add(new WorkshopKimMethod(wOrder));
         return res;
 
+    }
+
+    private static void saveMethodsList(List<KimMethod> kimMethods) {
+        ObjectMapper om = new ObjectMapper();
+        try {
+            ObjectWriter writer = om.writer().withDefaultPrettyPrinter();
+
+            writer.writeValue(new File("orders.json"), kimMethods);
+        } catch (JsonProcessingException jpe) {
+            System.err.println(jpe);
+        } catch (IOException ex) {
+            Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
