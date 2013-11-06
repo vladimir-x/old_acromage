@@ -47,7 +47,7 @@ public class OutWorld {
         outWorld.detailList.add(Detail.getZORRO());
     }
 
-    public static void loadByFile() {
+    public static void loadFromFile() {
         ObjectMapper om = new ObjectMapper();
         try {
             outWorld = om.readValue(new File("outworld.json"), OutWorld.class);

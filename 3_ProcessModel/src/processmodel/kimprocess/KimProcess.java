@@ -43,7 +43,7 @@ public class KimProcess {
         statisticCountStrategicMap = new HashMap<Integer, Integer>();
         maxTacticPoints = 0;
         maxStrategicPoints = 0;
-        OutWorld.loadByFile();
+        OutWorld.loadFromFile();
     }
 
     private void dayModele(int day) {

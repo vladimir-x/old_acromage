@@ -41,24 +41,9 @@ public class Main {
         List<KimMethod> kimMethods = readKimMethods();
         //saveMethodsList(kimMethods);
         for (KimMethod kimMethod : kimMethods) {
-            process.modele(kimMethod, 50);
+            process.modele(kimMethod, Control.getControl().iterationCount);
             process.fixBestStrategickPlan();
         }
-
-    }
-
-    private static List<KimMethod> getKimMethods() {
-
-        DeliverBookOrder dOrder = new DeliverBookOrder(0, 0, "bolt", 50);
-        DeliverBookOrder sOrder = new DeliverBookOrder(0, 0, "steel", 6);
-
-        WorkshopOrder wOrder = WorkshopOrder.getNamedOrder("X");
-
-        List<KimMethod> res = new ArrayList();
-        res.add(new DeliveryDetailKimMethod(dOrder));
-        res.add(new DeliveryDetailKimMethod(sOrder));
-        res.add(new WorkshopKimMethod(wOrder));
-        return res;
 
     }
 
@@ -76,18 +61,4 @@ public class Main {
 
     }
 
-    private static void saveMethodsList(List<KimMethod> kimMethods) {
-        ObjectMapper om = new ObjectMapper();
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY); // Adds type info
-
-        try {
-            ObjectWriter writer = om.writer().withDefaultPrettyPrinter();
-
-            writer.writeValue(new File("orders.json"), kimMethods);
-        } catch (JsonProcessingException jpe) {
-            System.err.println(jpe);
-        } catch (IOException ex) {
-            Logger.getLogger(Plant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
