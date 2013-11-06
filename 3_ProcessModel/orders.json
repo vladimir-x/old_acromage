@@ -1,43 +1,35 @@
-[ {
-  "dailySimpleMethods" : [ {
-    "allow" : true,
-    "weight" : 60.0
-  }, {
-    "allow" : false,
-    "weight" : 28.181818
-  } ],
-  "startDate" : 0,
-  "endDate" : 0,
-  "resultTacticPoint" : 0,
-  "resultStrategicPoint" : 83
+[ "java.util.ArrayList", [ {
+  "@class" : "processmodel.kimmethod.DeliveryDetailKimMethod",
+  "order" : {
+    "@class" : "processmodel.data.DeliverBookOrder",
+    "startDay" : 0,
+    "endDay" : 0,
+    "ident" : "bolt",
+    "count" : 50
+  }
 }, {
-  "dailySimpleMethods" : [ {
-    "allow" : true,
-    "weight" : 20.0
-  }, {
-    "allow" : false,
-    "weight" : 7.142857
-  } ],
-  "startDate" : 0,
-  "endDate" : 0,
-  "resultTacticPoint" : 0,
-  "resultStrategicPoint" : 83
+  "@class" : "processmodel.kimmethod.DeliveryDetailKimMethod",
+  "order" : {
+    "@class" : "processmodel.data.DeliverBookOrder",
+    "startDay" : 0,
+    "endDay" : 0,
+    "ident" : "steel",
+    "count" : 7
+  }
 }, {
-  "dailySimpleMethods" : [ {
-    "allow" : false,
-    "weight" : 400.0
-  }, {
-    "allow" : false,
-    "weight" : 396.0
-  }, {
-    "allow" : false,
-    "weight" : 379.0
-  }, {
-    "allow" : false,
-    "weight" : 361.0
-  } ],
-  "startDate" : 0,
-  "endDate" : 3,
-  "resultTacticPoint" : 0,
-  "resultStrategicPoint" : 293
-} ]
+  "@class" : "processmodel.kimmethod.WorkshopKimMethod",
+  "order" : {
+    "@class" : "processmodel.data.WorkshopOrder",
+    "identName" : "zakaz-001",
+    "startDay" : 0,
+    "endDay" : 3,
+    "powerAll" : 15,
+    "prioritet" : 1,
+    "sellCost" : 3000,
+    "parts" : {
+      "@class" : "java.util.HashMap",
+      "bolt" : 3,
+      "steel" : 2
+    }
+  }
+} ] ]

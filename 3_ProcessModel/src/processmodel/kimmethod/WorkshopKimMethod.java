@@ -17,8 +17,12 @@ import processmodel.simplest.SimpleMethod;
  */
 public class WorkshopKimMethod extends KimMethod {
 
-    WorkshopOrder order;
+    public WorkshopOrder order;
 
+    public WorkshopKimMethod() {
+    }
+
+    
     public WorkshopKimMethod(WorkshopOrder order) {
         this.order = order;
     }

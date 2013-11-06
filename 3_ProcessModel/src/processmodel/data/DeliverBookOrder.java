@@ -12,6 +12,11 @@ package processmodel.data;
  */
 public class DeliverBookOrder {
 
+    public DeliverBookOrder() {
+    }
+
+    
+    
     public DeliverBookOrder(Integer startDay, Integer endDay, String ident, Integer count) {
         this.startDay = startDay;
         this.endDay = endDay;

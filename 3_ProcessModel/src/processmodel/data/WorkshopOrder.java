@@ -4,6 +4,7 @@
  */
 package processmodel.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +64,7 @@ public class WorkshopOrder {
      *
      * @return
      */
+    @JsonIgnore
     public boolean isComplete() {
         return spendPower == powerAll;
     }
@@ -72,6 +74,7 @@ public class WorkshopOrder {
      *
      * @return
      */
+    @JsonIgnore
     public int getLeftPower() {
         return powerAll - spendPower;
     }

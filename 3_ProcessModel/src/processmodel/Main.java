@@ -4,9 +4,11 @@
  */
 package processmodel;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.type.ArrayType;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,10 +38,10 @@ public class Main {
 
         KimProcess process = new KimProcess();
         //KimProcess.printDetail = true;
-        List<KimMethod> kimMethods = getKimMethods();
-        saveMethodsList(kimMethods);
+        List<KimMethod> kimMethods = readKimMethods();
+        //saveMethodsList(kimMethods);
         for (KimMethod kimMethod : kimMethods) {
-            process.modele(kimMethod, 1);
+            process.modele(kimMethod, 50);
             process.fixBestStrategickPlan();
         }
 
@@ -60,8 +62,24 @@ public class Main {
 
     }
 
+    private static List<KimMethod> readKimMethods() {
+        try {
+            ObjectMapper om = new ObjectMapper();
+            om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY); // Adds type info
+
+            List<KimMethod> res = (List<KimMethod>) om.readValue(new File("orders.json"), Object.class);
+            return res;
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
     private static void saveMethodsList(List<KimMethod> kimMethods) {
         ObjectMapper om = new ObjectMapper();
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY); // Adds type info
+
         try {
             ObjectWriter writer = om.writer().withDefaultPrettyPrinter();
 

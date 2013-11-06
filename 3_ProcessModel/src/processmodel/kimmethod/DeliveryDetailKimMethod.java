@@ -18,7 +18,12 @@ import processmodel.simplest.SimpleMethod;
  */
 public class DeliveryDetailKimMethod extends KimMethod {
 
-    DeliverBookOrder order;
+    public DeliverBookOrder order;
+
+    public DeliveryDetailKimMethod() {
+    }
+    
+    
 
     public DeliveryDetailKimMethod(DeliverBookOrder order) {
         this.order = order;
