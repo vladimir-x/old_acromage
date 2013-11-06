@@ -56,14 +56,7 @@ public class DeliveryDetailKimMethod extends KimMethod {
 
     }
 
-    @Override
-    public Integer getResultTacticPoint() {
-        return Plant.getPlant().counting.getBalance();
-    }
+  
 
-    @Override
-    public Integer getResultStrategicPoint() {
-        return Plant.getPlant().calcState();
-    }
 
 }

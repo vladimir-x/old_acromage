@@ -57,14 +57,4 @@ public class WorkshopKimMethod extends KimMethod {
     public void init() {
         order.init();
     }
-
-    @Override
-    public Integer getResultTacticPoint() {
-        return Plant.getPlant().counting.getBalance();
-    }
-
-    @Override
-    public Integer getResultStrategicPoint() {
-        return Plant.getPlant().calcState();
-    }
 }
