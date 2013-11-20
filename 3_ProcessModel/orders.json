@@ -32,4 +32,20 @@
       "steel" : 2
     }
   }
+}, {
+  "@class" : "processmodel.kimmethod.WorkshopKimMethod",
+  "order" : {
+    "@class" : "processmodel.data.WorkshopOrder",
+    "identName" : "zakaz-002",
+    "startDay" : 3,
+    "endDay" : 3,
+    "powerAll" : 5,
+    "prioritet" : 1,
+    "sellCost" : 2000,
+    "parts" : {
+      "@class" : "java.util.HashMap",
+      "bolt" : 1,
+      "steel" : 1
+    }
+  }
 } ] ]
