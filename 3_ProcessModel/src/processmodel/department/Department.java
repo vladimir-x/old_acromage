@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- *
+ *  Абстрактный модуль
  * @author Dude
  */
 public abstract class Department<T> {

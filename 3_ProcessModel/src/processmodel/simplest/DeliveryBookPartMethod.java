@@ -11,7 +11,7 @@ import processmodel.department.Counting;
 import processmodel.department.Delivery;
 
 /**
- *
+ *  Доставка материалов для производства продукции.
  * @author Dude
  */
 public class DeliveryBookPartMethod extends SimpleMethod {

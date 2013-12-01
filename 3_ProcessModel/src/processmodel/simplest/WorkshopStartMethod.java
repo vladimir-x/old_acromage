@@ -12,7 +12,7 @@ import processmodel.data.WorkshopOrder;
 import processmodel.kimprocess.KimProcess;
 
 /**
- *
+ *  Старт производства заказа.
  * @author elduderino
  */
 public class WorkshopStartMethod extends SimpleMethod {

@@ -8,7 +8,7 @@ import processmodel.Plant;
 import processmodel.department.Counting;
 
 /**
- *
+ * Учёт средств : расходы и выручка.
  * @author Dude
  */
 public class CountingMethod extends SimpleMethod {
