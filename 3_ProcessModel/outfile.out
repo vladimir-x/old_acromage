@@ -1,1 +1,123 @@
-asdasdA
+------------------------------------------
+{
+  "workshop" : {
+    "shedule" : { },
+    "staticstic" : { }
+  },
+  "delivery" : {
+    "shedule" : {
+      "0" : {
+        "bolt" : 50
+      }
+    },
+    "staticstic" : { }
+  },
+  "counting" : {
+    "shedule" : {
+      "0" : 9750
+    },
+    "staticstic" : {
+      "0" : [ "initial:10000", "bolt:50:-250" ]
+    }
+  }
+}
+END.
+------------------------------------------
+{
+  "workshop" : {
+    "shedule" : { },
+    "staticstic" : { }
+  },
+  "delivery" : {
+    "shedule" : {
+      "0" : {
+        "bolt" : 50,
+        "steel" : 7
+      }
+    },
+    "staticstic" : { }
+  },
+  "counting" : {
+    "shedule" : {
+      "0" : 9050
+    },
+    "staticstic" : {
+      "0" : [ "initial:10000", "bolt:50:-250", "steel:7:-700" ]
+    }
+  }
+}
+END.
+------------------------------------------
+{
+  "workshop" : {
+    "shedule" : {
+      "0" : 6,
+      "1" : 1,
+      "2" : 6,
+      "3" : 2
+    },
+    "staticstic" : {
+      "0" : [ "zakaz-001:6" ],
+      "1" : [ "zakaz-001:1" ],
+      "2" : [ "zakaz-001:6" ],
+      "3" : [ "zakaz-001:2" ]
+    }
+  },
+  "delivery" : {
+    "shedule" : {
+      "0" : {
+        "bolt" : 47,
+        "steel" : 5
+      }
+    },
+    "staticstic" : { }
+  },
+  "counting" : {
+    "shedule" : {
+      "0" : 9050,
+      "3" : 3000
+    },
+    "staticstic" : {
+      "0" : [ "initial:10000", "bolt:50:-250", "steel:7:-700" ],
+      "3" : [ "zakaz-001:3000" ]
+    }
+  }
+}
+END.
+------------------------------------------
+{
+  "workshop" : {
+    "shedule" : {
+      "0" : 6,
+      "1" : 1,
+      "2" : 6,
+      "3" : 7
+    },
+    "staticstic" : {
+      "0" : [ "zakaz-001:6" ],
+      "1" : [ "zakaz-001:1" ],
+      "2" : [ "zakaz-001:6" ],
+      "3" : [ "zakaz-001:2", "zakaz-002:5" ]
+    }
+  },
+  "delivery" : {
+    "shedule" : {
+      "0" : {
+        "bolt" : 47,
+        "steel" : 5
+      }
+    },
+    "staticstic" : { }
+  },
+  "counting" : {
+    "shedule" : {
+      "0" : 9050,
+      "3" : 5000
+    },
+    "staticstic" : {
+      "0" : [ "initial:10000", "bolt:50:-250", "steel:7:-700" ],
+      "3" : [ "zakaz-001:3000", "zakaz-002:2000" ]
+    }
+  }
+}
+END.
