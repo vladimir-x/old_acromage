@@ -10,8 +10,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
@@ -26,6 +32,8 @@ public class Game extends Canvas implements Runnable {
     public static int HEIGHT = 300; //высота
     public static String NAME = "TUTORIAL 1"; //заголовок окна
     private boolean running = false;
+    
+    public static Sprite hero;
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -64,7 +72,10 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void init() {
-
+            
+        hero = getSprite("backdrop.bmp");
+        addKeyListener(new KeyInputHandler());
+        addMouseListener(new MouseInputHandler());
     }
 
     public void render() {
@@ -78,11 +89,31 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics(); //получаем Graphics из созданной нами BufferStrategy
         g.setColor(Color.black); //выбрать цвет
         g.fillRect(0, 0, getWidth(), getHeight()); //заполнить прямоугольник 
+
+        hero.draw(g, 20, 20);
+        
         g.dispose();
         bs.show(); //показать
     }
 
     public void update(long delta) {
 
+    }
+
+    public Sprite getSprite(String path) {
+        BufferedImage sourceImage = null;
+
+        try {
+            String exepath = System.getProperty("user.dir");
+            String imgPath = "img";
+            String fullPath = exepath + File.separator + imgPath + File.separator + path;
+            sourceImage = ImageIO.read(new File(fullPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Sprite sprite = new Sprite(Toolkit.getDefaultToolkit().createImage(sourceImage.getSource()));
+
+        return sprite;
     }
 }
