@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package acromage.gdx.game;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -16,19 +15,34 @@ import com.badlogic.gdx.Gdx;
  */
 public class ApplicationImpl extends Game {
 
+    private Settings settings;
     private Acromage acromage;
     private GameScreen screen;
     private GameInput input;
-    
+
     @Override
     public void create() {
-        acromage = new Acromage();
-        screen = new GameScreen(acromage);
-        input = new GameInput(acromage);
-        
+        settings = new Settings();
+        acromage = new Acromage(settings);
+        input = new GameInput(settings, acromage);
+        screen = new GameScreen(settings, acromage) {
+
+            @Override
+            void onShow() {
+                Gdx.input.setInputProcessor(input);
+            }
+
+            @Override
+            void onHide() {
+                Gdx.input.setInputProcessor(null);
+            }
+        };
+
         setScreen(screen);
-        Gdx.input.setInputProcessor(input);
     }
 
-    
+    public Settings getSettings() {
+        return settings;
+    }
+
 }
