@@ -6,7 +6,6 @@
 package acromage.gdx;
 
 import acromage.gdx.game.ApplicationImpl;
-import acromage.gdx.game.OptionDialog;
 import acromage.gdx.game.Settings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -16,6 +15,7 @@ import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Menu;
 import java.awt.MenuBar;
@@ -40,7 +40,7 @@ import javax.swing.SwingUtilities;
  */
 public class AcromageDesktop {
 
-    static JFrame frame;
+    static MainFrame frame;
     static ApplicationImpl applicationImpl;
 
     public static void main(String[] argv) {
@@ -58,12 +58,12 @@ public class AcromageDesktop {
         
         applicationImpl = new ApplicationImpl();
 
-        frame = new LwjglFrame(applicationImpl, config);
+        frame = new MainFrame(applicationImpl, config);
 
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
-        frame.setMenuBar(getMenuBar());
+        //frame.setMenuBar(getMenuBar());
     }
 
     public static MenuBar getMenuBar() {
@@ -164,6 +164,7 @@ public class AcromageDesktop {
     public static void applyVideoSettings() {
         Settings settings = applicationImpl.getSettings();
         frame.setSize(settings.getWidth(), settings.getHeight());
+       // frame.getContentPane().setPreferredSize(new Dimension(settings.getWidth(), settings.getHeight()));
         frame.setLocationRelativeTo(null);
     }
 }
