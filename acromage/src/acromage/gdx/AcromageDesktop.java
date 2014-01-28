@@ -6,6 +6,7 @@
 package acromage.gdx;
 
 import acromage.gdx.game.ApplicationImpl;
+import acromage.gdx.game.OptionDialog;
 import acromage.gdx.game.Settings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -104,6 +105,14 @@ public class AcromageDesktop {
     }
 
     public static void showOptionFrame() {
+        
+        if (true){
+            
+            OptionDialog od = new OptionDialog(frame, true);
+            od.setLocationRelativeTo(null);
+            od.setVisible(true);
+            return;
+        }
         final JDialog options = new JDialog(frame); //new JFrame("Настройки");
 
         Container panel = options.getContentPane();
@@ -123,7 +132,7 @@ public class AcromageDesktop {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                applyVideoSettings(applicationImpl.getSettings());
+                applyVideoSettings();
                 closeWindow(options);
             }
         });
@@ -152,7 +161,8 @@ public class AcromageDesktop {
         window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
     }
 
-    public static void applyVideoSettings(Settings settings) {
+    public static void applyVideoSettings() {
+        Settings settings = applicationImpl.getSettings();
         frame.setSize(settings.getWidth(), settings.getHeight());
         frame.setLocationRelativeTo(null);
     }
