@@ -3,22 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package acromage.gdx.game;
 
 /**
  *
  * @author elduderino
  */
-public class Acromage {
-
-    private Settings settings;
-
-    public Acromage(Settings settings) {
-        this.settings = settings;
-    }
-
-    public void render() {
-
-    }
-
+public class Sample {
+    
 }

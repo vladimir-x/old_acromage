@@ -3,30 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package acromage.gdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
  * @author elduderino
  */
-public class GameScreen implements Screen{
+public abstract class GameScreen implements Screen {
 
+    private Settings settings;
     private Acromage acromage;
     
-    public GameScreen(Acromage acromage) {
+    public OrthographicCamera cam;
+    public ShapeRenderer renderer;
+
+    public GameScreen(Settings settings,Acromage acromage) {
+        this.settings = settings;
         this.acromage = acromage;
+        cam = new OrthographicCamera(settings.getWidth(), settings.getHeight());
+        renderer = new ShapeRenderer();
+        renderer.setProjectionMatrix(cam.combined);
+
     }
-    
+
     @Override
     public void render(float delta) {
-        //Gdx.gl.glClearColor(1,1,1,1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        
+
+        renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.setColor(Color.RED);
+        renderer.circle(100, 100, 50);
+        renderer.end();
+
     }
 
     @Override
@@ -53,5 +70,8 @@ public class GameScreen implements Screen{
     public void dispose() {
     }
 
+    abstract void onShow();
+    
+    abstract void onHide();
     
 }

@@ -6,15 +6,26 @@
 package acromage.gdx;
 
 import acromage.gdx.game.ApplicationImpl;
+import acromage.gdx.game.Settings;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
+import java.awt.Button;
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.WindowEvent;
+import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -46,7 +57,7 @@ public class AcromageDesktop {
         LwjglCanvas lwCanvas = new LwjglCanvas(applicationImpl, config);
 
         frame = new JFrame();
-        frame.setSize(800, 600);
+        frame.setSize(320, 240);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //выход из приложения по нажатию клавиши ESC
         frame.setResizable(false);
@@ -74,6 +85,7 @@ public class AcromageDesktop {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                showOptionFrame();
             }
         });
         exitItem.addActionListener(new ActionListener() {
@@ -93,5 +105,53 @@ public class AcromageDesktop {
 
         mb.add(mainMenu);
         return mb;
+    }
+
+    public static void showOptionFrame() {
+        final JDialog options = new JDialog(frame); //new JFrame("Настройки");
+
+        Container panel = options.getContentPane();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        //panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        panel.add(new TextField("some text1"));
+        panel.add(new TextField("some text2"));
+        panel.add(new TextField("some text3"));
+
+        JPanel buttonPanel = new JPanel();
+
+        Button okButton = new Button("Применить");
+        Button cancelButton = new Button("Отмена");
+
+        okButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                options.dispatchEvent(new WindowEvent(options, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                options.dispatchEvent(new WindowEvent(options, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+
+        buttonPanel.add(okButton);
+        buttonPanel.add(cancelButton);
+
+        panel.add(buttonPanel);
+
+        options.setTitle("Настройки");
+        options.pack();
+        options.setModal(true);
+        options.setLocationRelativeTo(null);
+        options.setVisible(true);
+
+    }
+
+    public void applyVideoSettings(Settings settings) {
+        frame.setSize(settings.getWidth(), settings.getHeight());
     }
 }
