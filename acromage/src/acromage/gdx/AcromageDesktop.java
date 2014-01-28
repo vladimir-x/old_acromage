@@ -6,28 +6,16 @@
 package acromage.gdx;
 
 import acromage.gdx.game.ApplicationImpl;
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
-import java.awt.AWTEventMulticaster;
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Canvas;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
-import java.awt.MenuShortcut;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ContainerAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.Action;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.ViewportLayout;
 
 /**
  *
@@ -64,7 +52,6 @@ public class AcromageDesktop {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.add(lwCanvas.getCanvas());
-        //frame.pack();
 
         frame.setVisible(true);
 
