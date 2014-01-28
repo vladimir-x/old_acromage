@@ -53,9 +53,6 @@ public class AcromageDesktop {
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.fullscreen = false;
-        config.title = "Acromage gdx";
-        config.width = 800;
-        config.height = 600;
 
         applicationImpl = new ApplicationImpl();
         LwjglCanvas lwCanvas = new LwjglCanvas(applicationImpl, config);
