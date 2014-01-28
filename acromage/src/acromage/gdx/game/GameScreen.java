@@ -68,6 +68,7 @@ public abstract class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        renderer.dispose();
     }
 
     abstract void onShow();

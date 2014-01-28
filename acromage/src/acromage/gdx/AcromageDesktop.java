@@ -7,20 +7,25 @@ package acromage.gdx;
 
 import acromage.gdx.game.ApplicationImpl;
 import acromage.gdx.game.Settings;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
+import com.badlogic.gdx.backends.lwjgl.LwjglFrame;
 import java.awt.Button;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.TextField;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
@@ -54,15 +59,13 @@ public class AcromageDesktop {
         config.fullscreen = false;
 
         applicationImpl = new ApplicationImpl();
-        LwjglCanvas lwCanvas = new LwjglCanvas(applicationImpl, config);
 
-        frame = new JFrame();
+        frame = new LwjglFrame(applicationImpl, config);
         frame.setSize(320, 240);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //выход из приложения по нажатию клавиши ESC
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.add(lwCanvas.getCanvas());
 
         frame.setVisible(true);
 
@@ -127,14 +130,15 @@ public class AcromageDesktop {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                options.dispatchEvent(new WindowEvent(options, WindowEvent.WINDOW_CLOSING));
+                applyVideoSettings(applicationImpl.getSettings());
+                closeWindow(options);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                options.dispatchEvent(new WindowEvent(options, WindowEvent.WINDOW_CLOSING));
+                closeWindow(options);
             }
         });
 
@@ -151,7 +155,12 @@ public class AcromageDesktop {
 
     }
 
-    public void applyVideoSettings(Settings settings) {
+    public static void closeWindow(Window window) {
+        window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+    }
+
+    public static void applyVideoSettings(Settings settings) {
         frame.setSize(settings.getWidth(), settings.getHeight());
+        frame.setLocationRelativeTo(null);
     }
 }

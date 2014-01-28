@@ -41,6 +41,13 @@ public class ApplicationImpl extends Game {
         setScreen(screen);
     }
 
+    @Override
+    public void dispose() {
+        screen.dispose();
+    }
+    
+    
+
     public Settings getSettings() {
         return settings;
     }
