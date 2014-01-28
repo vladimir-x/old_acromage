@@ -44,12 +44,7 @@ public class AcromageDesktop {
 
     public static void main(String[] argv) {
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                makePanel();
-            }
-        });
+        makePanel();
 
     }
 
@@ -57,17 +52,15 @@ public class AcromageDesktop {
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.fullscreen = false;
-
+        config.width = 320;
+        config.height = 240;
+        
         applicationImpl = new ApplicationImpl();
 
         frame = new LwjglFrame(applicationImpl, config);
-        frame.setSize(320, 240);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //выход из приложения по нажатию клавиши ESC
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-
-        frame.setVisible(true);
 
         frame.setMenuBar(getMenuBar());
     }
