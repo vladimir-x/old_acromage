@@ -5,6 +5,7 @@
  */
 package acromage.gdx;
 
+import acromage.gdx.game.ApplicationImpl;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
 import java.awt.BorderLayout;
@@ -15,7 +16,7 @@ import javax.swing.ViewportLayout;
  *
  * @author admin
  */
-public class AcromageDesktop{
+public class AcromageDesktop {
 
     public static void main(String[] argv) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -25,19 +26,19 @@ public class AcromageDesktop{
         config.height = 600;
         config.useGL20 = true;
 
-        LwjglCanvas canvas = new LwjglCanvas(new Acromage(), config);
+        LwjglCanvas canvas = new LwjglCanvas(new ApplicationImpl(), config);
 
         JFrame frame = getJpanel();
-        frame.add(canvas.getCanvas());
+        frame.setLayout(new BorderLayout());
+        frame.add(canvas.getCanvas(), BorderLayout.CENTER);
+        frame.pack();
     }
-    
-    
+
     public static JFrame getJpanel() {
 
         JFrame frame = new JFrame();
+        frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //выход из приложения по нажатию клавиши ESC
-        frame.setLayout(new BorderLayout());
-        frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
