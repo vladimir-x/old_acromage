@@ -16,12 +16,16 @@ import com.badlogic.gdx.Gdx;
  */
 public class ApplicationImpl extends Game {
 
+    private Acromage acromage;
     private GameScreen screen;
     private GameInput input;
     
     @Override
     public void create() {
-        screen = new GameScreen();
+        acromage = new Acromage();
+        screen = new GameScreen(acromage);
+        input = new GameInput(acromage);
+        
         setScreen(screen);
         Gdx.input.setInputProcessor(input);
     }
