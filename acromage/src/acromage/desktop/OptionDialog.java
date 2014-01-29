@@ -43,12 +43,12 @@ public class OptionDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("444");
+        setTitle("Настройки");
         setAlwaysOnTop(true);
         setModal(true);
 
         videoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        videoPanel.setToolTipText("111");
+        videoPanel.setToolTipText("");
 
         videoGroup.add(minRadio);
         minRadio.setText("320 x 240");
