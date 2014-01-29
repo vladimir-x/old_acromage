@@ -5,10 +5,12 @@
  */
 package acromage.gdx;
 
+import acromage.gdx.game.Settings;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglFrame;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JRootPane;
 
 /**
@@ -19,11 +21,13 @@ public class MainFrame extends LwjglFrame {
 
     /**
      * Creates new form MainFrame
+     * @param listener
+     * @param settings
      */
-    public MainFrame(ApplicationListener listener, LwjglApplicationConfiguration config) {
-        super(listener, config);
+    public MainFrame(ApplicationListener listener, Settings settings) {
+        super(listener, "", settings.windowWidth, settings.windowHeight, false);
         initComponents();
-        getContentPane().setLayout(new FlowLayout());
+        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
     }
 
     /**
@@ -44,6 +48,7 @@ public class MainFrame extends LwjglFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Arcomage");
+        setResizable(false);
 
         gameMenu.setText("Игра");
 

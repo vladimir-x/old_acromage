@@ -11,28 +11,13 @@ package acromage.gdx.game;
  */
 public class Settings {
 
-    private Integer width;
-    private Integer height;
+    // размеры окна
+    public Integer windowWidth;
+    public Integer windowHeight;
+    public Boolean fullscreen;
+    
+    // размеры камеры (размеры пропорциональны файлам с ресурсами)
+    public Integer cameraWidth;
+    public Integer cameraHeight;
 
-    public Settings() {
-        
-        width = 800;
-        height = 600;
-    }
-
-    public void load() {
-        throw new UnsupportedOperationException("no supported yet");
-    }
-
-    public void save() {
-        throw new UnsupportedOperationException("no supported yet");
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
 }

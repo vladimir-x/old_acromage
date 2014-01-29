@@ -20,9 +20,12 @@ public class ApplicationImpl extends Game {
     private GameScreen screen;
     private GameInput input;
 
+    public ApplicationImpl(Settings settings) {
+        this.settings = settings;
+    }
+
     @Override
     public void create() {
-        settings = new Settings();
         acromage = new Acromage(settings);
         input = new GameInput(settings, acromage);
         screen = new GameScreen(settings, acromage) {
@@ -45,8 +48,6 @@ public class ApplicationImpl extends Game {
     public void dispose() {
         screen.dispose();
     }
-    
-    
 
     public Settings getSettings() {
         return settings;
