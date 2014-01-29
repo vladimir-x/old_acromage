@@ -6,8 +6,10 @@
 package acromage.game;
 
 import acromage.game.data.Deskzone;
+import acromage.game.data.Hand;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
@@ -17,8 +19,11 @@ public class Acromage {
 
     private Settings settings;
 
-    Deskzone left, right, top, bottom, center;
+    Deskzone left, right, center;
+    Hand top, bottom;
+    
     Deskzone zones[];
+    Hand hands[];
 
     public Acromage(Settings settings) {
         this.settings = settings;
@@ -26,16 +31,17 @@ public class Acromage {
         center = new Deskzone(settings, Deskzone.CENTER);
         right = new Deskzone(settings, Deskzone.EAST);
         left = new Deskzone(settings, Deskzone.WEST);
-        top = new Deskzone(settings, Deskzone.NORTH);
-        bottom = new Deskzone(settings, Deskzone.SOUTH);
+        top = new Hand(settings, Deskzone.NORTH);
+        bottom = new Hand(settings, Deskzone.SOUTH);
 
-        center.setColor(Color.YELLOW);
-        right.setColor(Color.RED);
-        left.setColor(Color.GREEN);
-        top.setColor(Color.CYAN);
-        bottom.setColor(Color.BLACK);
+        center.setColor(Color.DARK_GRAY);
+        right.setColor(Color.LIGHT_GRAY);
+        left.setColor(Color.LIGHT_GRAY);
+        top.setColor(Color.LIGHT_GRAY);
+        bottom.setColor(Color.LIGHT_GRAY);
 
         zones = new Deskzone[]{center, right, left, bottom, top};
+        hands = new Hand[]{top,bottom};
 
     }
 
@@ -51,6 +57,19 @@ public class Acromage {
                     zone.getRectangle().height
             );
         }
+
+        for (Hand hand : hands) {
+            for (Rectangle rect : hand.getRects()) {
+                renderer.setColor(Color.GREEN);
+                renderer.rect(
+                        rect.x,
+                        rect.y,
+                        rect.width,
+                        rect.height
+                );
+            }
+        }
+
         renderer.end();
     }
 
