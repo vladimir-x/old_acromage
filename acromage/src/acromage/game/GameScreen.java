@@ -28,7 +28,9 @@ public abstract class GameScreen implements Screen {
     public GameScreen(Settings settings, Acromage acromage) {
         this.settings = settings;
         this.acromage = acromage;
-        cam = new OrthographicCamera(settings.cameraWidth, settings.cameraHeight);
+        cam = new OrthographicCamera();
+        cam.setToOrtho(true, settings.cameraWidth, settings.cameraHeight);
+        cam.update();
         renderer = new ShapeRenderer();
         renderer.setProjectionMatrix(cam.combined);
 
