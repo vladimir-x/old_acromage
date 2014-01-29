@@ -21,14 +21,14 @@ public abstract class GameScreen implements Screen {
 
     private Settings settings;
     private Acromage acromage;
-    
+
     public OrthographicCamera cam;
     public ShapeRenderer renderer;
 
-    public GameScreen(Settings settings,Acromage acromage) {
+    public GameScreen(Settings settings, Acromage acromage) {
         this.settings = settings;
         this.acromage = acromage;
-        cam = new OrthographicCamera(settings.getWidth(), settings.getHeight());
+        cam = new OrthographicCamera(settings.cameraWidth, settings.cameraHeight);
         renderer = new ShapeRenderer();
         renderer.setProjectionMatrix(cam.combined);
 
@@ -72,7 +72,7 @@ public abstract class GameScreen implements Screen {
     }
 
     abstract void onShow();
-    
+
     abstract void onHide();
-    
+
 }
