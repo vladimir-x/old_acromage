@@ -89,12 +89,10 @@ public class MainFrame extends LwjglFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitItemActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitItemActionPerformed
 
     private void optionItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionItemActionPerformed
-        // TODO add your handling code here:
         OptionDialog od = new OptionDialog(null, true);
         od.setLocationRelativeTo(null);
         od.setVisible(true);
