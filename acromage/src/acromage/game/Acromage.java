@@ -20,7 +20,7 @@ public class Acromage {
     private Settings settings;
 
     Deskzone left, right, center;
-    Hand top, bottom;
+    Hand bottom;
     
     Deskzone zones[];
     Hand hands[];
@@ -31,17 +31,15 @@ public class Acromage {
         center = new Deskzone(settings, Deskzone.CENTER);
         right = new Deskzone(settings, Deskzone.EAST);
         left = new Deskzone(settings, Deskzone.WEST);
-        top = new Hand(settings, Deskzone.NORTH);
         bottom = new Hand(settings, Deskzone.SOUTH);
 
         center.setColor(Color.DARK_GRAY);
         right.setColor(Color.LIGHT_GRAY);
         left.setColor(Color.LIGHT_GRAY);
-        top.setColor(Color.LIGHT_GRAY);
         bottom.setColor(Color.LIGHT_GRAY);
 
-        zones = new Deskzone[]{center, right, left, bottom, top};
-        hands = new Hand[]{top,bottom};
+        zones = new Deskzone[]{center, right, left, bottom};
+        hands = new Hand[]{bottom};
 
     }
 

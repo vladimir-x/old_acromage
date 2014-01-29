@@ -16,10 +16,10 @@ import com.badlogic.gdx.math.Rectangle;
 public class Deskzone {
 
     private static float horizBound = 0.2f;
-    private static float vertBound = 0.2f;
+    private static float vertBound = 0.3f;
 
     public static final int CENTER = 0;
-    public static final int NORTH = 1;
+    //public static final int NORTH = 1;
     public static final int WEST = 2;
     public static final int SOUTH = 3;
     public static final int EAST = 4;
@@ -54,16 +54,13 @@ public class Deskzone {
 
         switch (zone) {
             case CENTER:
-                rect = new Rectangle(leftTopX, leftTopY, rightBotX - leftTopX, rightBotY - leftTopY);
-                break;
-            case NORTH:
-                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, leftTopY);
+                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, rightBotY - leftTopY);
                 break;
             case WEST:
                 rect = new Rectangle(0, leftTopY, leftTopX, rightBotY - leftTopY);
                 break;
             case SOUTH:
-                rect = new Rectangle(leftTopX, rightBotY, rightBotX - leftTopX, leftTopY);
+                rect = new Rectangle(0, rightBotY, width, leftTopY);
                 break;
             case EAST:
                 rect = new Rectangle(rightBotX, leftTopY, leftTopX, rightBotY - leftTopY);
