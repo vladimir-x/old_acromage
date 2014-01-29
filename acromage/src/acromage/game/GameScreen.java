@@ -39,15 +39,17 @@ public abstract class GameScreen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.setColor(Color.RED);
-        renderer.circle(100, 100, 50);
-        renderer.end();
+        acromage.render(renderer);
+        
+        
 
     }
 
     @Override
     public void resize(int width, int height) {
+        cam.setToOrtho(true, settings.cameraWidth, settings.cameraHeight);
+        cam.update();
+        renderer.setProjectionMatrix(cam.combined);
     }
 
     @Override
