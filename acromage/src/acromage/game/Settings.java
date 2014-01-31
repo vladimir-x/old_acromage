@@ -15,9 +15,16 @@ public class Settings {
     public Integer windowWidth;
     public Integer windowHeight;
     public Boolean fullscreen;
-    
+
     // размеры камеры (размеры пропорциональны файлам с ресурсами)
     public Integer cameraWidth;
     public Integer cameraHeight;
+
+    //размеры карты в текстуре для карт
+    public Integer cardHeight;
+    public Integer cardWidth;
+    
+    //игровые правила
+    public Integer cardCount;   //количество карт в руке
 
 }

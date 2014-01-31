@@ -19,17 +19,15 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public abstract class GameScreen implements Screen {
 
-    private Settings settings;
-    private Acromage acromage;
+    private Arcomage acromage;
 
     public OrthographicCamera cam;
     public ShapeRenderer renderer;
 
-    public GameScreen(Settings settings, Acromage acromage) {
-        this.settings = settings;
+    public GameScreen(Arcomage acromage) {
         this.acromage = acromage;
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, settings.cameraWidth, settings.cameraHeight);
+        cam.setToOrtho(true, Arcomage.settings.cameraWidth, Arcomage.settings.cameraHeight);
         cam.update();
         renderer = new ShapeRenderer();
         renderer.setProjectionMatrix(cam.combined);
@@ -49,7 +47,7 @@ public abstract class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        cam.setToOrtho(true, settings.cameraWidth, settings.cameraHeight);
+        cam.setToOrtho(true, Arcomage.settings.cameraWidth, Arcomage.settings.cameraHeight);
         cam.update();
         renderer.setProjectionMatrix(cam.combined);
     }

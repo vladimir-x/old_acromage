@@ -5,7 +5,9 @@
  */
 package acromage.game.data;
 
+import acromage.game.Settings;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
@@ -13,12 +15,26 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class Slot {
 
-    public int width;
-    public int height;
+    public static final int SLOT_SPACER = 10;
 
-    public Slot() {
-        width = 50;
-        height = 80;
-    }
     
+    private static Settings settings;
+    public Slot() {
+
+    }
+
+    public Rectangle getRect(Rectangle handRect, int pos, int count) {
+
+        float width = handRect.width/count;
+        float height = handRect.height -SLOT_SPACER ;
+        float halfSpacer = SLOT_SPACER/2;
+        
+        Rectangle rect = new Rectangle(
+                handRect.x + width*pos+halfSpacer,
+                handRect.y + halfSpacer,
+                width - halfSpacer,
+                height
+        );
+        return rect;
+    }
 }

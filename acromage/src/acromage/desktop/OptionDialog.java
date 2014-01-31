@@ -6,7 +6,7 @@
 
 package acromage.desktop;
 
-import acromage.desktop.AcromageDesktop;
+import acromage.desktop.ArcomageDesktop;
 
 /**
  *
@@ -171,7 +171,7 @@ public class OptionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
-        AcromageDesktop.applyVideoSettings();
+        ArcomageDesktop.applyVideoSettings();
         dispose();
     }//GEN-LAST:event_acceptButtonActionPerformed
 

@@ -14,7 +14,7 @@ import java.awt.event.WindowEvent;
  *
  * @author admin
  */
-public class AcromageDesktop {
+public class ArcomageDesktop {
 
     static MainFrame frame;
     static Settings settings;
@@ -51,9 +51,14 @@ public class AcromageDesktop {
         settings.windowHeight = 600;
 
         settings.fullscreen = false;
-        
+
         settings.cameraWidth = 640;
         settings.cameraHeight = 480;
+
+        settings.cardWidth = 60;
+        settings.cardHeight = 80;
+
+        settings.cardCount = 10;
 
         return settings;
     }
