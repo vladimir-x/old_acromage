@@ -5,6 +5,7 @@
  */
 package acromage.game.data;
 
+import acromage.game.Arcomage;
 import acromage.game.Settings;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,8 +16,8 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Deskzone {
 
-    private static float horizBound = 0.2f;
-    private static float vertBound = 0.3f;
+    private static float vertBound = 0.15f;
+    private static float horizBound = 0.3f;
 
     public static final int CENTER = 0;
     //public static final int NORTH = 1;
@@ -26,24 +27,21 @@ public class Deskzone {
 
     private int zone;
 
-    private Settings settings;
 
     //
     private Color color;
 
-    public Deskzone(Settings settings) {
-        this.settings = settings;
+    public Deskzone() {
         this.zone = 0;
     }
 
-    public Deskzone(Settings settings, int zone) {
-        this.settings = settings;
+    public Deskzone(int zone) {
         this.zone = zone;
     }
 
     public Rectangle getRectangle() {
-        int width = settings.cameraWidth;
-        int height = settings.cameraHeight;
+        int width = Arcomage.settings.cameraWidth;
+        int height = Arcomage.settings.cameraHeight;
 
         float leftTopX = width * vertBound;
         float leftTopY = height * horizBound;
@@ -54,16 +52,16 @@ public class Deskzone {
 
         switch (zone) {
             case CENTER:
-                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, rightBotY - leftTopY);
+                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, rightBotY );
                 break;
             case WEST:
-                rect = new Rectangle(0, leftTopY, leftTopX, rightBotY - leftTopY);
+                rect = new Rectangle(0, 0, leftTopX, rightBotY);
                 break;
             case SOUTH:
                 rect = new Rectangle(0, rightBotY, width, leftTopY);
                 break;
             case EAST:
-                rect = new Rectangle(rightBotX, leftTopY, leftTopX, rightBotY - leftTopY);
+                rect = new Rectangle(rightBotX, 0, leftTopX, rightBotY);
                 break;
             default:
                 throw new AssertionError();

@@ -5,7 +5,7 @@
  */
 package acromage.game.data;
 
-import acromage.game.Settings;
+import acromage.game.Arcomage;
 import com.badlogic.gdx.math.Rectangle;
 import java.util.Arrays;
 
@@ -15,13 +15,12 @@ import java.util.Arrays;
  */
 public class Hand extends Deskzone {
 
-    public static final int SLOT_SPACER = 10;
     
     Slot[] slots;
 
-    public Hand(Settings settings, int zone) {
-        super(settings, zone);
-        slots = new Slot[5];
+    public Hand(int zone) {
+        super( zone);
+        slots = new Slot[Arcomage.settings.cardCount];
         Arrays.fill(slots, new Slot());
     }
 
@@ -31,14 +30,10 @@ public class Hand extends Deskzone {
         
         Rectangle own = getRectangle();
         
-        float currX = own.x + SLOT_SPACER ;
-        float centerY = own.y + (own.height/2);
         
         for (int i=0;i<slots.length;++i){
             Slot slot = slots[i];
-            float currY = centerY - slot.height/2;
-            rects[i] = new Rectangle(currX, currY, slot.width, slot.height);
-            currX +=  slot.width+ SLOT_SPACER;
+            rects[i] = slot.getRect(own, i, slots.length);
         }
         
         return rects;

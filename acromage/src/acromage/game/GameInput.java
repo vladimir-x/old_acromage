@@ -15,11 +15,9 @@ import com.badlogic.gdx.InputProcessor;
  */
 public class GameInput implements InputProcessor{
 
-    private Settings settings;
-    private Acromage acromage;
+    private Arcomage acromage;
 
-    public GameInput(Settings settings,Acromage acromage) {
-        this.settings = settings;
+    public GameInput(Arcomage acromage) {
         this.acromage = acromage;
     }
     

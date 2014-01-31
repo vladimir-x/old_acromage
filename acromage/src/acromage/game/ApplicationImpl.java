@@ -5,7 +5,6 @@
  */
 package acromage.game;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
@@ -16,7 +15,7 @@ import com.badlogic.gdx.Gdx;
 public class ApplicationImpl extends Game {
 
     private Settings settings;
-    private Acromage acromage;
+    private Arcomage acromage;
     private GameScreen screen;
     private GameInput input;
 
@@ -26,9 +25,9 @@ public class ApplicationImpl extends Game {
 
     @Override
     public void create() {
-        acromage = new Acromage(settings);
-        input = new GameInput(settings, acromage);
-        screen = new GameScreen(settings, acromage) {
+        acromage = new Arcomage(settings);
+        input = new GameInput(acromage);
+        screen = new GameScreen(acromage) {
 
             @Override
             void onShow() {

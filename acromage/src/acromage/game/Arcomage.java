@@ -15,9 +15,9 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class Acromage {
+public class Arcomage {
 
-    private Settings settings;
+    public static Settings settings;
 
     Deskzone left, right, center;
     Hand bottom;
@@ -25,17 +25,17 @@ public class Acromage {
     Deskzone zones[];
     Hand hands[];
 
-    public Acromage(Settings settings) {
+    public Arcomage(Settings settings) {
         this.settings = settings;
 
-        center = new Deskzone(settings, Deskzone.CENTER);
-        right = new Deskzone(settings, Deskzone.EAST);
-        left = new Deskzone(settings, Deskzone.WEST);
-        bottom = new Hand(settings, Deskzone.SOUTH);
+        center = new Deskzone( Deskzone.CENTER);
+        right = new Deskzone( Deskzone.EAST);
+        left = new Deskzone( Deskzone.WEST);
+        bottom = new Hand( Deskzone.SOUTH);
 
         center.setColor(Color.DARK_GRAY);
-        right.setColor(Color.LIGHT_GRAY);
-        left.setColor(Color.LIGHT_GRAY);
+        right.setColor(Color.RED);
+        left.setColor(Color.BLUE);
         bottom.setColor(Color.LIGHT_GRAY);
 
         zones = new Deskzone[]{center, right, left, bottom};
