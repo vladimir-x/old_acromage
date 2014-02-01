@@ -17,14 +17,16 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public abstract class GameScreen implements Screen {
+public class GameScreen implements Screen {
+
+    private GameInput input;
 
     private Arcomage acromage;
-
     public OrthographicCamera cam;
     public ShapeRenderer renderer;
 
-    public GameScreen(Arcomage acromage) {
+    public GameScreen(Arcomage acromage, GameInput input) {
+        this.input = input;
         this.acromage = acromage;
         cam = new OrthographicCamera();
         cam.setToOrtho(true, Arcomage.settings.cameraWidth, Arcomage.settings.cameraHeight);
@@ -54,10 +56,12 @@ public abstract class GameScreen implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(input);
     }
 
     @Override
     public void hide() {
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override
@@ -72,9 +76,4 @@ public abstract class GameScreen implements Screen {
     public void dispose() {
         renderer.dispose();
     }
-
-    abstract void onShow();
-
-    abstract void onHide();
-
 }

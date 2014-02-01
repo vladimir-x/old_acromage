@@ -16,8 +16,11 @@ public class ApplicationImpl extends Game {
 
     private Settings settings;
     private Arcomage acromage;
-    private GameScreen screen;
+    private WelcomeScreen welcomeScreen;
+    private GameScreen gameScreen;
     private GameInput input;
+
+    private boolean gameStart;
 
     public ApplicationImpl(Settings settings) {
         this.settings = settings;
@@ -25,31 +28,36 @@ public class ApplicationImpl extends Game {
 
     @Override
     public void create() {
+        gameStart = false;
         acromage = new Arcomage(settings);
         input = new GameInput(acromage);
-        screen = new GameScreen(acromage) {
+        welcomeScreen = new WelcomeScreen(input);
+        gameScreen = new GameScreen(acromage,input);
 
-            @Override
-            void onShow() {
-                Gdx.input.setInputProcessor(input);
-            }
-
-            @Override
-            void onHide() {
-                Gdx.input.setInputProcessor(null);
-            }
-        };
-
-        setScreen(screen);
+        setScreen(welcomeScreen);
     }
 
     @Override
     public void dispose() {
-        screen.dispose();
+        gameScreen.dispose();
     }
 
     public Settings getSettings() {
         return settings;
     }
 
+    public void restart() {
+        gameStart = true;
+        acromage = new Arcomage(settings);
+        setScreen(gameScreen);
+    }
+
+    public void end() {
+        gameStart = false;
+        setScreen(welcomeScreen);
+    }
+
+    public boolean isGameStart() {
+        return gameStart;
+    }
 }

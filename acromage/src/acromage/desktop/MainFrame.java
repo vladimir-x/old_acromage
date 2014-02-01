@@ -9,6 +9,7 @@ import acromage.game.Settings;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglFrame;
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +53,11 @@ public class MainFrame extends LwjglFrame {
         gameMenu.setText("Игра");
 
         startItem.setText("Новая");
+        startItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startItemActionPerformed(evt);
+            }
+        });
         gameMenu.add(startItem);
         gameMenu.add(separator1);
 
@@ -96,6 +102,17 @@ public class MainFrame extends LwjglFrame {
         od.setLocationRelativeTo(null);
         od.setVisible(true);
     }//GEN-LAST:event_optionItemActionPerformed
+
+    private void startItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startItemActionPerformed
+        if (!ArcomageDesktop.applicationImpl.isGameStart()) {
+            ArcomageDesktop.applicationImpl.restart();
+        } else {
+            int dialogResult = JOptionPane.showConfirmDialog(this, "Начать новую игру?");
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                ArcomageDesktop.applicationImpl.restart();
+            }
+        }
+    }//GEN-LAST:event_startItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem exitItem;
