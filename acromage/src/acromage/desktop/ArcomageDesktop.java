@@ -55,10 +55,10 @@ public class ArcomageDesktop {
         settings.cameraWidth = 640;
         settings.cameraHeight = 480;
 
-        settings.cardWidth = 60;
-        settings.cardHeight = 80;
+        settings.cardWidth = 95;
+        settings.cardHeight = 130;
 
-        settings.cardCount = 10;
+        settings.cardCount = 6;
 
         return settings;
     }

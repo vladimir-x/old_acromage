@@ -30,7 +30,6 @@ public class Hand extends Deskzone {
         
         Rectangle own = getRectangle();
         
-        
         for (int i=0;i<slots.length;++i){
             Slot slot = slots[i];
             rects[i] = slot.getRect(own, i, slots.length);
