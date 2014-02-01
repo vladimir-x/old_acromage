@@ -8,13 +8,15 @@ package acromage.game.data;
 import acromage.game.Arcomage;
 import acromage.game.Settings;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
  * @author elduderino
  */
-public class Deskzone {
+public class Deskzone implements Rendereble {
 
     private static float vertBound = 0.15f;
     private static float horizBound = 0.3f;
@@ -27,6 +29,7 @@ public class Deskzone {
 
     private int zone;
 
+    private Rectangle rect;
 
     //
     private Color color;
@@ -39,7 +42,7 @@ public class Deskzone {
         this.zone = zone;
     }
 
-    public Rectangle getRectangle() {
+    public Rectangle calcRectangle() {
         int width = Arcomage.settings.cameraWidth;
         int height = Arcomage.settings.cameraHeight;
 
@@ -52,7 +55,7 @@ public class Deskzone {
 
         switch (zone) {
             case CENTER:
-                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, rightBotY );
+                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, rightBotY);
                 break;
             case WEST:
                 rect = new Rectangle(0, 0, leftTopX, rightBotY);
@@ -78,4 +81,29 @@ public class Deskzone {
         this.color = color;
     }
 
+    @Override
+    public void update(long delta) {
+        rect = calcRectangle();
+    }
+
+    @Override
+    public void render(ShapeRenderer renderer) {
+        renderer.setColor(color);
+        renderer.rect(
+                rect.x,
+                rect.y,
+                rect.width,
+                rect.height
+        );
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return rect;
+    }
+   
 }

@@ -7,29 +7,32 @@ package acromage.game.data;
 
 import acromage.game.Arcomage;
 import acromage.game.Settings;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
  * @author elduderino
  */
-public class Slot {
+public class Slot implements Rendereble{
 
     public static final int SLOT_SPACER = 10;
 
+    private Rendereble owner;
+    
+    private Rectangle rect;
+    
     public Slot() {
 
     }
 
-    public Rectangle getRect(Rectangle handRect, int pos, int count) {
+    public Rectangle calcRect(Rectangle handRect, int pos, int count) {
 
         float width = handRect.width/count;
         float centrX = width/2;
         
-        
-        float height = handRect.height;
-        float centrY = height/2;
-        float halfSpacer = SLOT_SPACER/2;
+        float centrY = handRect.height/2;
         
         Rectangle rect = new Rectangle(
                 handRect.x + (width*pos+centrX - Arcomage.settings.cardWidth/2),
@@ -37,6 +40,24 @@ public class Slot {
                 Arcomage.settings.cardWidth,
                 Arcomage.settings.cardHeight
         );
+        return rect;
+    }
+
+    @Override
+    public void update(long delta) {
+        rect = calcRect
+    }
+
+    @Override
+    public void render(ShapeRenderer renderer) {
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+    }
+    
+    @Override
+    public Rectangle getRectangle() {
         return rect;
     }
 }
