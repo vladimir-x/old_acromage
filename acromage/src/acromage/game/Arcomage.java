@@ -47,13 +47,7 @@ public class Arcomage {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         for (Deskzone zone : zones) {
-            renderer.setColor(zone.getColor());
-            renderer.rect(
-                    zone.getRectangle().x,
-                    zone.getRectangle().y,
-                    zone.getRectangle().width,
-                    zone.getRectangle().height
-            );
+            zone.render(renderer);
         }
 
         for (Hand hand : hands) {

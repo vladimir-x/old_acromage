@@ -6,6 +6,8 @@
 package acromage.game.data;
 
 import acromage.game.Arcomage;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import java.util.Arrays;
 
@@ -28,13 +30,45 @@ public class Hand extends Deskzone {
 
         Rectangle[] rects = new Rectangle[slots.length];
         
-        Rectangle own = getRectangle();
+        Rectangle own = calcRectangle();
         
         for (int i=0;i<slots.length;++i){
             Slot slot = slots[i];
-            rects[i] = slot.getRect(own, i, slots.length);
+            rects[i] = slot.calcRect(own, i, slots.length);
         }
         
         return rects;
     }
+
+    
+    @Override
+    public void update(long delta) {
+        super.update(delta); 
+        
+        for (Slot slot: slots){
+            slot.update(delta);
+        }
+    }
+    
+    @Override
+    public void render(ShapeRenderer renderer) {
+        super.render(renderer); 
+        
+        for (Slot slot: slots){
+            slot.render(renderer);
+        }
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+        super.render(spriteBatch);
+        
+        for (Slot slot: slots){
+            slot.render(spriteBatch);
+        }
+    }
+
+    
+    
+    
 }

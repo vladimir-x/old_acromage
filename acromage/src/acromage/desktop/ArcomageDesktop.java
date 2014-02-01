@@ -45,6 +45,7 @@ public class ArcomageDesktop {
     }
 
     public static Settings loadSettings() {
+        // реализация из файла настроек позже
         Settings settings = new Settings();
 
         settings.windowWidth = 800;
@@ -64,6 +65,6 @@ public class ArcomageDesktop {
     }
 
     public static void saveSettings(Settings settings) {
-        // реализация позже
+        // реализация в фаил настроек позже
     }
 }
