@@ -39,9 +39,8 @@ public abstract class GameScreen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
+        acromage.action(delta);
         acromage.render(renderer);
-        
-        
 
     }
 
@@ -50,6 +49,7 @@ public abstract class GameScreen implements Screen {
         cam.setToOrtho(true, Arcomage.settings.cameraWidth, Arcomage.settings.cameraHeight);
         cam.update();
         renderer.setProjectionMatrix(cam.combined);
+        acromage.update();
     }
 
     @Override

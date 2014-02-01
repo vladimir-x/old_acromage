@@ -17,10 +17,10 @@ import com.badlogic.gdx.math.Rectangle;
 public interface Rendereble {
  
     // прямоугольник, в котором находится объект
-    Rectangle getRectangle();
+    //Rectangle getRectangle();
     
     // пересчитать данные для рендеринга (перемещение объекта или изменение настроек экрана)
-    void update(long delta);
+    void update();
     
     //отрисовка примитивов
     void render(ShapeRenderer renderer);

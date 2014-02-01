@@ -7,6 +7,7 @@ package acromage.game.data;
 
 import acromage.game.Arcomage;
 import acromage.game.Settings;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,28 +16,30 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class Slot implements Rendereble{
+public class HandSlot implements Rendereble {
 
     public static final int SLOT_SPACER = 10;
 
-    private Rendereble owner;
-    
-    private Rectangle rect;
-    
-    public Slot() {
+    private Hand hand;
+    private int pos;
 
+    private Rectangle rect;
+
+    public HandSlot(Hand hand, int pos) {
+        this.hand = hand;
+        this.pos = pos;
     }
 
-    public Rectangle calcRect(Rectangle handRect, int pos, int count) {
+    public Rectangle calcRect() {
 
-        float width = handRect.width/count;
-        float centrX = width/2;
-        
-        float centrY = handRect.height/2;
-        
+        float width = hand.getRectangle().width / hand.getCount();
+        float centrX = width / 2;
+
+        float centrY = hand.getRectangle().height / 2;
+
         Rectangle rect = new Rectangle(
-                handRect.x + (width*pos+centrX - Arcomage.settings.cardWidth/2),
-                handRect.y + (centrY - Arcomage.settings.cardHeight/2),
+                hand.getRectangle().x + (width * pos + centrX - Arcomage.settings.cardWidth / 2),
+                hand.getRectangle().y + (centrY - Arcomage.settings.cardHeight / 2),
                 Arcomage.settings.cardWidth,
                 Arcomage.settings.cardHeight
         );
@@ -44,20 +47,22 @@ public class Slot implements Rendereble{
     }
 
     @Override
-    public void update(long delta) {
-        rect = calcRect
+    public void update() {
+        rect = calcRect();
     }
 
     @Override
     public void render(ShapeRenderer renderer) {
+        renderer.setColor(Color.GREEN);
+        renderer.rect(
+                rect.x,
+                rect.y,
+                rect.width,
+                rect.height);
     }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
     }
-    
-    @Override
-    public Rectangle getRectangle() {
-        return rect;
-    }
+
 }
