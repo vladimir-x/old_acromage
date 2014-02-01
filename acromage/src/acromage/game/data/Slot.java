@@ -5,8 +5,8 @@
  */
 package acromage.game.data;
 
+import acromage.game.Arcomage;
 import acromage.game.Settings;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
@@ -17,8 +17,6 @@ public class Slot {
 
     public static final int SLOT_SPACER = 10;
 
-    
-    private static Settings settings;
     public Slot() {
 
     }
@@ -26,14 +24,18 @@ public class Slot {
     public Rectangle getRect(Rectangle handRect, int pos, int count) {
 
         float width = handRect.width/count;
-        float height = handRect.height -SLOT_SPACER ;
+        float centrX = width/2;
+        
+        
+        float height = handRect.height;
+        float centrY = height/2;
         float halfSpacer = SLOT_SPACER/2;
         
         Rectangle rect = new Rectangle(
-                handRect.x + width*pos+halfSpacer,
-                handRect.y + halfSpacer,
-                width - halfSpacer,
-                height
+                handRect.x + (width*pos+centrX - Arcomage.settings.cardWidth/2),
+                handRect.y + (centrY - Arcomage.settings.cardHeight/2),
+                Arcomage.settings.cardWidth,
+                Arcomage.settings.cardHeight
         );
         return rect;
     }
