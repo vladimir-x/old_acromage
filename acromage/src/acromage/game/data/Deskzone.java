@@ -82,7 +82,7 @@ public class Deskzone implements Rendereble {
     }
 
     @Override
-    public void update(long delta) {
+    public void update() {
         rect = calcRectangle();
     }
 
@@ -101,7 +101,7 @@ public class Deskzone implements Rendereble {
     public void render(SpriteBatch spriteBatch) {
     }
 
-    @Override
+    //@Override
     public Rectangle getRectangle() {
         return rect;
     }

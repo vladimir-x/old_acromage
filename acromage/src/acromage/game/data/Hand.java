@@ -18,35 +18,27 @@ import java.util.Arrays;
 public class Hand extends Deskzone {
 
     
-    Slot[] slots;
+    HandSlot[] slots;
 
     public Hand(int zone) {
-        super( zone);
-        slots = new Slot[Arcomage.settings.cardCount];
-        Arrays.fill(slots, new Slot());
+        super(zone);
+        slots = new HandSlot[Arcomage.settings.cardCount];
+        for (int i=0;i<slots.length;++i){
+            slots[i] = new HandSlot(this,i);
+        }
     }
 
-    public Rectangle[] getRects() {
-
-        Rectangle[] rects = new Rectangle[slots.length];
-        
-        Rectangle own = calcRectangle();
-        
-        for (int i=0;i<slots.length;++i){
-            Slot slot = slots[i];
-            rects[i] = slot.calcRect(own, i, slots.length);
-        }
-        
-        return rects;
+    public int getCount(){
+        return slots.length;
     }
 
     
     @Override
-    public void update(long delta) {
-        super.update(delta); 
+    public void update() {
+        super.update(); 
         
-        for (Slot slot: slots){
-            slot.update(delta);
+        for (HandSlot slot: slots){
+            slot.update();
         }
     }
     
@@ -54,7 +46,7 @@ public class Hand extends Deskzone {
     public void render(ShapeRenderer renderer) {
         super.render(renderer); 
         
-        for (Slot slot: slots){
+        for (HandSlot slot: slots){
             slot.render(renderer);
         }
     }
@@ -63,7 +55,7 @@ public class Hand extends Deskzone {
     public void render(SpriteBatch spriteBatch) {
         super.render(spriteBatch);
         
-        for (Slot slot: slots){
+        for (HandSlot slot: slots){
             slot.render(spriteBatch);
         }
     }
