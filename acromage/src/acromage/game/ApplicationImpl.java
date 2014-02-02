@@ -14,7 +14,8 @@ import com.badlogic.gdx.Gdx;
  */
 public class ApplicationImpl extends Game {
 
-    private Settings settings;
+    public static Settings settings;
+    
     private Arcomage acromage;
     private WelcomeScreen welcomeScreen;
     private GameScreen gameScreen;
@@ -29,7 +30,7 @@ public class ApplicationImpl extends Game {
     @Override
     public void create() {
         gameStart = false;
-        acromage = new Arcomage(settings);
+        acromage = new Arcomage();
         input = new GameInput(acromage);
         welcomeScreen = new WelcomeScreen(input);
         gameScreen = new GameScreen(acromage,input);
@@ -48,7 +49,7 @@ public class ApplicationImpl extends Game {
 
     public void restart() {
         gameStart = true;
-        acromage = new Arcomage(settings);
+        acromage = new Arcomage();
         setScreen(gameScreen);
     }
 

@@ -10,8 +10,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -24,15 +29,30 @@ public class GameScreen implements Screen {
     private Arcomage acromage;
     public OrthographicCamera cam;
     public ShapeRenderer renderer;
+    public SpriteBatch spriteBatch;
+
+    public Map<String, TextureRegion> textureMap;
 
     public GameScreen(Arcomage acromage, GameInput input) {
         this.input = input;
         this.acromage = acromage;
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, Arcomage.settings.cameraWidth, Arcomage.settings.cameraHeight);
+        cam.setToOrtho(true, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
         cam.update();
+
+        spriteBatch = new SpriteBatch();
         renderer = new ShapeRenderer();
+        spriteBatch.setProjectionMatrix(cam.combined);
         renderer.setProjectionMatrix(cam.combined);
+
+    }
+
+    private void loadTextores() {
+
+        textureMap = new HashMap<String, TextureRegion>();
+        Texture texture = new Texture(ApplicationImpl.settings.welcomeTexture);
+
+       // TextureRegion.split(texture, tileWidth, tileHeight);
 
     }
 
@@ -43,12 +63,13 @@ public class GameScreen implements Screen {
 
         acromage.action(delta);
         acromage.render(renderer);
+        acromage.render(spriteBatch);
 
     }
 
     @Override
     public void resize(int width, int height) {
-        cam.setToOrtho(true, Arcomage.settings.cameraWidth, Arcomage.settings.cameraHeight);
+        cam.setToOrtho(true, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
         cam.update();
         renderer.setProjectionMatrix(cam.combined);
         acromage.update();

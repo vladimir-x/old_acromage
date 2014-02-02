@@ -22,16 +22,13 @@ import java.nio.CharBuffer;
  */
 public class Arcomage implements Rendereble, Actionable {
 
-    public static Settings settings;
-
     Deskzone left, right, center;
     Hand bottom;
 
     Deskzone zones[];
     Hand hands[];
 
-    public Arcomage(Settings settings) {
-        this.settings = settings;
+    public Arcomage() {
 
         center = new Deskzone(Deskzone.CENTER);
         right = new Deskzone(Deskzone.EAST);
@@ -45,7 +42,7 @@ public class Arcomage implements Rendereble, Actionable {
 
         zones = new Deskzone[]{center, right, left, bottom};
         hands = new Hand[]{bottom};
-        
+
         update();
     }
 
@@ -60,8 +57,6 @@ public class Arcomage implements Rendereble, Actionable {
         renderer.end();
     }
 
-    
-
     @Override
     public void update() {
         for (Deskzone zone : zones) {
@@ -71,9 +66,11 @@ public class Arcomage implements Rendereble, Actionable {
 
     @Override
     public void render(SpriteBatch spriteBatch) {
+        spriteBatch.begin();
         for (Deskzone zone : zones) {
             zone.render(spriteBatch);
         }
+        spriteBatch.end();
     }
 
     @Override
