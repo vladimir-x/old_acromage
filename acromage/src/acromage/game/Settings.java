@@ -27,4 +27,12 @@ public class Settings {
     //игровые правила
     public Integer cardCount;   //количество карт в руке
 
+    
+    //текстуры
+    public String welcomeTexture;   //экран привествия
+    public String aboutTexture;     //экран about
+    public String boardTexture;     //стол
+    public String deckTexture;      //колода
+    public String itemsTexture;     //башни, рубашки карт, и прочие текстуры
+    public String titleTexture;     //логотим Arcomage
 }

@@ -9,6 +9,7 @@ import acromage.game.ApplicationImpl;
 import acromage.game.Settings;
 import java.awt.Window;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 /**
  *
@@ -60,6 +61,13 @@ public class ArcomageDesktop {
         settings.cardHeight = 130;
 
         settings.cardCount = 6;
+        
+        settings.welcomeTexture = "data" + File.separator + "layout.bmp";
+        settings.aboutTexture = "data" + File.separator + "credits.bmp";
+        settings.boardTexture = "data" + File.separator + "layout.bmp";
+        settings.deckTexture = "data" + File.separator + "deck_ru.bmp";
+        settings.itemsTexture = "data" + File.separator + "items.bmp";
+        settings.titleTexture = "data" + File.separator + "title.bmp";
 
         return settings;
     }
