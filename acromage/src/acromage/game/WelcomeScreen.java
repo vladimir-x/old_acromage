@@ -29,7 +29,7 @@ public class WelcomeScreen implements Screen {
         this.input = input;
 
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
+        cam.setToOrtho(true, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
         cam.update();
 
         spriteBatch = new SpriteBatch();
