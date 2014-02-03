@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  *
@@ -23,19 +24,20 @@ public class WelcomeScreen implements Screen {
     public OrthographicCamera cam;
     public SpriteBatch spriteBatch;
 
-    Texture texture;
+    TextureRegion welcomeTexture;
 
     WelcomeScreen(GameInput input) {
         this.input = input;
 
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
+        cam.setToOrtho(false, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
         cam.update();
 
         spriteBatch = new SpriteBatch();
         spriteBatch.setProjectionMatrix(cam.combined);
 
-        texture = new Texture(ApplicationImpl.settings.welcomeTexture);
+        Texture texture = new Texture(ApplicationImpl.settings.welcomeTexture);
+        welcomeTexture = new TextureRegion(texture, ApplicationImpl.settings.welcomeTextureWidth, ApplicationImpl.settings.welcomeTextureHeight);
 
     }
 
@@ -46,7 +48,7 @@ public class WelcomeScreen implements Screen {
 
         spriteBatch.begin();
 
-        spriteBatch.draw(texture, 0, 0);
+        spriteBatch.draw(welcomeTexture, 0, 0);
         spriteBatch.end();
 
     }

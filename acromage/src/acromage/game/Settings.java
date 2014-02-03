@@ -35,4 +35,8 @@ public class Settings {
     public String deckTexture;      //колода
     public String itemsTexture;     //башни, рубашки карт, и прочие текстуры
     public String titleTexture;     //логотим Arcomage
+    
+    //размеры текстур
+    public Integer welcomeTextureWidth;
+    public Integer welcomeTextureHeight;
 }
