@@ -96,6 +96,7 @@ public class Deskzone implements Rendereble {
                 rect.width,
                 rect.height
         );
+
     }
 
     @Override
@@ -106,5 +107,5 @@ public class Deskzone implements Rendereble {
     public Rectangle getRectangle() {
         return rect;
     }
-   
+
 }

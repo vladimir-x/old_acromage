@@ -39,4 +39,9 @@ public class Settings {
     //размеры текстур
     public Integer welcomeTextureWidth;
     public Integer welcomeTextureHeight;
+    public Integer deckTextureWidth;
+    public Integer deckTextureHeight;
+    
+    
+    
 }
