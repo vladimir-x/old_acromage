@@ -71,6 +71,9 @@ public class ArcomageDesktop {
 
         settings.welcomeTextureWidth = 640;
         settings.welcomeTextureHeight = 480;
+        
+        settings.deckTextureWidth = 640;
+        settings.deckTextureHeight = 480;
 
         return settings;
     }

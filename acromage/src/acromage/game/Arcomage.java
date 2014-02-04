@@ -9,12 +9,11 @@ import acromage.game.data.Actionable;
 import acromage.game.data.Deskzone;
 import acromage.game.data.Hand;
 import acromage.game.data.Rendereble;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import java.io.IOException;
-import java.nio.CharBuffer;
 
 /**
  *
@@ -35,10 +34,10 @@ public class Arcomage implements Rendereble, Actionable {
         left = new Deskzone(Deskzone.WEST);
         bottom = new Hand(Deskzone.SOUTH);
 
-        center.setColor(Color.DARK_GRAY);
-        right.setColor(Color.RED);
-        left.setColor(Color.BLUE);
-        bottom.setColor(Color.LIGHT_GRAY);
+        center.setColor(Color.DARK_GRAY.sub(0, 0, 0, 0.5f));
+        right.setColor(Color.RED.sub(0, 0, 0, 0.5f));
+        left.setColor(Color.BLUE.sub(0, 0, 0, 0.5f));
+        bottom.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
 
         zones = new Deskzone[]{center, right, left, bottom};
         hands = new Hand[]{bottom};
@@ -67,6 +66,9 @@ public class Arcomage implements Rendereble, Actionable {
     @Override
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.begin();
+
+        spriteBatch.draw(ApplicationImpl.resources.deckTexture, 0, 0);
+
         for (Deskzone zone : zones) {
             zone.render(spriteBatch);
         }
