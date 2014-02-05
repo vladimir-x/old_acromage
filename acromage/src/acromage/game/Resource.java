@@ -17,26 +17,49 @@ import java.util.Map;
 public class Resource {
 
     public TextureRegion welcomeTexture;
-    public TextureRegion deckTexture;
-    
-    protected static Map<String, TextureRegion> textureMap;
+    public TextureRegion boardTexture;
+    public TextureRegion deckUndoTexture;
 
+    protected static Map<String, TextureRegion> textureMap;
 
     public Resource() {
 
         Texture texture;
 
+        //фоны
         texture = new Texture(ApplicationImpl.settings.welcomeTexture);
         welcomeTexture = new TextureRegion(texture, ApplicationImpl.settings.welcomeTextureWidth, ApplicationImpl.settings.welcomeTextureHeight);
 
-        texture = new Texture(ApplicationImpl.settings.welcomeTexture);
-        deckTexture = new TextureRegion(texture, ApplicationImpl.settings.deckTextureWidth, ApplicationImpl.settings.deckTextureHeight);
+        texture = new Texture(ApplicationImpl.settings.boardTexture);
+        boardTexture = new TextureRegion(texture, ApplicationImpl.settings.boardTextureWidth, ApplicationImpl.settings.boardTextureHeight);
 
-        textureMap = new  HashMap<String, TextureRegion>();
+        //куски
+        texture = new Texture(ApplicationImpl.settings.itemsTexture);
+        deckUndoTexture = new TextureRegion(texture,
+                ApplicationImpl.settings.deckUndoTextureX,
+                ApplicationImpl.settings.deckUndoTextureY,
+                ApplicationImpl.settings.deckTextureWidth,
+                ApplicationImpl.settings.deckTextureHeight);
+
+        
+        //колода
+        textureMap = new HashMap<String, TextureRegion>();
+        texture = new Texture(ApplicationImpl.settings.deckTexture);
+        TextureRegion[][] regions = TextureRegion.split(texture,
+                ApplicationImpl.settings.deckTextureWidth,
+                ApplicationImpl.settings.deckTextureHeight
+        );
+
+        for (int i = 0; i < ApplicationImpl.settings.deckCountY; ++i) {
+            for (int j = 0; j < ApplicationImpl.settings.deckCountX; ++j) {
+                String name = i + "_" + j;
+                textureMap.put(name, regions[i][j]);
+            }
+        }
+
     }
 
-    
-    public TextureRegion getGameTexture(String name){
+    public TextureRegion getGameTexture(String name) {
         return textureMap.get(name);
     }
 }
