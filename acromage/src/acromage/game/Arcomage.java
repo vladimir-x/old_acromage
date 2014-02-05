@@ -67,7 +67,7 @@ public class Arcomage implements Rendereble, Actionable {
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.begin();
 
-        spriteBatch.draw(ApplicationImpl.resources.deckTexture, 0, 0);
+        spriteBatch.draw(ApplicationImpl.resources.boardTexture, 0, 0);
 
         for (Deskzone zone : zones) {
             zone.render(spriteBatch);

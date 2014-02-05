@@ -72,8 +72,20 @@ public class ArcomageDesktop {
         settings.welcomeTextureWidth = 640;
         settings.welcomeTextureHeight = 480;
         
-        settings.deckTextureWidth = 640;
-        settings.deckTextureHeight = 480;
+        settings.boardTextureWidth = 640;
+        settings.boardTextureHeight = 480;
+        
+        settings.deckTextureWidth = 95;
+        settings.deckTextureHeight = 128;
+        
+        settings.deckUndoTextureX = 192;
+        settings.deckUndoTextureY = 0;
+        
+        
+        settings.deckCountX = 10;
+        settings.deckCountY = 12;
+        
+        
 
         return settings;
     }
