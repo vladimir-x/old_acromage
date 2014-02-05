@@ -6,17 +6,9 @@
 package acromage.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -30,6 +22,8 @@ public class GameScreen extends BaseScreen {
     public ShapeRenderer renderer;
     public SpriteBatch spriteBatch;
 
+    GridRender gridRender;
+
     public GameScreen(Arcomage acromage, GameInput input) {
         super(input);
         this.acromage = acromage;
@@ -40,6 +34,8 @@ public class GameScreen extends BaseScreen {
         spriteBatch.enableBlending();
         renderer.setProjectionMatrix(cam.combined);
 
+        gridRender = new GridRender();
+
     }
 
     @Override
@@ -47,10 +43,14 @@ public class GameScreen extends BaseScreen {
         super.render(delta);
 
         acromage.action(delta);
+        
         acromage.render(spriteBatch);
-
+        gridRender.render(spriteBatch);
+        
         Gdx.gl.glEnable(GL10.GL_BLEND);
+        
         acromage.render(renderer);
+        gridRender.render(renderer);
 
     }
 
@@ -60,6 +60,7 @@ public class GameScreen extends BaseScreen {
         renderer.setProjectionMatrix(cam.combined);
         spriteBatch.setProjectionMatrix(cam.combined);
         acromage.update();
+        gridRender.update();
     }
 
     @Override
