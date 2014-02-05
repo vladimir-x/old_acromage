@@ -5,6 +5,8 @@
  */
 package acromage.game;
 
+import acromage.game.screen.GameScreen;
+import acromage.game.screen.WelcomeScreen;
 import com.badlogic.gdx.Game;
 
 /**

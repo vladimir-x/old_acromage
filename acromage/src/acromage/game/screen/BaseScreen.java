@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game;
+package acromage.game.screen;
 
+import acromage.game.ApplicationImpl;
+import acromage.game.GameInput;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
