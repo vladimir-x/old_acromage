@@ -19,6 +19,10 @@ public class Resource {
     public TextureRegion welcomeTexture;
     public TextureRegion boardTexture;
     public TextureRegion deckUndoTexture;
+    
+    public TextureRegion brickTexture;
+    public TextureRegion gemTexture;
+    public TextureRegion beastTexture;
 
     protected static Map<String, TextureRegion> textureMap;
 
@@ -35,12 +39,28 @@ public class Resource {
 
         //куски
         texture = new Texture(ApplicationImpl.settings.itemsTexture);
+        
         deckUndoTexture = new TextureRegion(texture,
                 ApplicationImpl.settings.deckUndoTextureX,
                 ApplicationImpl.settings.deckUndoTextureY,
                 ApplicationImpl.settings.deckTextureWidth,
                 ApplicationImpl.settings.deckTextureHeight);
 
+        brickTexture = new TextureRegion(texture,
+                ApplicationImpl.settings.brickTextureX,
+                ApplicationImpl.settings.brickTextureY,
+                ApplicationImpl.settings.resTextureWidth,
+                ApplicationImpl.settings.resTextureHeight);
+        gemTexture = new TextureRegion(texture,
+                ApplicationImpl.settings.gemTextureX,
+                ApplicationImpl.settings.gemTextureY,
+                ApplicationImpl.settings.resTextureWidth,
+                ApplicationImpl.settings.resTextureHeight);
+        beastTexture = new TextureRegion(texture,
+                ApplicationImpl.settings.beastTextureX,
+                ApplicationImpl.settings.beastTextureY,
+                ApplicationImpl.settings.resTextureWidth,
+                ApplicationImpl.settings.resTextureHeight);
         
         //колода
         textureMap = new HashMap<String, TextureRegion>();

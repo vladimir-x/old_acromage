@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package acromage.game.data;
+package acromage.game.interfaсe;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
