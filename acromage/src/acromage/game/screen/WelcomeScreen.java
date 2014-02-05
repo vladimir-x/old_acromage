@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game;
+package acromage.game.screen;
 
+import acromage.game.ApplicationImpl;
+import acromage.game.GameInput;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -15,7 +17,7 @@ public class WelcomeScreen extends BaseScreen {
 
     public SpriteBatch spriteBatch;
 
-    WelcomeScreen(GameInput input) {
+    public WelcomeScreen(GameInput input) {
         super(input);
 
         spriteBatch = new SpriteBatch();

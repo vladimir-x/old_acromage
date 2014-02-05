@@ -47,25 +47,25 @@ public class Deskzone implements Rendereble {
         int width = ApplicationImpl.settings.cameraWidth;
         int height = ApplicationImpl.settings.cameraHeight;
 
-        float leftTopX = width * vertBound;
-        float leftTopY = height * horizBound;
-        float rightBotX = width - leftTopX;
-        float rightBotY = height - leftTopY;
+        float leftBotX = width * vertBound;
+        float leftBotY = height * horizBound;
+        float rightTopX = width - leftBotX;
+        float rightTopY = height - leftBotY;
 
         Rectangle rect = null;
 
         switch (zone) {
             case CENTER:
-                rect = new Rectangle(leftTopX, 0, rightBotX - leftTopX, rightBotY);
+                rect = new Rectangle(leftBotX, leftBotY, rightTopX - leftBotX, rightTopY);
                 break;
-            case WEST:
-                rect = new Rectangle(0, 0, leftTopX, rightBotY);
+            case WEST://запад
+                rect = new Rectangle(0, leftBotY, leftBotX, rightTopY);
                 break;
             case SOUTH:
-                rect = new Rectangle(0, rightBotY, width, leftTopY);
+                rect = new Rectangle(0, 0, width, leftBotY);
                 break;
             case EAST:
-                rect = new Rectangle(rightBotX, 0, leftTopX, rightBotY);
+                rect = new Rectangle(rightTopX, leftBotY, leftBotX, rightTopY);
                 break;
             default:
                 throw new AssertionError();
