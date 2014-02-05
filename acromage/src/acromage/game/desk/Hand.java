@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game.data;
+package acromage.game.desk;
 
 import acromage.game.ApplicationImpl;
 import acromage.game.Arcomage;
+import acromage.game.data.HandSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,7 +19,6 @@ import java.util.Arrays;
  */
 public class Hand extends Deskzone {
 
-    
     HandSlot[] slots;
 
     public Hand(int zone) {
@@ -60,8 +60,5 @@ public class Hand extends Deskzone {
             slot.render(spriteBatch);
         }
     }
-
-    
-    
     
 }

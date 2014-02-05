@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game.data;
+package acromage.game.desk;
 
 import acromage.game.ApplicationImpl;
-import acromage.game.Arcomage;
-import acromage.game.Settings;
+import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;

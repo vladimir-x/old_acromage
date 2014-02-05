@@ -5,10 +5,9 @@
  */
 package acromage.game.data;
 
+import acromage.game.interfaсe.Rendereble;
+import acromage.game.desk.Hand;
 import acromage.game.ApplicationImpl;
-import acromage.game.Arcomage;
-import acromage.game.Settings;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -34,13 +33,13 @@ public class HandSlot implements Rendereble {
     public Rectangle calcRect() {
 
         float width = hand.getRectangle().width / hand.getCount();
-        float centrX = width / 2;
+        float centrX = width / 2.f;
 
-        float centrY = hand.getRectangle().height / 2;
+        float centrY = hand.getRectangle().height / 2.f;
 
         Rectangle rect = new Rectangle(
-                hand.getRectangle().x + (width * pos + centrX - ApplicationImpl.settings.cardWidth / 2),
-                hand.getRectangle().y + (centrY - ApplicationImpl.settings.cardHeight / 2),
+                hand.getRectangle().x + (width * pos + centrX - ApplicationImpl.settings.cardWidth / 2.f),
+                hand.getRectangle().y + (centrY - ApplicationImpl.settings.cardHeight / 2.f),
                 ApplicationImpl.settings.cardWidth,
                 ApplicationImpl.settings.cardHeight
         );
