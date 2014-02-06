@@ -28,6 +28,12 @@ public class ActiveSlot implements Rendereble, Actionable {
         this.owner = owner;
     }
 
+    public Rectangle getRectangle() {
+        return rect;
+    }
+    
+    
+
     @Override
     public void update() {
         float centrX = owner.getRectangle().x + owner.getRectangle().width / 2.f;

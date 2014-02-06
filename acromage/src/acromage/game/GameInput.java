@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package acromage.game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-
 
 /**
  *
  * @author elduderino
  */
-public class GameInput implements InputProcessor{
+public class GameInput implements InputProcessor {
 
     private Arcomage acromage;
 
     public GameInput(Arcomage acromage) {
         this.acromage = acromage;
     }
-    
+
     @Override
     public boolean keyDown(int keycode) {
         return true;
@@ -38,7 +37,17 @@ public class GameInput implements InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        float propX = screenX * AppImpl.settings.cameraWidth / (1.0f * AppImpl.settings.windowWidth);
+        float propY = (AppImpl.settings.windowHeight - screenY)  * AppImpl.settings.cameraHeight / (1.0f *AppImpl.settings.windowHeight);
+
+        if (button == Input.Buttons.LEFT) {
+            acromage.promptToStep(propX, propY);
+        } else {
+            acromage.promptToDrop(propX, propY);
+        }
         return true;
+
     }
 
     @Override
@@ -58,7 +67,7 @@ public class GameInput implements InputProcessor{
 
     @Override
     public boolean scrolled(int amount) {
-        return true; 
+        return true;
     }
-    
+
 }
