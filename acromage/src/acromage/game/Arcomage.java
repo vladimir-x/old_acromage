@@ -49,14 +49,18 @@ public class Arcomage implements Rendereble, Actionable {
     }
 
     @Override
-    public void render(ShapeRenderer renderer) {
+    public void render(ShapeRenderer renderer,SpriteBatch spriteBatch) {
 
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        
+        spriteBatch.begin();
+        spriteBatch.draw(ApplicationImpl.resources.boardTexture, 0, 0);
+        spriteBatch.end();
+
+        
         for (Deskzone zone : zones) {
-            zone.render(renderer);
+            zone.render(renderer,spriteBatch);
         }
-
-        renderer.end();
+        
     }
 
     @Override
@@ -64,18 +68,6 @@ public class Arcomage implements Rendereble, Actionable {
         for (Deskzone zone : zones) {
             zone.update();
         }
-    }
-
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-        spriteBatch.begin();
-
-        spriteBatch.draw(ApplicationImpl.resources.boardTexture, 0, 0);
-
-        for (Deskzone zone : zones) {
-            zone.render(spriteBatch);
-        }
-        spriteBatch.end();
     }
 
     @Override

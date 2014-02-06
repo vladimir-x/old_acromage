@@ -7,7 +7,9 @@ package acromage.game.desk;
 
 import acromage.game.ApplicationImpl;
 import acromage.game.interfaсe.Rendereble;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -87,7 +89,10 @@ public class Deskzone implements Rendereble {
     }
 
     @Override
-    public void render(ShapeRenderer renderer) {
+    public void render(ShapeRenderer renderer,SpriteBatch spriteBatch) {
+                
+        Gdx.gl.glEnable(GL10.GL_BLEND);
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(color);
         renderer.rect(
                 rect.x,
@@ -95,11 +100,8 @@ public class Deskzone implements Rendereble {
                 rect.width,
                 rect.height
         );
+        renderer.end();
 
-    }
-
-    @Override
-    public void render(SpriteBatch spriteBatch) {
     }
 
     //@Override

@@ -11,6 +11,10 @@ package acromage.game;
  */
 public class Settings {
 
+    //шрифты
+    public String fontFnt;
+    public String fontPng;
+    
     // размеры окна
     public Integer windowWidth;
     public Integer windowHeight;
