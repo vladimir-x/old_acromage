@@ -5,9 +5,9 @@
  */
 package acromage.game.desk;
 
-import acromage.game.data.ActiveSlot;
-import acromage.game.data.DeckSlot;
-import acromage.game.data.PlayedSlot;
+import acromage.game.slot.ActiveSlot;
+import acromage.game.slot.DeckSlot;
+import acromage.game.slot.PlayedSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.ArrayList;
@@ -18,47 +18,65 @@ import java.util.ArrayList;
  */
 public class Board extends Deskzone {
 
+    private static final int LINE_CNT = 4;
+    public static final int CARDS_SPACE_X = 30;
+    public static final int CARDS_SPACE_Y = 40;
+
     DeckSlot deckSlot;
     ActiveSlot activeSlot;
-    
+
     ArrayList<PlayedSlot> playedSlots;
     PlayedSlot lastSlot;
-    
+
     public Board(int zone) {
         super(zone);
+        deckSlot = new DeckSlot(this);
+        activeSlot = new ActiveSlot(this);
         playedSlots = new ArrayList<PlayedSlot>();
+        makeEmptySlot();
     }
 
     @Override
     public void update() {
-        super.update(); 
-        
+        super.update();
+
         deckSlot.update();
         activeSlot.update();
-        
-        for (PlayedSlot playedSlot :playedSlots){
+
+        for (PlayedSlot playedSlot : playedSlots) {
             playedSlot.update();
         }
-        
+
     }
-    
+
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-        super.render(renderer, spriteBatch); 
-        
-        for (PlayedSlot playedSlot :playedSlots){
+        super.render(renderer, spriteBatch);
+
+        for (PlayedSlot playedSlot : playedSlots) {
             playedSlot.render(renderer, spriteBatch);
         }
         deckSlot.render(renderer, spriteBatch);
         activeSlot.render(renderer, spriteBatch);
-        
+
     }
 
-    private void makeEmptySlot(){
-        
-        PlayedSlot playedSlot = new PlayedSlot();
-        
-        lastSlot = playedSlot;
-        
+    private void makeEmptySlot() {
+
+        int posX = 1, posY = 0;
+        if (lastSlot != null) {
+            if (lastSlot.posX != LINE_CNT - 1) {
+                posX = lastSlot.posX + 1;
+                posY = lastSlot.posY;
+            } else {
+                posX = 0;
+                posY = lastSlot.posY + 1;
+            }
+        }
+
+        lastSlot = new PlayedSlot(this, posX, posY);
+
+        playedSlots.add(lastSlot);
+
     }
 }

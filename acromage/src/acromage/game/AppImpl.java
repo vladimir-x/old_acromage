@@ -13,7 +13,7 @@ import com.badlogic.gdx.Game;
  *
  * @author admin
  */
-public class ApplicationImpl extends Game {
+public class AppImpl extends Game {
 
     public static Settings settings;
     public static Resource resources;
@@ -25,13 +25,13 @@ public class ApplicationImpl extends Game {
 
     private boolean gameStart;
 
-    public ApplicationImpl(Settings settings) {
-        ApplicationImpl.settings = settings;
+    public AppImpl(Settings settings) {
+        AppImpl.settings = settings;
     }
 
     @Override
     public void create() {
-        ApplicationImpl.resources = new Resource();
+        AppImpl.resources = new Resource();
         gameStart = false;
         acromage = new Arcomage();
         input = new GameInput(acromage);

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game.data;
+package acromage.game.slot;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.desk.ResPanel;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -32,7 +32,7 @@ public class NameBlock extends TextBlock {
         float centrY = topSlotY + (topResPanelY - topSlotY) / 2.f;
         
         
-        BitmapFont.TextBounds tb = ApplicationImpl.resources.font.getBounds(text);
+        BitmapFont.TextBounds tb = AppImpl.resources.font.getBounds(text);
         
         rect = new Rectangle(centrX -tb.width/2.f, centrY - tb.height/2.f, tb.width, tb.height);
     }

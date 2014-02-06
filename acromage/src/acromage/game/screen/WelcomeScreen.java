@@ -5,7 +5,7 @@
  */
 package acromage.game.screen;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.GameInput;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -30,7 +30,7 @@ public class WelcomeScreen extends BaseScreen {
         super.render(delta);
 
         spriteBatch.begin();
-        spriteBatch.draw(ApplicationImpl.resources.welcomeTexture, 0, 0);
+        spriteBatch.draw(AppImpl.resources.welcomeTexture, 0, 0);
         spriteBatch.end();
     }
 

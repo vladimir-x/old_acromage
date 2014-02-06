@@ -5,7 +5,7 @@
  */
 package acromage.desktop;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.Settings;
 import java.awt.Window;
 import java.awt.event.WindowEvent;
@@ -19,7 +19,7 @@ public class ArcomageDesktop {
 
     static MainFrame frame;
     static Settings settings;
-    static ApplicationImpl applicationImpl;
+    static AppImpl applicationImpl;
 
     public static void main(String[] argv) {
 
@@ -29,7 +29,7 @@ public class ArcomageDesktop {
     public static void makePanel() {
 
         settings = loadSettings();
-        applicationImpl = new ApplicationImpl(settings);
+        applicationImpl = new AppImpl(settings);
 
         frame = new MainFrame(applicationImpl, settings);
     }

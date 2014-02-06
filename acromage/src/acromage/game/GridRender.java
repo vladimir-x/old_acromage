@@ -48,10 +48,10 @@ public class GridRender {
     public void update() {
         lines = new ArrayList<GridLine>();
 
-        for (int i = 0, cnt = 0; i <= ApplicationImpl.settings.cameraWidth; i += stepx, cnt++) {
+        for (int i = 0, cnt = 0; i <= AppImpl.settings.cameraWidth; i += stepx, cnt++) {
             GridLine line = new GridLine();
-            line.p1 = new Vector2(i, -ApplicationImpl.settings.cameraHeight);
-            line.p2 = new Vector2(i, ApplicationImpl.settings.cameraHeight);
+            line.p1 = new Vector2(i, -AppImpl.settings.cameraHeight);
+            line.p2 = new Vector2(i, AppImpl.settings.cameraHeight);
             line.pt = new Vector2(i, 50);
 
             line.color = Color.RED;
@@ -60,10 +60,10 @@ public class GridRender {
             lines.add(line);
         }
 
-        for (int i = 0, cnt = 0; i <= ApplicationImpl.settings.cameraHeight; i += stepy, cnt++) {
+        for (int i = 0, cnt = 0; i <= AppImpl.settings.cameraHeight; i += stepy, cnt++) {
             GridLine line = new GridLine();
-            line.p1 = new Vector2(-ApplicationImpl.settings.cameraWidth, i);
-            line.p2 = new Vector2(ApplicationImpl.settings.cameraWidth, i);
+            line.p1 = new Vector2(-AppImpl.settings.cameraWidth, i);
+            line.p2 = new Vector2(AppImpl.settings.cameraWidth, i);
             line.pt = new Vector2(50, i);
 
             line.color = Color.CYAN;

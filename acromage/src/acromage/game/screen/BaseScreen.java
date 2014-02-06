@@ -5,7 +5,7 @@
  */
 package acromage.game.screen;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.GameInput;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -25,7 +25,7 @@ public class BaseScreen implements Screen {
         this.input = input;
 
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
+        cam.setToOrtho(false, AppImpl.settings.cameraWidth, AppImpl.settings.cameraHeight);
         cam.update();
     }
 
@@ -37,7 +37,7 @@ public class BaseScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        cam.setToOrtho(false, ApplicationImpl.settings.cameraWidth, ApplicationImpl.settings.cameraHeight);
+        cam.setToOrtho(false, AppImpl.settings.cameraWidth, AppImpl.settings.cameraHeight);
         cam.update();
     }
 

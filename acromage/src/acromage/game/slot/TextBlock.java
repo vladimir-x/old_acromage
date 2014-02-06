@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game.data;
+package acromage.game.slot;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -39,7 +39,7 @@ public abstract class TextBlock implements Rendereble {
         renderer.end();
         
         spriteBatch.begin();
-        ApplicationImpl.resources.font.draw(spriteBatch, text, rect.x, rect.y +rect.height);
+        AppImpl.resources.font.draw(spriteBatch, text, rect.x, rect.y +rect.height);
         spriteBatch.end();
 
     }

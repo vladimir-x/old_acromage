@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game.data;
+package acromage.game.slot;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.desk.ResPanel;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.graphics.Color;
@@ -37,12 +37,12 @@ public class ResSlot implements Rendereble {
         float centrX = owner.getRectangle().x + owner.getRectangle().width / 2.f;
         float centrY = owner.getRectangle().y + owner.getRectangle().height / 2.f;
 
-        float x = centrX - ApplicationImpl.settings.resTextureWidth / 2.f;
-        float y = centrY - ApplicationImpl.settings.resTextureHeight * (1 / 2.f + pos - 1);
+        float x = centrX - AppImpl.settings.resTextureWidth / 2.f;
+        float y = centrY - AppImpl.settings.resTextureHeight * (1 / 2.f + pos - 1);
         
         rect = new Rectangle(x, y,
-                ApplicationImpl.settings.resTextureWidth,
-                ApplicationImpl.settings.resTextureHeight);
+                AppImpl.settings.resTextureWidth,
+                AppImpl.settings.resTextureHeight);
     }
 
     @Override
