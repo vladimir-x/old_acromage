@@ -46,6 +46,16 @@ public class HandSlot implements Rendereble {
         return rect;
     }
 
+    public boolean contains(float propX, float propY){
+        return rect.contains(propX, propY);
+    }
+
+    public Rectangle getRectangle() {
+        return rect;
+    }
+    
+    
+    
     @Override
     public void update() {
         rect = calcRect();
@@ -57,5 +67,7 @@ public class HandSlot implements Rendereble {
         spriteBatch.draw(AppImpl.resources.deckUndoTexture, rect.x, rect.y);
         spriteBatch.end();
     }
+    
+    
 
 }

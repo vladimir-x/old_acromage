@@ -36,7 +36,7 @@ public class Arcomage implements Rendereble, Actionable {
         board = new Board(Deskzone.CENTER);
         resLeft = new ResPanel(Deskzone.WEST);
         resRight = new ResPanel(Deskzone.EAST);
-        hand = new Hand(Deskzone.SOUTH);
+        hand = new Hand(Deskzone.SOUTH,board.getActiveSlot());
 
         board.setColor(Color.DARK_GRAY.sub(0, 0, 0, 0.5f));
         resLeft.setColor(Color.BLUE.sub(0, 0, 0, 0.5f));
@@ -72,5 +72,16 @@ public class Arcomage implements Rendereble, Actionable {
 
     @Override
     public void action(float delta) {
+        board.action(delta);
+        hand.action(delta);
+    }
+    
+
+    public void promptToStep(float propX, float propY) {
+        boolean hasSelect = hand.promptToSelect(propX,propY);
+    }
+
+    void promptToDrop(float propX, float propY) {
+        boolean hasSelect = hand.promptToSelect(propX,propY);
     }
 }
