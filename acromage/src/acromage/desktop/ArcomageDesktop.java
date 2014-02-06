@@ -19,7 +19,6 @@ public class ArcomageDesktop {
 
     static MainFrame frame;
     static Settings settings;
-    static AppImpl applicationImpl;
 
     public static void main(String[] argv) {
 
@@ -29,7 +28,7 @@ public class ArcomageDesktop {
     public static void makePanel() {
 
         settings = loadSettings();
-        applicationImpl = new AppImpl(settings);
+        AppImpl applicationImpl = new AppImpl(settings);
 
         frame = new MainFrame(applicationImpl, settings);
     }

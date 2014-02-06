@@ -5,6 +5,7 @@
  */
 package acromage.desktop;
 
+import acromage.game.AppImpl;
 import acromage.game.Settings;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglFrame;
@@ -23,8 +24,11 @@ public class MainFrame extends LwjglFrame {
      * @param listener
      * @param settings
      */
-    public MainFrame(ApplicationListener listener, Settings settings) {
-        super(listener, "", settings.windowWidth, settings.windowHeight, false);
+    AppImpl appImpl;
+    
+    public MainFrame(AppImpl appImpl, Settings settings) {
+        super(appImpl, "", settings.windowWidth, settings.windowHeight, false);
+        this.appImpl = appImpl;
         initComponents();
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
         setLocationRelativeTo(null);
@@ -104,12 +108,12 @@ public class MainFrame extends LwjglFrame {
     }//GEN-LAST:event_optionItemActionPerformed
 
     private void startItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startItemActionPerformed
-        if (!ArcomageDesktop.applicationImpl.isGameStart()) {
-            ArcomageDesktop.applicationImpl.restart();
+        if (!appImpl.isGameStart()) {
+            appImpl.restart();
         } else {
             int dialogResult = JOptionPane.showConfirmDialog(this, "Начать новую игру?");
             if (dialogResult == JOptionPane.YES_OPTION) {
-                ArcomageDesktop.applicationImpl.restart();
+                appImpl.restart();
             }
         }
     }//GEN-LAST:event_startItemActionPerformed
