@@ -5,8 +5,11 @@
  */
 package acromage.game;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +28,8 @@ public class Resource {
     public TextureRegion beastTexture;
 
     protected static Map<String, TextureRegion> textureMap;
+    
+    public BitmapFont font;
 
     public Resource() {
 
@@ -61,6 +66,13 @@ public class Resource {
                 ApplicationImpl.settings.beastTextureY,
                 ApplicationImpl.settings.resTextureWidth,
                 ApplicationImpl.settings.resTextureHeight);
+        
+        // Шрифты
+        font = new BitmapFont(
+                new FileHandle(ApplicationImpl.settings.fontFnt),
+                new FileHandle(ApplicationImpl.settings.fontPng),
+                false
+        );
         
         //колода
         textureMap = new HashMap<String, TextureRegion>();

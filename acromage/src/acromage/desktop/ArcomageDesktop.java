@@ -62,6 +62,11 @@ public class ArcomageDesktop {
 
         settings.cardCount = 6;
 
+        //шрифты
+        settings.fontFnt ="data" + File.separator + "fc.fnt";
+        settings.fontPng ="data" + File.separator + "fc.png";
+        
+        //текстуры
         settings.welcomeTexture = "data" + File.separator + "layout.bmp";
         settings.aboutTexture = "data" + File.separator + "credits.bmp";
         settings.boardTexture = "data" + File.separator + "layout.bmp";
@@ -69,7 +74,7 @@ public class ArcomageDesktop {
         settings.itemsTexture = "data" + File.separator + "items.bmp";
         settings.titleTexture = "data" + File.separator + "title.bmp";
 
-        // ширина и высота
+        // ширина и высота текстур
         settings.welcomeTextureWidth = 640;
         settings.welcomeTextureHeight = 480;
 

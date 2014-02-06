@@ -59,13 +59,12 @@ public class GridRender {
 
             lines.add(line);
         }
-        
-        
+
         for (int i = 0, cnt = 0; i <= ApplicationImpl.settings.cameraHeight; i += stepy, cnt++) {
             GridLine line = new GridLine();
-            line.p1 = new Vector2(-ApplicationImpl.settings.cameraWidth,i);
-            line.p2 = new Vector2(ApplicationImpl.settings.cameraWidth,i);
-            line.pt = new Vector2(50,i);
+            line.p1 = new Vector2(-ApplicationImpl.settings.cameraWidth, i);
+            line.p2 = new Vector2(ApplicationImpl.settings.cameraWidth, i);
+            line.pt = new Vector2(50, i);
 
             line.color = Color.CYAN;
             line.title = String.valueOf(cnt);
@@ -74,17 +73,14 @@ public class GridRender {
         }
     }
 
-    public void render(ShapeRenderer renderer) {
+    public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
         renderer.begin(ShapeRenderer.ShapeType.Line);
         for (GridLine line : lines) {
             renderer.setColor(line.color);
             renderer.line(line.p1, line.p2);
         }
         renderer.end();
-    }
 
-    public void render(SpriteBatch spriteBatch) {
-        
         spriteBatch.begin();
         for (GridLine line : lines) {
             font.draw(spriteBatch, line.title, line.pt.x, line.pt.y);

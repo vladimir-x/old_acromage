@@ -46,14 +46,10 @@ public class GameScreen extends BaseScreen {
         super.render(delta);
 
         acromage.action(delta);
-        
-        acromage.render(spriteBatch);
-        gridRender.render(spriteBatch);
-        
-        Gdx.gl.glEnable(GL10.GL_BLEND);
-        
-        acromage.render(renderer);
-        gridRender.render(renderer);
+
+
+        acromage.render(renderer, spriteBatch);
+        //gridRender.render(renderer, spriteBatch);
 
     }
 

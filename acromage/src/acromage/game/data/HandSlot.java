@@ -52,21 +52,10 @@ public class HandSlot implements Rendereble {
     }
 
     @Override
-    public void render(ShapeRenderer renderer) {
-        /*
-        renderer.setColor(Color.GREEN);
-        renderer.rect(
-                rect.x,
-                rect.y,
-                rect.width,
-                rect.height);
-        */
-    }
-
-    @Override
-    public void render(SpriteBatch spriteBatch) {
+    public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
+        spriteBatch.begin();
         spriteBatch.draw(ApplicationImpl.resources.deckUndoTexture, rect.x, rect.y);
-        
+        spriteBatch.end();
     }
 
 }

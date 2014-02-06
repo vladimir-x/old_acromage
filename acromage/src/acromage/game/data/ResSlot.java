@@ -26,7 +26,7 @@ public class ResSlot implements Rendereble {
     int pos;
     TextureRegion textureRegion;
 
-    public ResSlot(ResPanel owner, int pos,TextureRegion textureRegion) {
+    public ResSlot(ResPanel owner, int pos, TextureRegion textureRegion) {
         this.owner = owner;
         this.pos = pos;
         this.textureRegion = textureRegion;
@@ -39,27 +39,21 @@ public class ResSlot implements Rendereble {
 
         float x = centrX - ApplicationImpl.settings.resTextureWidth / 2.f;
         float y = centrY - ApplicationImpl.settings.resTextureHeight * (1 / 2.f + pos - 1);
+        
         rect = new Rectangle(x, y,
                 ApplicationImpl.settings.resTextureWidth,
                 ApplicationImpl.settings.resTextureHeight);
     }
 
     @Override
-    public void render(ShapeRenderer renderer) {
-
-        /*
-        renderer.setColor(Color.GREEN);
-        renderer.rect(
-                rect.x,
-                rect.y,
-                rect.width,
-                rect.height);
-        */
+    public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
+        spriteBatch.begin();
+        spriteBatch.draw(textureRegion, rect.x, rect.y);
+        spriteBatch.end();
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-        spriteBatch.draw(textureRegion, rect.x, rect.y);
+    public Rectangle getRectangle() {
+        return rect;
     }
 
 }

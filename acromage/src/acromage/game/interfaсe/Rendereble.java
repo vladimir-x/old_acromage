@@ -23,9 +23,7 @@ public interface Rendereble {
     void update();
     
     //отрисовка примитивов
-    void render(ShapeRenderer renderer);
+    void render(ShapeRenderer renderer,SpriteBatch spriteBatch);
     
-    //отрисовка спрайтов
-    void render(SpriteBatch spriteBatch);
     
 }

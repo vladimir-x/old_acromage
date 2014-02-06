@@ -44,21 +44,12 @@ public class Hand extends Deskzone {
     }
     
     @Override
-    public void render(ShapeRenderer renderer) {
-        super.render(renderer); 
+    public void render(ShapeRenderer renderer,SpriteBatch spriteBatch) {
+        super.render(renderer,spriteBatch); 
         
         for (HandSlot slot: slots){
-            slot.render(renderer);
+            slot.render(renderer,spriteBatch);
         }
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-        super.render(spriteBatch);
-        
-        for (HandSlot slot: slots){
-            slot.render(spriteBatch);
-        }
-    }
-    
 }

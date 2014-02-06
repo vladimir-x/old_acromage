@@ -6,9 +6,11 @@
 package acromage.game.desk;
 
 import acromage.game.ApplicationImpl;
+import acromage.game.data.NameBlock;
 import acromage.game.data.ResSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
@@ -18,7 +20,9 @@ public class ResPanel extends Deskzone {
 
     ResSlot brickSlot, gemSlot, beastSlot;
 
-    ResSlot[] resSlots;
+    public ResSlot[] resSlots;
+    
+    NameBlock nameBlock;
 
     public ResPanel(int zone) {
         super(zone);
@@ -28,34 +32,31 @@ public class ResPanel extends Deskzone {
         beastSlot = new ResSlot(this,2,ApplicationImpl.resources.beastTexture);
 
         resSlots = new ResSlot[]{brickSlot, gemSlot, beastSlot};
+        
+        nameBlock = new NameBlock(this);
+        nameBlock.setText("text");
     }
     
 
     @Override
     public void update() {
         super.update();
-
+        
         for (ResSlot resSlot:resSlots){
             resSlot.update();
         }
+        nameBlock.update();
     }
 
     @Override
-    public void render(ShapeRenderer renderer) {
-        super.render(renderer);
+    public void render(ShapeRenderer renderer,SpriteBatch spriteBatch) {
+        super.render(renderer,spriteBatch);
 
         for (ResSlot resSlot:resSlots){
-            resSlot.render(renderer);
+            resSlot.render(renderer,spriteBatch);
         }
+        nameBlock.render(renderer, spriteBatch);
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-        super.render(spriteBatch);
-
-        for (ResSlot resSlot:resSlots){
-            resSlot.render(spriteBatch);
-        }
-    }
 
 }
