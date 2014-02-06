@@ -43,11 +43,9 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void render(float delta) {
-        super.render(delta);
+        //super.render(delta);
 
         acromage.action(delta);
-
-
         acromage.render(renderer, spriteBatch);
         //gridRender.render(renderer, spriteBatch);
 
