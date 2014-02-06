@@ -5,7 +5,7 @@
  */
 package acromage.game.desk;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -45,8 +45,8 @@ public class Deskzone implements Rendereble {
     }
 
     public Rectangle calcRectangle() {
-        int width = ApplicationImpl.settings.cameraWidth;
-        int height = ApplicationImpl.settings.cameraHeight;
+        int width = AppImpl.settings.cameraWidth;
+        int height = AppImpl.settings.cameraHeight;
 
         float leftBotX = width * vertBound;
         float leftBotY = height * horizBound;

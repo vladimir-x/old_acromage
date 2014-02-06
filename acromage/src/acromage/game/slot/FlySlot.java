@@ -4,18 +4,24 @@
  * and open the template in the editor.
  */
 
-package acromage.game.data;
+package acromage.game.slot;
 
+import acromage.game.interfaсe.Actionable;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
- * Колода
+ *
  * @author elduderino
  */
-public class DeckSlot implements Rendereble{
+public class FlySlot implements Rendereble,Actionable{
 
+    Rectangle current,destination;
+    
+    
+    
     
     @Override
     public void update() {
@@ -24,6 +30,11 @@ public class DeckSlot implements Rendereble{
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void action(float delta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

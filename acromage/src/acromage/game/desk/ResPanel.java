@@ -5,9 +5,9 @@
  */
 package acromage.game.desk;
 
-import acromage.game.ApplicationImpl;
-import acromage.game.data.NameBlock;
-import acromage.game.data.ResSlot;
+import acromage.game.AppImpl;
+import acromage.game.slot.NameBlock;
+import acromage.game.slot.ResSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -27,9 +27,9 @@ public class ResPanel extends Deskzone {
     public ResPanel(int zone) {
         super(zone);
 
-        brickSlot = new ResSlot(this,0,ApplicationImpl.resources.brickTexture);
-        gemSlot = new ResSlot(this,1,ApplicationImpl.resources.gemTexture);
-        beastSlot = new ResSlot(this,2,ApplicationImpl.resources.beastTexture);
+        brickSlot = new ResSlot(this,0,AppImpl.resources.brickTexture);
+        gemSlot = new ResSlot(this,1,AppImpl.resources.gemTexture);
+        beastSlot = new ResSlot(this,2,AppImpl.resources.beastTexture);
 
         resSlots = new ResSlot[]{brickSlot, gemSlot, beastSlot};
         

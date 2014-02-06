@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package acromage.game.data;
+package acromage.game.slot;
 
 import acromage.game.interfaсe.Rendereble;
 import acromage.game.desk.Hand;
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -38,10 +38,10 @@ public class HandSlot implements Rendereble {
         float centrY = hand.getRectangle().height / 2.f;
 
         Rectangle rect = new Rectangle(
-                hand.getRectangle().x + (width * pos + centrX - ApplicationImpl.settings.cardWidth / 2.f),
-                hand.getRectangle().y + (centrY - ApplicationImpl.settings.cardHeight / 2.f),
-                ApplicationImpl.settings.cardWidth,
-                ApplicationImpl.settings.cardHeight
+                hand.getRectangle().x + (width * pos + centrX - AppImpl.settings.cardWidth / 2.f),
+                hand.getRectangle().y + (centrY - AppImpl.settings.cardHeight / 2.f),
+                AppImpl.settings.cardWidth,
+                AppImpl.settings.cardHeight
         );
         return rect;
     }
@@ -54,7 +54,7 @@ public class HandSlot implements Rendereble {
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
         spriteBatch.begin();
-        spriteBatch.draw(ApplicationImpl.resources.deckUndoTexture, rect.x, rect.y);
+        spriteBatch.draw(AppImpl.resources.deckUndoTexture, rect.x, rect.y);
         spriteBatch.end();
     }
 

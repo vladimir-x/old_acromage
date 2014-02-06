@@ -5,9 +5,9 @@
  */
 package acromage.game.desk;
 
-import acromage.game.ApplicationImpl;
+import acromage.game.AppImpl;
 import acromage.game.Arcomage;
-import acromage.game.data.HandSlot;
+import acromage.game.slot.HandSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -23,7 +23,7 @@ public class Hand extends Deskzone {
 
     public Hand(int zone) {
         super(zone);
-        slots = new HandSlot[ApplicationImpl.settings.cardCount];
+        slots = new HandSlot[AppImpl.settings.cardCount];
         for (int i=0;i<slots.length;++i){
             slots[i] = new HandSlot(this,i);
         }

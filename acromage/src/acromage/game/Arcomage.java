@@ -53,7 +53,7 @@ public class Arcomage implements Rendereble, Actionable {
 
         
         spriteBatch.begin();
-        spriteBatch.draw(ApplicationImpl.resources.boardTexture, 0, 0);
+        spriteBatch.draw(AppImpl.resources.boardTexture, 0, 0);
         spriteBatch.end();
 
         
