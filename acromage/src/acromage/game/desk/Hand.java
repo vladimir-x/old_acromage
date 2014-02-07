@@ -14,6 +14,7 @@ import acromage.game.slot.HandSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -22,22 +23,22 @@ import java.util.Arrays;
  */
 public class Hand extends Deskzone implements Actionable {
 
-    HandSlot[] slots;
+    ArrayList<HandSlot> slots;
     FlySlot selectedSlot;
 
     ActiveSlot activeSlot;
-    
-    public Hand(int zone,ActiveSlot activeSlot) {
+
+    public Hand(int zone, ActiveSlot activeSlot) {
         super(zone);
         this.activeSlot = activeSlot;
-        slots = new HandSlot[AppImpl.settings.cardCount];
-        for (int i = 0; i < slots.length; ++i) {
-            slots[i] = new HandSlot(this, i);
+        slots = new ArrayList<HandSlot>();
+        for (int i = 0; i < AppImpl.settings.cardCount; ++i) {
+            slots.add(new HandSlot(this, i));
         }
     }
 
     public int getCount() {
-        return slots.length;
+        return slots.size();
     }
 
     public void selectSlot() {
@@ -49,8 +50,9 @@ public class Hand extends Deskzone implements Actionable {
     public void update() {
         super.update();
 
-        for (HandSlot slot : slots) {
-            slot.update();
+        for (int i = 0; i < slots.size(); ++i) {
+            slots.get(i).setPos(i);
+            slots.get(i).update();
         }
     }
 
@@ -61,19 +63,27 @@ public class Hand extends Deskzone implements Actionable {
         for (HandSlot slot : slots) {
             slot.render(renderer, spriteBatch);
         }
+        if (selectedSlot != null) {
+            selectedSlot.render(renderer, spriteBatch);
+        }
     }
 
     @Override
     public void action(float delta) {
         if (selectedSlot != null) {
             selectedSlot.action(delta);
+            if (selectedSlot.card == null) {
+                selectedSlot = null;
+            }
         }
     }
 
     public boolean promptToSelect(float propX, float propY) {
         for (HandSlot handSlot : slots) {
             if (handSlot.contains(propX, propY)) {
-                selectedSlot = new FlySlot(handSlot.getRectangle(), activeSlot.getRectangle());
+                selectedSlot = new FlySlot(handSlot, activeSlot);
+                slots.remove(handSlot);
+                update();
                 return true;
             }
         }

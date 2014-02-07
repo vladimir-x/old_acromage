@@ -14,10 +14,10 @@ import com.badlogic.gdx.InputProcessor;
  */
 public class GameInput implements InputProcessor {
 
-    private Arcomage acromage;
+    private AppImpl appImpl;
 
-    public GameInput(Arcomage acromage) {
-        this.acromage = acromage;
+    public GameInput(AppImpl appImpl) {
+        this.appImpl = appImpl;
     }
 
     @Override
@@ -42,9 +42,9 @@ public class GameInput implements InputProcessor {
         float propY = (AppImpl.settings.windowHeight - screenY)  * AppImpl.settings.cameraHeight / (1.0f *AppImpl.settings.windowHeight);
 
         if (button == Input.Buttons.LEFT) {
-            acromage.promptToStep(propX, propY);
+            appImpl.acromage.promptToStep(propX, propY);
         } else {
-            acromage.promptToDrop(propX, propY);
+            appImpl.acromage.promptToDrop(propX, propY);
         }
         return true;
 

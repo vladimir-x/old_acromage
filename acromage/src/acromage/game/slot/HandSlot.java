@@ -8,6 +8,7 @@ package acromage.game.slot;
 import acromage.game.interfaсe.Rendereble;
 import acromage.game.desk.Hand;
 import acromage.game.AppImpl;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,14 +17,13 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class HandSlot implements Rendereble {
+public class HandSlot extends Slot {
 
     public static final int SLOT_SPACER = 10;
 
     private Hand hand;
     private int pos;
 
-    private Rectangle rect;
 
     public HandSlot(Hand hand, int pos) {
         this.hand = hand;
@@ -46,16 +46,10 @@ public class HandSlot implements Rendereble {
         return rect;
     }
 
-    public boolean contains(float propX, float propY){
+    public boolean contains(float propX, float propY) {
         return rect.contains(propX, propY);
     }
 
-    public Rectangle getRectangle() {
-        return rect;
-    }
-    
-    
-    
     @Override
     public void update() {
         rect = calcRect();
@@ -63,11 +57,15 @@ public class HandSlot implements Rendereble {
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-        spriteBatch.begin();
-        spriteBatch.draw(AppImpl.resources.deckUndoTexture, rect.x, rect.y);
-        spriteBatch.end();
+        super.render(renderer, spriteBatch);
+        
+        renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.setColor(Color.GREEN);
+        renderer.rect(rect.x, rect.y, rect.width, rect.height);
+        renderer.end();
     }
-    
-    
 
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
 }

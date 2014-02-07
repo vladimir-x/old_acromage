@@ -18,19 +18,19 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class PlayedSlot implements Rendereble {
+public class PlayedSlot extends Slot {
 
     private static final int SPACER = 5;
 
     public int posX,posY;
     Board board;
 
-    Rectangle rect;
-
     public PlayedSlot(Board board, int posX, int posY) {
         this.board = board;
         this.posX = posX;
         this.posY = posY;
+
+        card = null;
     }
 
     @Override
@@ -48,11 +48,20 @@ public class PlayedSlot implements Rendereble {
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-
+        super.render(renderer, spriteBatch);
+        
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.GREEN);
         renderer.rect(rect.x, rect.y, rect.width, rect.height);
         renderer.end();
     }
+
+    @Override
+    void onGetCard() {
+        board.makeEmptySlot();
+        board.update();
+    }
+    
+    
 
 }

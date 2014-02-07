@@ -17,11 +17,9 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class DeckSlot implements Rendereble {
+public class DeckSlot extends Slot {
 
     Board owner;
-
-    Rectangle rect;
 
     public DeckSlot(Board owner) {
         this.owner = owner;
@@ -38,13 +36,6 @@ public class DeckSlot implements Rendereble {
                 AppImpl.settings.cardWidth,
                 AppImpl.settings.cardHeight
         );
-    }
-
-    @Override
-    public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-        spriteBatch.begin();
-        spriteBatch.draw(AppImpl.resources.deckUndoTexture, rect.x, rect.y);
-        spriteBatch.end();
     }
 
 }

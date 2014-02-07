@@ -19,20 +19,20 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class ActiveSlot implements Rendereble, Actionable {
+public class ActiveSlot extends Slot implements Actionable {
 
-    Rectangle rect;
+    private static final float CARD_ACTIVE_TIME = 0.5f;
+
     Board owner;
+    float remainingTime;
+
+    FlySlot playedCard;
 
     public ActiveSlot(Board owner) {
         this.owner = owner;
+        remainingTime = 0f;
+        card = null;
     }
-
-    public Rectangle getRectangle() {
-        return rect;
-    }
-    
-    
 
     @Override
     public void update() {
@@ -48,15 +48,40 @@ public class ActiveSlot implements Rendereble, Actionable {
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
+        super.render(renderer, spriteBatch);
+
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.ORANGE);
         renderer.rect(rect.x, rect.y, rect.width, rect.height);
         renderer.end();
+
+        if (playedCard != null) {
+            playedCard.render(renderer, spriteBatch);
+        }
+    }
+
+    @Override
+    void onGetCard() {
+        remainingTime = CARD_ACTIVE_TIME;
     }
 
     @Override
     public void action(float delta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (remainingTime > 0.000001f) {
+
+            remainingTime -= delta;
+
+            if (remainingTime < 0.000001) {
+                playedCard = new FlySlot(this, owner.getLastPlayedSlot());
+                card = null;
+            }
+        }
+        if (playedCard != null) {
+            playedCard.action(delta);
+            if (playedCard.card == null) {
+                playedCard = null;
+            }
+        }
     }
 
 }

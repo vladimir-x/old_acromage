@@ -45,7 +45,6 @@ public class Arcomage implements Rendereble, Actionable {
 
         zones = new Deskzone[]{board, resLeft, resRight, hand};
 
-        update();
     }
 
     @Override
