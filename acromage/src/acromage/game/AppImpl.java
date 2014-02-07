@@ -18,7 +18,7 @@ public class AppImpl extends Game {
     public static Settings settings;
     public static Resource resources;
     
-    private Arcomage acromage;
+    public Arcomage acromage;
     private WelcomeScreen welcomeScreen;
     private GameScreen gameScreen;
     private GameInput input;
@@ -34,9 +34,9 @@ public class AppImpl extends Game {
         AppImpl.resources = new Resource();
         gameStart = false;
         acromage = new Arcomage();
-        input = new GameInput(acromage);
+        input = new GameInput(this);
         welcomeScreen = new WelcomeScreen(input);
-        gameScreen = new GameScreen(acromage,input);
+        gameScreen = new GameScreen(this,input);
 
         setScreen(gameScreen);
     }

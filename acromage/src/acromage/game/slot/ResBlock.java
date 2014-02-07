@@ -18,7 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author admin
  */
-public class ResSlot implements Rendereble {
+public class ResBlock implements Rendereble {
 
     Rectangle rect;
 
@@ -26,7 +26,7 @@ public class ResSlot implements Rendereble {
     int pos;
     TextureRegion textureRegion;
 
-    public ResSlot(ResPanel owner, int pos, TextureRegion textureRegion) {
+    public ResBlock(ResPanel owner, int pos, TextureRegion textureRegion) {
         this.owner = owner;
         this.pos = pos;
         this.textureRegion = textureRegion;
@@ -39,7 +39,7 @@ public class ResSlot implements Rendereble {
 
         float x = centrX - AppImpl.settings.resTextureWidth / 2.f;
         float y = centrY - AppImpl.settings.resTextureHeight * (1 / 2.f + pos - 1);
-        
+
         rect = new Rectangle(x, y,
                 AppImpl.settings.resTextureWidth,
                 AppImpl.settings.resTextureHeight);

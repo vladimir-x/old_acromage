@@ -5,6 +5,7 @@
  */
 package acromage.game.screen;
 
+import acromage.game.AppImpl;
 import acromage.game.Arcomage;
 import acromage.game.GameInput;
 import acromage.game.GridRender;
@@ -21,15 +22,15 @@ public class GameScreen extends BaseScreen {
 
     private GameInput input;
 
-    private Arcomage acromage;
+    private AppImpl appImpl;
     public ShapeRenderer renderer;
     public SpriteBatch spriteBatch;
 
     GridRender gridRender;
 
-    public GameScreen(Arcomage acromage, GameInput input) {
+    public GameScreen(AppImpl appImpl, GameInput input) {
         super(input);
-        this.acromage = acromage;
+        this.appImpl = appImpl;
 
         spriteBatch = new SpriteBatch();
         renderer = new ShapeRenderer();
@@ -45,8 +46,8 @@ public class GameScreen extends BaseScreen {
     public void render(float delta) {
         //super.render(delta);
 
-        acromage.action(delta);
-        acromage.render(renderer, spriteBatch);
+        appImpl.acromage.action(delta);
+        appImpl.acromage.render(renderer, spriteBatch);
         //gridRender.render(renderer, spriteBatch);
 
     }
@@ -56,7 +57,7 @@ public class GameScreen extends BaseScreen {
         super.resize(width, height);
         renderer.setProjectionMatrix(cam.combined);
         spriteBatch.setProjectionMatrix(cam.combined);
-        acromage.update();
+        appImpl.acromage.update();
         gridRender.update();
     }
 

@@ -7,7 +7,7 @@ package acromage.game.desk;
 
 import acromage.game.AppImpl;
 import acromage.game.slot.NameBlock;
-import acromage.game.slot.ResSlot;
+import acromage.game.slot.ResBlock;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,45 +18,43 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class ResPanel extends Deskzone {
 
-    ResSlot brickSlot, gemSlot, beastSlot;
+    ResBlock brickSlot, gemSlot, beastSlot;
 
-    public ResSlot[] resSlots;
-    
+    public ResBlock[] resSlots;
+
     NameBlock nameBlock;
 
     public ResPanel(int zone) {
         super(zone);
 
-        brickSlot = new ResSlot(this,0,AppImpl.resources.brickTexture);
-        gemSlot = new ResSlot(this,1,AppImpl.resources.gemTexture);
-        beastSlot = new ResSlot(this,2,AppImpl.resources.beastTexture);
+        brickSlot = new ResBlock(this, 0, AppImpl.resources.brickTexture);
+        gemSlot = new ResBlock(this, 1, AppImpl.resources.gemTexture);
+        beastSlot = new ResBlock(this, 2, AppImpl.resources.beastTexture);
 
-        resSlots = new ResSlot[]{brickSlot, gemSlot, beastSlot};
-        
+        resSlots = new ResBlock[]{brickSlot, gemSlot, beastSlot};
+
         nameBlock = new NameBlock(this);
         nameBlock.setText("text");
     }
-    
 
     @Override
     public void update() {
         super.update();
-        
-        for (ResSlot resSlot:resSlots){
+
+        for (ResBlock resSlot : resSlots) {
             resSlot.update();
         }
         nameBlock.update();
     }
 
     @Override
-    public void render(ShapeRenderer renderer,SpriteBatch spriteBatch) {
-        super.render(renderer,spriteBatch);
+    public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
+        super.render(renderer, spriteBatch);
 
-        for (ResSlot resSlot:resSlots){
-            resSlot.render(renderer,spriteBatch);
+        for (ResBlock resSlot : resSlots) {
+            resSlot.render(renderer, spriteBatch);
         }
         nameBlock.render(renderer, spriteBatch);
     }
-
 
 }

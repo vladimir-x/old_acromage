@@ -62,7 +62,7 @@ public class Board extends Deskzone  implements Actionable{
 
     }
 
-    private void makeEmptySlot() {
+    public void makeEmptySlot() {
 
         int posX = 1, posY = 0;
         if (lastSlot != null) {
@@ -85,9 +85,13 @@ public class Board extends Deskzone  implements Actionable{
         return activeSlot;
     }
     
+    public PlayedSlot getLastPlayedSlot(){
+        return lastSlot;
+    }
     
 
     @Override
     public void action(float delta) {
+        activeSlot.action(delta);
     }
 }

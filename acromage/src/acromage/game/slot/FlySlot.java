@@ -16,17 +16,18 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * @author elduderino
  */
-public class FlySlot implements Rendereble, Actionable {
+public class FlySlot extends Slot implements Actionable {
 
     private static float FLY_TIME = 0.30f;//количество секунд, зак оторые производится прохождение полного пути полёта
 
-    Rectangle current, destination;
+    Slot destination;
     float remainingTime;
 
-    public FlySlot(Rectangle source, Rectangle destination) {
-        this.current = source;
+    public FlySlot(Slot source, Slot destination) {
+        this.rect = new Rectangle(source.getRect());
+        this.card = source.card;
         this.destination = destination;
-        remainingTime = FLY_TIME;
+        this.remainingTime = FLY_TIME;
     }
 
     @Override
@@ -34,32 +35,30 @@ public class FlySlot implements Rendereble, Actionable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-        spriteBatch.begin();
-        spriteBatch.draw(AppImpl.resources.deckUndoTexture, current.x, current.y);
-        spriteBatch.end();
-    }
+    
 
     @Override
     public void action(float delta) {
 
         if (remainingTime < 0.00001) {
             //анимация прошла
-            
+            destination.card = card;
+            destination.onGetCard();
+            card = null;
+
         } else if (delta > 0.00001) {
             float part = delta / remainingTime;
-            float deltaX = (destination.x - current.x) * part;
-            float deltaY = (destination.y - current.y) * part;
+            float deltaX = (destination.getRect().x - rect.x) * part;
+            float deltaY = (destination.getRect().y - rect.y) * part;
 
             remainingTime -= delta;
 
             if (remainingTime < 0.00001) {
-                current.x = destination.x;
-                current.y = destination.y;
+                rect.x = destination.getRect().x;
+                rect.y = destination.getRect().y;
             } else {
-                current.x += deltaX;
-                current.y += deltaY;
+                rect.x += deltaX;
+                rect.y += deltaY;
             }
         }
 
