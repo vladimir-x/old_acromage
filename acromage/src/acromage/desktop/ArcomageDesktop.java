@@ -59,7 +59,7 @@ public class ArcomageDesktop {
         settings.cardWidth = 95;
         settings.cardHeight = 128;
 
-        settings.cardCount = 20;
+        settings.cardCount = 6;
 
         //шрифты
         settings.fontFnt ="data" + File.separator + "fc.fnt";
