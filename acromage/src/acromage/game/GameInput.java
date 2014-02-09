@@ -39,13 +39,10 @@ public class GameInput implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         float propX = screenX * AppImpl.settings.cameraWidth / (1.0f * AppImpl.settings.windowWidth);
-        float propY = (AppImpl.settings.windowHeight - screenY)  * AppImpl.settings.cameraHeight / (1.0f *AppImpl.settings.windowHeight);
+        float propY = (AppImpl.settings.windowHeight - screenY) * AppImpl.settings.cameraHeight / (1.0f * AppImpl.settings.windowHeight);
 
-        if (button == Input.Buttons.LEFT) {
-            appImpl.acromage.promptToStep(propX, propY);
-        } else {
-            appImpl.acromage.promptToDrop(propX, propY);
-        }
+        appImpl.acromage.promptToStep(propX, propY, button);
+
         return true;
 
     }

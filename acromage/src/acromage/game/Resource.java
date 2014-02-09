@@ -22,13 +22,14 @@ public class Resource {
     public TextureRegion welcomeTexture;
     public TextureRegion boardTexture;
     public TextureRegion deckUndoTexture;
-    
+
     public TextureRegion brickTexture;
     public TextureRegion gemTexture;
     public TextureRegion beastTexture;
 
-    protected static Map<String, TextureRegion> textureMap;
-    
+    protected static Map<String, TextureRegion> cardsTextureMap;
+    protected static TextureRegion[][] cardsTextureArray;
+
     public BitmapFont font;
 
     public Resource() {
@@ -44,7 +45,7 @@ public class Resource {
 
         //куски
         texture = new Texture(AppImpl.settings.itemsTexture);
-        
+
         deckUndoTexture = new TextureRegion(texture,
                 AppImpl.settings.deckUndoTextureX,
                 AppImpl.settings.deckUndoTextureY,
@@ -66,18 +67,18 @@ public class Resource {
                 AppImpl.settings.beastTextureY,
                 AppImpl.settings.resTextureWidth,
                 AppImpl.settings.resTextureHeight);
-        
+
         // Шрифты
         font = new BitmapFont(
                 new FileHandle(AppImpl.settings.fontFnt),
                 new FileHandle(AppImpl.settings.fontPng),
                 false
         );
-        
+
         //колода
-        textureMap = new HashMap<String, TextureRegion>();
+        cardsTextureMap = new HashMap<String, TextureRegion>();
         texture = new Texture(AppImpl.settings.deckTexture);
-        TextureRegion[][] regions = TextureRegion.split(texture,
+        cardsTextureArray = TextureRegion.split(texture,
                 AppImpl.settings.deckTextureWidth,
                 AppImpl.settings.deckTextureHeight
         );
@@ -85,13 +86,21 @@ public class Resource {
         for (int i = 0; i < AppImpl.settings.deckCountY; ++i) {
             for (int j = 0; j < AppImpl.settings.deckCountX; ++j) {
                 String name = i + "_" + j;
-                textureMap.put(name, regions[i][j]);
+                cardsTextureMap.put(name, cardsTextureArray[i][j]);
             }
         }
 
     }
 
     public TextureRegion getGameTexture(String name) {
-        return textureMap.get(name);
+        return cardsTextureMap.get(name);
+    }
+
+    public TextureRegion getGameTexture(int y, int x) {
+        if (cardsTextureArray.length > y && cardsTextureArray[y].length > x) {
+            return cardsTextureArray[y][x];
+        } else {
+            return deckUndoTexture;
+        }
     }
 }

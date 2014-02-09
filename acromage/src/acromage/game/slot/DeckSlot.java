@@ -6,6 +6,7 @@
 package acromage.game.slot;
 
 import acromage.game.AppImpl;
+import acromage.game.data.Card;
 import acromage.game.desk.Board;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,6 +24,7 @@ public class DeckSlot extends Slot {
 
     public DeckSlot(Board owner) {
         this.owner = owner;
+        card = Card.getUndoCard();
     }
 
     @Override

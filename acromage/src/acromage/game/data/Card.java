@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package acromage.game.data;
 
 import acromage.game.AppImpl;
@@ -14,13 +13,82 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  *
  * @author elduderino
  */
-public class Card {
-    
-    void CardAction(){
+public abstract class Card {
+
+    void CardAction() {
         //предписание карты
     }
 
-    public TextureRegion getTexture() {
-        return AppImpl.resources.deckUndoTexture;
+    public abstract TextureRegion getTexture();
+    public abstract void play();
+
+    public static Card getUndoCard() {
+        return new Card() {
+
+            @Override
+            public TextureRegion getTexture() {
+                return AppImpl.resources.deckUndoTexture;
+            }
+
+            @Override
+            public void play() {
+            }
+        };
+    }
+
+    public static Card getCard_0_0(){
+        return new Card() {
+
+            @Override
+            public TextureRegion getTexture() {
+                return AppImpl.resources.getGameTexture(0,0);
+            }
+
+            @Override
+            public void play() {
+            }
+        };
+    }
+    
+    public static Card getCard_0_1(){
+        return new Card() {
+
+            @Override
+            public TextureRegion getTexture() {
+                return AppImpl.resources.getGameTexture(0,1);
+            }
+
+            @Override
+            public void play() {
+            }
+        };
+    }
+    
+    public static Card getCard_0_2(){
+        return new Card() {
+
+            @Override
+            public TextureRegion getTexture() {
+                return AppImpl.resources.getGameTexture(0,2);
+            }
+
+            @Override
+            public void play() {
+            }
+        };
+    }
+    
+    public static Card getCard_0_3(){
+        return new Card() {
+
+            @Override
+            public TextureRegion getTexture() {
+                return AppImpl.resources.getGameTexture(0,3);
+            }
+
+            @Override
+            public void play() {
+            }
+        };
     }
 }
