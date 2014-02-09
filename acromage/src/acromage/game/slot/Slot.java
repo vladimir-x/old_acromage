@@ -21,7 +21,7 @@ public abstract class Slot implements Rendereble {
     Rectangle rect;
 
     public Slot() {
-        card = new Card();
+        card = null;
     }
     
 

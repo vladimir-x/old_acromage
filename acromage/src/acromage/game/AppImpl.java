@@ -5,6 +5,7 @@
  */
 package acromage.game;
 
+import acromage.game.data.Card;
 import acromage.game.screen.GameScreen;
 import acromage.game.screen.WelcomeScreen;
 import com.badlogic.gdx.Game;
@@ -17,7 +18,8 @@ public class AppImpl extends Game {
 
     public static Settings settings;
     public static Resource resources;
-    
+    public static CardManager cardManager;
+
     public Arcomage acromage;
     private WelcomeScreen welcomeScreen;
     private GameScreen gameScreen;
@@ -32,11 +34,13 @@ public class AppImpl extends Game {
     @Override
     public void create() {
         AppImpl.resources = new Resource();
+        AppImpl.cardManager = new CardManager();
+
         gameStart = false;
         acromage = new Arcomage();
         input = new GameInput(this);
         welcomeScreen = new WelcomeScreen(input);
-        gameScreen = new GameScreen(this,input);
+        gameScreen = new GameScreen(this, input);
 
         setScreen(gameScreen);
     }

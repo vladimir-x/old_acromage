@@ -7,6 +7,7 @@ package acromage.game.desk;
 
 import acromage.game.AppImpl;
 import acromage.game.Arcomage;
+import acromage.game.data.Card;
 import acromage.game.interfaсe.Actionable;
 import acromage.game.slot.ActiveSlot;
 import acromage.game.slot.FlySlot;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  *
@@ -34,6 +36,17 @@ public class Hand extends Deskzone implements Actionable {
         slots = new ArrayList<HandSlot>();
         for (int i = 0; i < AppImpl.settings.cardCount; ++i) {
             slots.add(new HandSlot(this, i));
+        }
+        selectedSlot = null;
+    }
+    
+    public void fillHand(ArrayList<Card> cards){
+        while (slots.size()<cards.size()){
+            slots.add(new HandSlot(this, slots.size()));
+        }
+        
+        for(int i=0;i<cards.size();++i){
+            slots.get(i).card = cards.get(i);
         }
     }
 
@@ -80,7 +93,7 @@ public class Hand extends Deskzone implements Actionable {
 
     public boolean promptToSelect(float propX, float propY) {
         for (HandSlot handSlot : slots) {
-            if (handSlot.contains(propX, propY)) {
+            if (handSlot.contains(propX, propY) && selectedSlot == null) {
                 selectedSlot = new FlySlot(handSlot, activeSlot);
                 slots.remove(handSlot);
                 update();
