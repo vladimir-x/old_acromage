@@ -13,6 +13,8 @@ package acromage.game;
 public enum RoundEnum {
     
     NOGAME,
-    USER,
+    USER_TURN,
+    USER_DROPPING,
+    USER_ANIM,
     OPPONENT
 }
