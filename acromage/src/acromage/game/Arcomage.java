@@ -77,11 +77,11 @@ public class Arcomage implements Rendereble, Actionable {
     public void swicthRound() {
         switch (round) {
             case OPPONENT:
-                round = RoundEnum.USER;
+                round = RoundEnum.USER_TURN;
                 hand = userHand;
                 player = user;
                 break;
-            case USER:
+            case USER_TURN:
                 round = RoundEnum.OPPONENT;
                 hand = opponentHand;
                 player = opponent;
@@ -90,7 +90,7 @@ public class Arcomage implements Rendereble, Actionable {
                 if (firstTurn) {
                     round = RoundEnum.OPPONENT;
                 } else {
-                    round = RoundEnum.USER;
+                    round = RoundEnum.USER_TURN;
                 }
                 swicthRound();
                 break;
@@ -126,7 +126,7 @@ public class Arcomage implements Rendereble, Actionable {
     }
 
     public void promptToStep(float propX, float propY, int button) {
-        if (round.equals(RoundEnum.USER)) {
+        if (round.equals(RoundEnum.USER_TURN)) {
 
             if (button == Input.Buttons.LEFT) {
                 cardAction = CardActionEnum.PROCESS;
