@@ -27,7 +27,6 @@ public class Hand extends Deskzone implements Actionable {
 
     ArrayList<HandSlot> slots;
     FlySlot selectedSlot;
-
     ActiveSlot activeSlot;
 
     public Hand(int zone, ActiveSlot activeSlot) {
@@ -39,13 +38,13 @@ public class Hand extends Deskzone implements Actionable {
         }
         selectedSlot = null;
     }
-    
-    public void fillHand(ArrayList<Card> cards){
-        while (slots.size()<cards.size()){
+
+    public void fillHand(ArrayList<Card> cards) {
+        while (slots.size() < cards.size()) {
             slots.add(new HandSlot(this, slots.size()));
         }
-        
-        for(int i=0;i<cards.size();++i){
+
+        for (int i = 0; i < cards.size(); ++i) {
             slots.get(i).card = cards.get(i);
         }
     }
@@ -91,10 +90,13 @@ public class Hand extends Deskzone implements Actionable {
         }
     }
 
-    public boolean promptToSelect(float propX, float propY) {
+    public boolean promptToSelect(float propX, float propY, boolean play) {
         for (HandSlot handSlot : slots) {
             if (handSlot.contains(propX, propY) && selectedSlot == null) {
                 selectedSlot = new FlySlot(handSlot, activeSlot);
+                if (!play) {
+                    selectedSlot.setDroped();
+                }
                 slots.remove(handSlot);
                 update();
                 return true;
