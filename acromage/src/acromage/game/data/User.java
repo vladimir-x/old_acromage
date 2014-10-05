@@ -24,6 +24,10 @@ public class User extends Player{
             cards.add(c);
         }
     }
+
+    @Override
+    public void ding() {
+    }
     
     
     

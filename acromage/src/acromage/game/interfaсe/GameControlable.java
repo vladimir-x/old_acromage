@@ -10,7 +10,7 @@ package acromage.game.interfaсe;
  *
  * @author admin
  */
-public interface GameControable {
+public interface GameControlable {
     
     // передать ход
     void switchTurn();

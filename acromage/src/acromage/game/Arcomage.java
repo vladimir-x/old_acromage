@@ -13,7 +13,7 @@ import acromage.game.interfaсe.Actionable;
 import acromage.game.desk.Deskzone;
 import acromage.game.desk.Hand;
 import acromage.game.desk.ResPanel;
-import acromage.game.interfaсe.GameControable;
+import acromage.game.interfaсe.GameControlable;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  *
  * @author elduderino
  */
-public class Arcomage implements Rendereble, Actionable,GameControable {
+public class Arcomage implements Rendereble, Actionable, GameControlable {
 
     ResPanel resLeft, resRight;
 
@@ -81,6 +81,7 @@ public class Arcomage implements Rendereble, Actionable,GameControable {
         } else {
             hand = opponentHand;
             player = opponent;
+            opponent.ding();
         }
     }
 
