@@ -7,6 +7,9 @@ package acromage.game.slot;
 
 import acromage.game.data.Card;
 import acromage.game.interfaсe.Rendereble;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -19,11 +22,12 @@ public abstract class Slot implements Rendereble {
 
     public Card card;
     Rectangle rect;
+    Boolean droped;
 
     public Slot() {
         card = null;
+        droped = false;
     }
-    
 
     public Rectangle getRect() {
         return rect;
@@ -38,8 +42,25 @@ public abstract class Slot implements Rendereble {
         if (card != null) {
             spriteBatch.begin();
             spriteBatch.draw(card.getTexture(), rect.x, rect.y);
+
             spriteBatch.end();
+            if (droped) {
+                Gdx.gl.glEnable(GL10.GL_BLEND);
+                renderer.begin(ShapeRenderer.ShapeType.Filled);
+                renderer.setColor(Color.GRAY.add(0, 0, 0, -0.5f));
+                renderer.rect(
+                        rect.x,
+                        rect.y,
+                        rect.width,
+                        rect.height
+                );
+                renderer.end();
+            }
         }
+    }
+
+    public void setDroped() {
+        droped = true;
     }
 
 }

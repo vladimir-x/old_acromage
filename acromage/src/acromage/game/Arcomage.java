@@ -13,6 +13,7 @@ import acromage.game.interfaсe.Actionable;
 import acromage.game.desk.Deskzone;
 import acromage.game.desk.Hand;
 import acromage.game.desk.ResPanel;
+import acromage.game.interfaсe.GameControable;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -25,7 +26,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  *
  * @author elduderino
  */
-public class Arcomage implements Rendereble, Actionable {
+public class Arcomage implements Rendereble, Actionable,GameControable {
 
     ResPanel resLeft, resRight;
 
@@ -37,7 +38,7 @@ public class Arcomage implements Rendereble, Actionable {
     RoundEnum round;
     CardActionEnum cardAction;
 
-    Boolean firstTurn;
+    Boolean isTurning;
 
     public Arcomage() {
 
@@ -57,8 +58,7 @@ public class Arcomage implements Rendereble, Actionable {
 
         user = new User();
         opponent = new Computer();
-        firstTurn = true;
-
+        isTurning = !true;//поменяется в  startGame()->swicthTurn()
         startGame();
     }
 
@@ -66,34 +66,21 @@ public class Arcomage implements Rendereble, Actionable {
 
         user.takeCard(AppImpl.settings.cardCount);
         opponent.takeCard(AppImpl.settings.cardCount);
-        
+
         userHand.fillHand(user.cards);
         opponentHand.fillHand(opponent.cards);
 
-        round = RoundEnum.NOGAME;
-        swicthRound();
+        switchTurn();
     }
 
-    public void swicthRound() {
-        switch (round) {
-            case OPPONENT:
-                round = RoundEnum.USER_TURN;
-                hand = userHand;
-                player = user;
-                break;
-            case USER_TURN:
-                round = RoundEnum.OPPONENT;
-                hand = opponentHand;
-                player = opponent;
-                break;
-            case NOGAME:
-                if (firstTurn) {
-                    round = RoundEnum.OPPONENT;
-                } else {
-                    round = RoundEnum.USER_TURN;
-                }
-                swicthRound();
-                break;
+    public void switchTurn() {
+        isTurning = !isTurning;
+        if (isTurning) {
+            hand = userHand;
+            player = user;
+        } else {
+            hand = opponentHand;
+            player = opponent;
         }
     }
 
@@ -117,6 +104,8 @@ public class Arcomage implements Rendereble, Actionable {
         resLeft.update();
         resRight.update();
         hand.update();
+        userHand.update();
+        opponentHand.update();
     }
 
     @Override
@@ -126,14 +115,13 @@ public class Arcomage implements Rendereble, Actionable {
     }
 
     public void promptToStep(float propX, float propY, int button) {
-        if (round.equals(RoundEnum.USER_TURN)) {
+        if (isTurning) {
 
             if (button == Input.Buttons.LEFT) {
-                cardAction = CardActionEnum.PROCESS;
+                userHand.promptToSelect(propX, propY, true);
             } else if (button == Input.Buttons.RIGHT) {
-                cardAction = CardActionEnum.DROP;
+                userHand.promptToSelect(propX, propY, false);
             }
-            boolean hasSelect = userHand.promptToSelect(propX, propY);
 
         }
     }

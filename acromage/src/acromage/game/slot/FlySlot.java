@@ -26,6 +26,7 @@ public class FlySlot extends Slot implements Actionable {
     public FlySlot(Slot source, Slot destination) {
         this.rect = new Rectangle(source.getRect());
         this.card = source.card;
+        this.droped = source.droped;
         this.destination = destination;
         this.remainingTime = FLY_TIME;
     }

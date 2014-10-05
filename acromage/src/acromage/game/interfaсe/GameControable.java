@@ -4,15 +4,14 @@
  * and open the template in the editor.
  */
 
-package acromage.game;
+package acromage.game.interfaсe;
 
 /**
  *
  * @author admin
  */
-public enum RoundEnum {
+public interface GameControable {
     
-    NOGAME,
-    USER_TURN,
-    OPPONENT_TURN
+    // передать ход
+    void switchTurn();
 }
