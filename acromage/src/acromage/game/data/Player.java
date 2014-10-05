@@ -22,4 +22,7 @@ public abstract class Player {
     }
     
     public abstract void takeCard(int cnt);
+    
+    // событие - ход передан этому игроку
+    public abstract void ding();
 }

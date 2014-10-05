@@ -32,6 +32,7 @@ public abstract class Card {
 
             @Override
             public void play() {
+                AppImpl.control.switchTurn();
             }
         };
     }
@@ -46,6 +47,8 @@ public abstract class Card {
 
             @Override
             public void play() {
+                
+                AppImpl.control.switchTurn();
             }
         };
     }
@@ -60,6 +63,8 @@ public abstract class Card {
 
             @Override
             public void play() {
+                
+                AppImpl.control.switchTurn();
             }
         };
     }
@@ -74,6 +79,8 @@ public abstract class Card {
 
             @Override
             public void play() {
+                
+                AppImpl.control.switchTurn();
             }
         };
     }
@@ -88,6 +95,8 @@ public abstract class Card {
 
             @Override
             public void play() {
+                
+                AppImpl.control.switchTurn();
             }
         };
     }
