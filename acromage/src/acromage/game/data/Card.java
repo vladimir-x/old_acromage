@@ -15,12 +15,25 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public abstract class Card {
 
+    boolean switchTurn = true;
+
     void CardAction() {
         //предписание карты
     }
 
     public abstract TextureRegion getTexture();
+
+    public abstract void init();
+
     public abstract void play();
+
+    public boolean isSwitchTurn() {
+        return switchTurn;
+    }
+
+    public void setSwitchTurn(boolean switchTurn) {
+        this.switchTurn = switchTurn;
+    }
 
     public static Card getUndoCard() {
         return new Card() {
@@ -32,71 +45,87 @@ public abstract class Card {
 
             @Override
             public void play() {
-                AppImpl.control.switchTurn();
+            }
+
+            @Override
+            public void init() {
+                setSwitchTurn(true);
             }
         };
     }
 
-    public static Card getCard_0_0(){
+    public static Card getCard_0_0() {
         return new Card() {
 
             @Override
             public TextureRegion getTexture() {
-                return AppImpl.resources.getGameTexture(0,0);
+                return AppImpl.resources.getGameTexture(0, 0);
             }
 
             @Override
             public void play() {
-                
-                AppImpl.control.switchTurn();
+            }
+
+            @Override
+            public void init() {
+                setSwitchTurn(true);
             }
         };
     }
-    
-    public static Card getCard_0_1(){
+
+    public static Card getCard_0_1() {
         return new Card() {
 
             @Override
             public TextureRegion getTexture() {
-                return AppImpl.resources.getGameTexture(0,1);
+                return AppImpl.resources.getGameTexture(0, 1);
             }
 
             @Override
             public void play() {
-                
-                AppImpl.control.switchTurn();
+            }
+
+            @Override
+            public void init() {
+                setSwitchTurn(true);
             }
         };
     }
-    
-    public static Card getCard_0_2(){
+
+    public static Card getCard_0_2() {
         return new Card() {
 
             @Override
             public TextureRegion getTexture() {
-                return AppImpl.resources.getGameTexture(0,2);
+                return AppImpl.resources.getGameTexture(0, 2);
             }
 
             @Override
             public void play() {
-                
-                AppImpl.control.switchTurn();
+            }
+
+            @Override
+            public void init() {
+                setSwitchTurn(true);
             }
         };
     }
-    
-    public static Card getCard_0_3(){
+
+    public static Card getCard_0_3() {
         return new Card() {
 
             @Override
             public TextureRegion getTexture() {
-                return AppImpl.resources.getGameTexture(0,3);
+                return AppImpl.resources.getGameTexture(0, 3);
             }
 
             @Override
             public void play() {
-                
-                AppImpl.control.switchTurn();
+            }
+
+            @Override
+            public void init() {
+                setSwitchTurn(true);
             }
         };
     }

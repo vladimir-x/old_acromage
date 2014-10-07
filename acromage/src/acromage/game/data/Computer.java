@@ -7,6 +7,7 @@ package acromage.game.data;
 
 import acromage.game.AppImpl;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
  * @author admin
  */
 public class Computer extends Player {
+
+    private static Random randomGen = new Random(System.currentTimeMillis());
 
     @Override
     public void takeCard(int cnt) {
@@ -26,18 +29,20 @@ public class Computer extends Player {
 
     @Override
     public void ding() {
-        new Thread() {
-
-            @Override
-            public void run() {
-                try {
-                    sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Computer.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                AppImpl.control.switchTurn();
-            }
-        }.run();
+        System.out.println("computerStep st");
+        randomStep();
+        System.out.println("computerStep en");
     }
 
+    public void randomStep() {
+        int r = randomGen.nextInt(cards.size());
+        if (!AppImpl.control.playCard(r, false)) {
+            AppImpl.control.playCard(r, true);
+        }
+    }
+
+    public void randomStepDrop() {
+        int r = randomGen.nextInt(cards.size());
+        AppImpl.control.playCard(r, true);
+    }
 }

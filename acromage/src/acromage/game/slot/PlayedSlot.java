@@ -22,7 +22,7 @@ public class PlayedSlot extends Slot {
 
     private static final int SPACER = 5;
 
-    public int posX,posY;
+    public int posX, posY;
     Board board;
 
     public PlayedSlot(Board board, int posX, int posY) {
@@ -49,7 +49,7 @@ public class PlayedSlot extends Slot {
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
         super.render(renderer, spriteBatch);
-        
+
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.setColor(Color.GREEN);
         renderer.rect(rect.x, rect.y, rect.width, rect.height);
@@ -58,10 +58,12 @@ public class PlayedSlot extends Slot {
 
     @Override
     void onGetCard() {
+        System.out.println("card.isSwitchTurn() = " + card.isSwitchTurn());
+        if (card.isSwitchTurn()) {
+            AppImpl.control.switchTurn();
+        } 
         board.makeEmptySlot();
         board.update();
     }
-    
-    
 
 }

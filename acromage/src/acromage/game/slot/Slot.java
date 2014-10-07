@@ -45,9 +45,8 @@ public abstract class Slot implements Rendereble {
 
             spriteBatch.end();
             if (droped) {
-                Gdx.gl.glEnable(GL10.GL_BLEND);
                 renderer.begin(ShapeRenderer.ShapeType.Filled);
-                renderer.setColor(Color.GRAY.add(0, 0, 0, -0.5f));
+                renderer.setColor(Color.GRAY.sub(0, 0, 0, 0.5f));
                 renderer.rect(
                         rect.x,
                         rect.y,

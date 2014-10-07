@@ -14,4 +14,6 @@ public interface GameControlable {
     
     // передать ход
     void switchTurn();
+
+    public boolean playCard(int r, boolean drop);
 }

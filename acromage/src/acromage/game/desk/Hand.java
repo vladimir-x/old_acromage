@@ -28,6 +28,8 @@ public class Hand extends Deskzone implements Actionable {
     ArrayList<HandSlot> slots;
     FlySlot selectedSlot;
     ActiveSlot activeSlot;
+    
+    public String debugstr;
 
     public Hand(int zone, ActiveSlot activeSlot) {
         super(zone);
@@ -90,18 +92,31 @@ public class Hand extends Deskzone implements Actionable {
         }
     }
 
-    public boolean promptToSelect(float propX, float propY, boolean play) {
+    public boolean promptToSelect(float propX, float propY, boolean drop) {
         for (HandSlot handSlot : slots) {
             if (handSlot.contains(propX, propY) && selectedSlot == null) {
-                selectedSlot = new FlySlot(handSlot, activeSlot);
-                if (!play) {
-                    selectedSlot.setDroped();
-                }
-                slots.remove(handSlot);
-                update();
-                return true;
+                return playSlot(handSlot, drop);
             }
         }
         return false;
+    }
+
+    public boolean promptToSelect(int position, boolean drop) {
+        if (position >= 0 && position < slots.size()) {
+            return playSlot(slots.get(position), drop);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean playSlot(HandSlot handSlot, boolean drop) {
+        selectedSlot = new FlySlot(handSlot, activeSlot);
+        if (drop) {
+            selectedSlot.setDroped();
+        }
+        slots.remove(handSlot);
+        update();
+        return true;
+
     }
 }

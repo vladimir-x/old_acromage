@@ -21,6 +21,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL43;
 
 /**
  *
@@ -48,6 +50,8 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
         userHand = new Hand(Deskzone.SOUTH, board.getActiveSlot());
         opponentHand = new Hand(Deskzone.SOUTH, board.getActiveSlot());
+        userHand.debugstr = "user";
+        opponentHand.debugstr = "oppon";
 
         board.setColor(Color.DARK_GRAY.sub(0, 0, 0, 0.5f));
         resLeft.setColor(Color.BLUE.sub(0, 0, 0, 0.5f));
@@ -81,13 +85,15 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         } else {
             hand = opponentHand;
             player = opponent;
-            opponent.ding();
         }
+        player.ding();
     }
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
 
+        
+        
         spriteBatch.begin();
         spriteBatch.draw(AppImpl.resources.boardTexture, 0, 0);
         spriteBatch.end();
@@ -104,7 +110,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         board.update();
         resLeft.update();
         resRight.update();
-        hand.update();
+        
         userHand.update();
         opponentHand.update();
     }
@@ -112,19 +118,24 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
     @Override
     public void action(float delta) {
         board.action(delta);
-        userHand.action(delta);
+        hand.action(delta);
     }
 
     public void promptToStep(float propX, float propY, int button) {
         if (isTurning) {
 
             if (button == Input.Buttons.LEFT) {
-                userHand.promptToSelect(propX, propY, true);
+                hand.promptToSelect(propX, propY, false);
             } else if (button == Input.Buttons.RIGHT) {
-                userHand.promptToSelect(propX, propY, false);
+                hand.promptToSelect(propX, propY, true);
             }
 
         }
+    }
+
+    @Override
+    public boolean playCard(int r, boolean drop) {
+        return hand.promptToSelect(r, drop);
     }
 
 }
