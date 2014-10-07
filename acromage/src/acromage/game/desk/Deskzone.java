@@ -91,7 +91,7 @@ public class Deskzone implements Rendereble {
     @Override
     public void render(ShapeRenderer renderer,SpriteBatch spriteBatch) {
                 
-        Gdx.gl.glEnable(GL10.GL_BLEND);
+        
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(color);
         renderer.rect(
