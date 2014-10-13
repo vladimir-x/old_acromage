@@ -9,10 +9,10 @@ import acromage.game.data.Card;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import org.lwjgl.opengl.GL11;
 
 /**
  *

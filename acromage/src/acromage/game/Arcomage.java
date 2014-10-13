@@ -18,12 +18,10 @@ import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL43;
-
 /**
  *
  * @author elduderino
@@ -48,20 +46,22 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         resLeft = new ResPanel(Deskzone.WEST);
         resRight = new ResPanel(Deskzone.EAST);
 
-        userHand = new Hand(Deskzone.SOUTH, board.getActiveSlot());
-        opponentHand = new Hand(Deskzone.SOUTH, board.getActiveSlot());
+        user = new User();
+        opponent = new Computer();
+        
+        userHand = new Hand(Deskzone.SOUTH, board.getActiveSlot(),user);
+        opponentHand = new Hand(Deskzone.SOUTH, board.getActiveSlot(),opponent  );
         userHand.debugstr = "user";
         opponentHand.debugstr = "oppon";
 
-        board.setColor(Color.DARK_GRAY.sub(0, 0, 0, 0.5f));
+        board.setColor(Color.DARK_GRAY.sub(0, 0, 0, 0.1f));
         resLeft.setColor(Color.BLUE.sub(0, 0, 0, 0.5f));
         resRight.setColor(Color.RED.sub(0, 0, 0, 0.5f));
 
         userHand.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
         opponentHand.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
 
-        user = new User();
-        opponent = new Computer();
+        
         isTurning = !true;//поменяется в  startGame()->swicthTurn()
         startGame();
     }
@@ -70,9 +70,6 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
         user.takeCard(AppImpl.settings.cardCount);
         opponent.takeCard(AppImpl.settings.cardCount);
-
-        userHand.fillHand(user.cards);
-        opponentHand.fillHand(opponent.cards);
 
         switchTurn();
     }
@@ -86,7 +83,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
             hand = opponentHand;
             player = opponent;
         }
-        player.ding();
+        board.passCard(hand);
     }
 
     @Override
@@ -110,7 +107,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         board.update();
         resLeft.update();
         resRight.update();
-        
+
         userHand.update();
         opponentHand.update();
     }

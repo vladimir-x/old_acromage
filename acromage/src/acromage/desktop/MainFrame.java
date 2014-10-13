@@ -27,7 +27,7 @@ public class MainFrame extends LwjglFrame {
     AppImpl appImpl;
     
     public MainFrame(AppImpl appImpl, Settings settings) {
-        super(appImpl, "", settings.windowWidth, settings.windowHeight, false);
+        super(appImpl, "", settings.windowWidth, settings.windowHeight);
         this.appImpl = appImpl;
         initComponents();
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));

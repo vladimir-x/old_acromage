@@ -10,9 +10,9 @@ import acromage.game.Arcomage;
 import acromage.game.GameInput;
 import acromage.game.GridRender;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import org.lwjgl.opengl.GL11;
 
 /**
  *

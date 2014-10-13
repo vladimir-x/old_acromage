@@ -5,6 +5,7 @@
  */
 package acromage.game.desk;
 
+import acromage.game.data.Player;
 import acromage.game.interfaсe.Actionable;
 import acromage.game.slot.ActiveSlot;
 import acromage.game.slot.DeckSlot;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author admin
  */
-public class Board extends Deskzone  implements Actionable{
+public class Board extends Deskzone implements Actionable {
 
     private static final int LINE_CNT = 4;
     public static final int CARDS_SPACE_X = 30;
@@ -84,14 +85,17 @@ public class Board extends Deskzone  implements Actionable{
     public ActiveSlot getActiveSlot() {
         return activeSlot;
     }
-    
-    public PlayedSlot getLastPlayedSlot(){
+
+    public PlayedSlot getLastPlayedSlot() {
         return lastSlot;
     }
-    
 
     @Override
     public void action(float delta) {
         activeSlot.action(delta);
+    }
+
+    public void passCard(Hand hand) {
+        hand.getPlayer().ding();
     }
 }

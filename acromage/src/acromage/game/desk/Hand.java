@@ -8,6 +8,7 @@ package acromage.game.desk;
 import acromage.game.AppImpl;
 import acromage.game.Arcomage;
 import acromage.game.data.Card;
+import acromage.game.data.Player;
 import acromage.game.interfaсe.Actionable;
 import acromage.game.slot.ActiveSlot;
 import acromage.game.slot.FlySlot;
@@ -28,12 +29,15 @@ public class Hand extends Deskzone implements Actionable {
     ArrayList<HandSlot> slots;
     FlySlot selectedSlot;
     ActiveSlot activeSlot;
-    
+    HandSlot emptySlot;
+    Player player;
+
     public String debugstr;
 
-    public Hand(int zone, ActiveSlot activeSlot) {
+    public Hand(int zone, ActiveSlot activeSlot, Player player) {
         super(zone);
         this.activeSlot = activeSlot;
+        this.player = player;
         slots = new ArrayList<HandSlot>();
         for (int i = 0; i < AppImpl.settings.cardCount; ++i) {
             slots.add(new HandSlot(this, i));
@@ -41,18 +45,12 @@ public class Hand extends Deskzone implements Actionable {
         selectedSlot = null;
     }
 
-    public void fillHand(ArrayList<Card> cards) {
-        while (slots.size() < cards.size()) {
-            slots.add(new HandSlot(this, slots.size()));
-        }
-
-        for (int i = 0; i < cards.size(); ++i) {
-            slots.get(i).card = cards.get(i);
-        }
-    }
-
     public int getCount() {
         return slots.size();
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void selectSlot() {
@@ -74,9 +72,13 @@ public class Hand extends Deskzone implements Actionable {
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
         super.render(renderer, spriteBatch);
 
-        for (HandSlot slot : slots) {
+        ArrayList<Card> cards = player.getCards();
+        for (int i = 0; i < cards.size(); ++i) {
+            HandSlot slot = slots.get(i);
+            slot.card = cards.get(i);
             slot.render(renderer, spriteBatch);
         }
+
         if (selectedSlot != null) {
             selectedSlot.render(renderer, spriteBatch);
         }
@@ -110,13 +112,28 @@ public class Hand extends Deskzone implements Actionable {
     }
 
     public boolean playSlot(HandSlot handSlot, boolean drop) {
-        selectedSlot = new FlySlot(handSlot, activeSlot);
-        if (drop) {
-            selectedSlot.setDroped();
-        }
-        slots.remove(handSlot);
-        update();
-        return true;
+        if (selectedSlot == null) {
 
+            if (player.playable(handSlot.card) || drop) {
+                selectedSlot = new FlySlot(handSlot, activeSlot);
+
+                if (drop) {
+                    selectedSlot.setDroped();
+                }
+                emptySlot = handSlot;
+                emptySlot.card = null;
+                update();
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+
+    
+    public void takeCard(){
+        player.takeCard(1);
     }
 }

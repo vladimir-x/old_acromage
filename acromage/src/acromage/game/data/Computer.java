@@ -19,13 +19,6 @@ public class Computer extends Player {
 
     private static Random randomGen = new Random(System.currentTimeMillis());
 
-    @Override
-    public void takeCard(int cnt) {
-        for (int i = 0; i < cnt; ++i) {
-            Card c = AppImpl.cardManager.selectRandomCard();
-            cards.add(c);
-        }
-    }
 
     @Override
     public void ding() {
@@ -44,5 +37,10 @@ public class Computer extends Player {
     public void randomStepDrop() {
         int r = randomGen.nextInt(cards.size());
         AppImpl.control.playCard(r, true);
+    }
+
+    @Override
+    public ArrayList<Card> getCards() {
+        return maskCards;
     }
 }
