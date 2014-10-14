@@ -6,6 +6,8 @@
 
 package acromage.game.interfaсe;
 
+import acromage.game.data.Card;
+
 /**
  *
  * @author admin
@@ -15,5 +17,5 @@ public interface GameControlable {
     // передать ход
     void switchTurn();
 
-    public boolean playCard(int r, boolean drop);
+    public boolean playCard(int r, Card card,boolean drop);
 }

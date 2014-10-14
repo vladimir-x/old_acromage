@@ -5,6 +5,7 @@
  */
 package acromage.game;
 
+import acromage.game.data.Card;
 import acromage.game.data.Computer;
 import acromage.game.data.Player;
 import acromage.game.data.User;
@@ -127,8 +128,8 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
     }
 
     @Override
-    public boolean playCard(int r, boolean drop) {
-        return hand.promptToSelect(r, drop);
+    public boolean playCard(int r, Card card,boolean drop) {
+        return hand.promptToSelect(r, card,drop);
     }
 
 }

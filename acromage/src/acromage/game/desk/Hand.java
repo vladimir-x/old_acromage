@@ -100,25 +100,26 @@ public class Hand extends Deskzone implements Actionable {
     public boolean promptToSelect(float propX, float propY, boolean drop) {
         for (HandSlot handSlot : slots) {
             if (handSlot.contains(propX, propY) && selectedSlot == null) {
-                return playSlot(handSlot, drop);
+                return playSlot(handSlot,handSlot.card, drop);
             }
         }
         return false;
     }
 
-    public boolean promptToSelect(int position, boolean drop) {
+    public boolean promptToSelect(int position, Card card,boolean drop) {
         if (position >= 0 && position < slots.size()) {
-            return playSlot(slots.get(position), drop);
+            return playSlot(slots.get(position), card, drop);
         } else {
             return false;
         }
     }
 
-    public boolean playSlot(HandSlot handSlot, boolean drop) {
+    public boolean playSlot(HandSlot handSlot, Card card, boolean drop) {
         if (selectedSlot == null) {
 
-            if (player.playable(handSlot.card) || drop) {
+            if (player.playable(card) || drop) {
                 selectedSlot = new FlySlot(handSlot, activeSlot);
+                selectedSlot.card = card;
 
                 if (drop) {
                     selectedSlot.setDroped();

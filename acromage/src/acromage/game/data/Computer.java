@@ -8,8 +8,6 @@ package acromage.game.data;
 import acromage.game.AppImpl;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +16,6 @@ import java.util.logging.Logger;
 public class Computer extends Player {
 
     private static Random randomGen = new Random(System.currentTimeMillis());
-
 
     @Override
     public void ding() {
@@ -29,14 +26,14 @@ public class Computer extends Player {
 
     public void randomStep() {
         int r = randomGen.nextInt(cards.size());
-        if (!AppImpl.control.playCard(r, false)) {
-            AppImpl.control.playCard(r, true);
+        if (!AppImpl.control.playCard(r, cards.get(r), false)) {
+            AppImpl.control.playCard(r, cards.get(r), true);
         }
     }
 
     public void randomStepDrop() {
         int r = randomGen.nextInt(cards.size());
-        AppImpl.control.playCard(r, true);
+        AppImpl.control.playCard(r, cards.get(r), true);
     }
 
     @Override
