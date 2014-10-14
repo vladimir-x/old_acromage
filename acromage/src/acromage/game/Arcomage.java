@@ -15,13 +15,10 @@ import acromage.game.desk.Hand;
 import acromage.game.desk.ResPanel;
 import acromage.game.interfaсe.GameControlable;
 import acromage.game.interfaсe.Rendereble;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL43;
 /**
  *
  * @author elduderino
@@ -54,9 +51,9 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         userHand.debugstr = "user";
         opponentHand.debugstr = "oppon";
 
-        board.setColor(Color.DARK_GRAY.sub(0, 0, 0, 0.1f));
-        resLeft.setColor(Color.BLUE.sub(0, 0, 0, 0.5f));
-        resRight.setColor(Color.RED.sub(0, 0, 0, 0.5f));
+        board.setColor(Color.DARK_GRAY.cpy().sub(0, 0, 0, 0.5f));
+        resLeft.setColor(Color.BLUE.cpy().sub(0, 0, 0, 0.5f));
+        resRight.setColor(Color.RED.cpy().sub(0, 0, 0, 0.5f));
 
         userHand.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
         opponentHand.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
@@ -88,18 +85,17 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-
         
-        
+                
         spriteBatch.begin();
         spriteBatch.draw(AppImpl.resources.boardTexture, 0, 0);
         spriteBatch.end();
-
+                
         board.render(renderer, spriteBatch);
         resLeft.render(renderer, spriteBatch);
         resRight.render(renderer, spriteBatch);
         hand.render(renderer, spriteBatch);
-
+       
     }
 
     @Override

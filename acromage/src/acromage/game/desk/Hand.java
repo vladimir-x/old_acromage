@@ -13,6 +13,9 @@ import acromage.game.interfaсe.Actionable;
 import acromage.game.slot.ActiveSlot;
 import acromage.game.slot.FlySlot;
 import acromage.game.slot.HandSlot;
+import acromage.game.slot.Slot;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -131,9 +134,7 @@ public class Hand extends Deskzone implements Actionable {
         return false;
     }
 
-
-    
-    public void takeCard(){
+    public void takeCard() {
         player.takeCard(1);
     }
 }

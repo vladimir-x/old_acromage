@@ -10,7 +10,7 @@ import acromage.game.GameInput;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import org.lwjgl.opengl.GL11;
+
 /**
  *
  * @author elduderino
@@ -31,7 +31,6 @@ public class BaseScreen implements Screen {
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
-        Gdx.gl.glClear(GL11.GL_COLOR_BUFFER_BIT);
     }
 
     @Override

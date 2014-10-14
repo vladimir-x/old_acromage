@@ -9,6 +9,7 @@ import acromage.game.data.Card;
 import acromage.game.interfaсe.Rendereble;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -45,8 +46,14 @@ public abstract class Slot implements Rendereble {
 
             spriteBatch.end();
             if (droped) {
+
+                Gdx.gl.glEnable(GL20.GL_BLEND);
+                Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+                Color c = Color.GRAY.cpy().sub(0, 0, 0, 0.5f);
+
                 renderer.begin(ShapeRenderer.ShapeType.Filled);
-                renderer.setColor(Color.GRAY.sub(0, 0, 0, 0.5f));
+                renderer.setColor(c);
+                //renderer.setColor(1, 0, 0, 0.3f);
                 renderer.rect(
                         rect.x,
                         rect.y,
@@ -54,6 +61,8 @@ public abstract class Slot implements Rendereble {
                         rect.height
                 );
                 renderer.end();
+                Gdx.gl.glDisable(GL20.GL_BLEND);
+
             }
         }
     }

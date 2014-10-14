@@ -44,6 +44,7 @@ public class FlySlot extends Slot implements Actionable {
         if (remainingTime < 0.00001) {
             //анимация прошла
             destination.card = card;
+            destination.droped = droped;
             destination.onGetCard();
             card = null;
 
