@@ -92,7 +92,6 @@ public class Board extends Deskzone implements Actionable {
         return deckSlot;
     }
 
-    
     public PlayedSlot getLastPlayedSlot() {
         return lastSlot;
     }
@@ -102,9 +101,11 @@ public class Board extends Deskzone implements Actionable {
         activeSlot.action(delta);
     }
 
-    public void passCard(Hand hand) {
+    public void passCard(Hand hand, boolean ding) {
         hand.takeCard();
-        hand.getPlayer().ding();
+        if (ding) {
+            hand.getPlayer().ding();
+        }
     }
 
     /**
@@ -116,17 +117,17 @@ public class Board extends Deskzone implements Actionable {
         Integer currentSter = AppImpl.control.getCurrentStepCount();
         for (int i = 0; i < playedSlots.size(); ++i) {
             Integer cartStep = playedSlots.get(i).getPlayedStep();
-            if (cartStep !=null && (currentSter - cartStep > 1)) {
+            if (cartStep != null && (currentSter - cartStep > 1)) {
                 FlySlot erasing = new FlySlot(playedSlots.get(i), deckSlot);
                 clearing++;
             } else {
                 break;
             }
         }
-        for (int i=clearing;i<playedSlots.size();++i){
-            FlySlot shifting = new FlySlot(playedSlots.get(i), playedSlots.get(i-clearing));
-                
+        for (int i = clearing; i < playedSlots.size(); ++i) {
+            FlySlot shifting = new FlySlot(playedSlots.get(i), playedSlots.get(i - clearing));
+
         }
-        
+
     }
 }

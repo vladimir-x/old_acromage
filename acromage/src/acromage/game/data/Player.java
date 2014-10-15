@@ -23,27 +23,14 @@ public abstract class Player {
         maskCards = new ArrayList<Card>();
     }
 
-    public Card takeCard(int cnt) {
-
-        int taked = 1;
-        int index = 0;
+    public Card takeCard() {
 
         Card lastCard = null;
-        do {
-            if ((cards.size() < index && cards.get(index) == null) || cards.size() >= index) {
-                lastCard = AppImpl.cardManager.selectRandomCard();
-
-                if (cards.size() < index) {
-                    cards.set(index, lastCard);
-                    maskCards.set(index, Card.getUndoCard());
-                } else {
-                    cards.add(lastCard);
-                    maskCards.add(Card.getUndoCard());
-                }
-                taked++;
-            }
-            index++;
-        } while (taked <= cnt);
+        for (int i = cards.size(); i < AppImpl.settings.cardCount; ++i) {
+            lastCard = AppImpl.cardManager.selectRandomCard();
+            cards.add(lastCard);
+            maskCards.add(Card.getUndoCard());
+        }
         return lastCard;
     }
 
@@ -59,6 +46,7 @@ public abstract class Player {
     public void removeCard(Card card) {
         if (cards.contains(card)) {
             cards.remove(card);
+            maskCards.remove(1);
         } else {
             System.out.println("not contain (");
         }

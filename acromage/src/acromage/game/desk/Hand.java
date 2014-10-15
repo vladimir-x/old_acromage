@@ -86,11 +86,7 @@ public class Hand extends Deskzone implements Actionable {
             selectedSlot.render(renderer, spriteBatch);
         }
         if (newCardSlot != null) {
-            if (newCardSlot.getCard() == null) {
-                newCardSlot = null;
-            } else {
-                newCardSlot.render(renderer, spriteBatch);
-            }
+            newCardSlot.render(renderer, spriteBatch);
         }
 
     }
@@ -101,6 +97,14 @@ public class Hand extends Deskzone implements Actionable {
             selectedSlot.action(delta);
             if (selectedSlot.getCard() == null) {
                 selectedSlot = null;
+            }
+        }
+
+        if (newCardSlot != null) {
+            if (newCardSlot.getCard() == null) {
+                newCardSlot = null;
+            } else {
+                newCardSlot.action(delta);
             }
         }
     }
@@ -135,7 +139,6 @@ public class Hand extends Deskzone implements Actionable {
 
                 emptySlot = handSlot;
                 emptySlot.setCard(null);
-                update();
                 return true;
             } else {
                 return false;
@@ -146,7 +149,7 @@ public class Hand extends Deskzone implements Actionable {
 
     public void takeCard() {
         newCardSlot = new FlySlot(deckSlot, emptySlot);
-        Card card = player.takeCard(1);
+        Card card = player.takeCard();
         newCardSlot.setCard(card);
 
     }
