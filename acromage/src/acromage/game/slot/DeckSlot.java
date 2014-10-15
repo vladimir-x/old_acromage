@@ -24,7 +24,7 @@ public class DeckSlot extends Slot {
 
     public DeckSlot(Board owner) {
         this.owner = owner;
-        card = Card.getUndoCard();
+        setCard(Card.getUndoCard());
     }
 
     @Override

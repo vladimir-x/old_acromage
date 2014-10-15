@@ -5,10 +5,12 @@
  */
 package acromage.game.desk;
 
+import acromage.game.AppImpl;
 import acromage.game.data.Player;
 import acromage.game.interfaсe.Actionable;
 import acromage.game.slot.ActiveSlot;
 import acromage.game.slot.DeckSlot;
+import acromage.game.slot.FlySlot;
 import acromage.game.slot.PlayedSlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -86,6 +88,11 @@ public class Board extends Deskzone implements Actionable {
         return activeSlot;
     }
 
+    public DeckSlot getDeckSlot() {
+        return deckSlot;
+    }
+
+    
     public PlayedSlot getLastPlayedSlot() {
         return lastSlot;
     }
@@ -96,6 +103,30 @@ public class Board extends Deskzone implements Actionable {
     }
 
     public void passCard(Hand hand) {
+        hand.takeCard();
         hand.getPlayer().ding();
+    }
+
+    /**
+     * убрать с поля карты с предыдущего хода
+     */
+    public void clearPrevStep() {
+        int clearing = 0;
+
+        Integer currentSter = AppImpl.control.getCurrentStepCount();
+        for (int i = 0; i < playedSlots.size(); ++i) {
+            Integer cartStep = playedSlots.get(i).getPlayedStep();
+            if (cartStep !=null && (currentSter - cartStep > 1)) {
+                FlySlot erasing = new FlySlot(playedSlots.get(i), deckSlot);
+                clearing++;
+            } else {
+                break;
+            }
+        }
+        for (int i=clearing;i<playedSlots.size();++i){
+            FlySlot shifting = new FlySlot(playedSlots.get(i), playedSlots.get(i-clearing));
+                
+        }
+        
     }
 }

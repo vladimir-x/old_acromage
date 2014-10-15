@@ -29,8 +29,7 @@ public class PlayedSlot extends Slot {
         this.board = board;
         this.posX = posX;
         this.posY = posY;
-
-        card = null;
+        setCard(null);
     }
 
     @Override
@@ -58,8 +57,8 @@ public class PlayedSlot extends Slot {
 
     @Override
     void onGetCard() {
-        System.out.println("card.isSwitchTurn() = " + card.isSwitchTurn());
-        if (card.isSwitchTurn()) {
+        System.out.println("card.isSwitchTurn() = " + getCard().isSwitchTurn());
+        if (getCard().isSwitchTurn()) {
             AppImpl.control.switchTurn();
         } 
         board.makeEmptySlot();

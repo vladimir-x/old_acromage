@@ -31,7 +31,7 @@ public class ActiveSlot extends Slot implements Actionable {
     public ActiveSlot(Board owner) {
         this.owner = owner;
         remainingTime = 0f;
-        card = null;
+        setCard(null);
     }
 
     @Override
@@ -74,19 +74,19 @@ public class ActiveSlot extends Slot implements Actionable {
             if (remainingTime < 0.000001f) {
                 playedCard = new FlySlot(this, owner.getLastPlayedSlot());
                 executeCard();
-                card = null;
+                setCard(null);
             }
         }
         if (playedCard != null) {
             playedCard.action(delta);
-            if (playedCard.card == null) {
+            if (playedCard.getCard() == null) {
                 playedCard = null;
             }
         }
     }
     
     private void executeCard(){
-        card.play();
+        getCard().play();
     }
 
 }

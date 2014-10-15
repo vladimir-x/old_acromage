@@ -21,9 +21,10 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class Slot implements Rendereble {
 
-    public Card card;
+    private Card card;
     Rectangle rect;
-    Boolean droped;
+    private Boolean droped;
+    Integer playedStep; // на каком ходу был разыгран
 
     public Slot() {
         card = null;
@@ -67,8 +68,29 @@ public abstract class Slot implements Rendereble {
         }
     }
 
-    public void setDroped() {
-        droped = true;
+    public Boolean getDroped() {
+        return droped;
     }
 
+    public void setDroped(Boolean droped) {
+        this.droped = droped;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public void setPlayedStep(Integer playedStep) {
+        this.playedStep = playedStep;
+    }
+
+    public Integer getPlayedStep() {
+        return playedStep;
+    }
+    
+    
 }

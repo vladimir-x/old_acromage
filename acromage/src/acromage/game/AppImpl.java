@@ -46,6 +46,8 @@ public class AppImpl extends Game {
         gameScreen = new GameScreen(this, input);
 
         setScreen(gameScreen);
+        
+        acromage.startGame();
     }
 
     @Override
@@ -62,6 +64,7 @@ public class AppImpl extends Game {
         acromage = new Arcomage();
         control = acromage;
         setScreen(gameScreen);
+        acromage.startGame();
     }
 
     public void end() {

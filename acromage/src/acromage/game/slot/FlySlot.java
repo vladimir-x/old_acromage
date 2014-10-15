@@ -25,10 +25,12 @@ public class FlySlot extends Slot implements Actionable {
 
     public FlySlot(Slot source, Slot destination) {
         this.rect = new Rectangle(source.getRect());
-        this.card = source.card;
-        this.droped = source.droped;
         this.destination = destination;
         this.remainingTime = FLY_TIME;
+
+        setCard(source.getCard());
+        setDroped(source.getDroped());
+        setPlayedStep(source.getPlayedStep());
     }
 
     @Override
@@ -36,17 +38,12 @@ public class FlySlot extends Slot implements Actionable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-
     @Override
     public void action(float delta) {
 
         if (remainingTime < 0.00001) {
             //анимация прошла
-            destination.card = card;
-            destination.droped = droped;
-            destination.onGetCard();
-            card = null;
+            onDest();
 
         } else if (delta > 0.00001) {
             float part = delta / remainingTime;
@@ -63,7 +60,14 @@ public class FlySlot extends Slot implements Actionable {
                 rect.y += deltaY;
             }
         }
+    }
 
+    public void onDest() {
+        destination.setCard(getCard());
+        destination.setDroped(getDroped());
+        destination.setPlayedStep(getPlayedStep());
+        destination.onGetCard();
+        setCard(null);
     }
 
 }

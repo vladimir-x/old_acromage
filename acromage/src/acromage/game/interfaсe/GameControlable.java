@@ -17,5 +17,8 @@ public interface GameControlable {
     // передать ход
     void switchTurn();
 
-    public boolean playCard(int r, Card card,boolean drop);
+    boolean playCard(int r, Card card,boolean drop);
+    
+    // узнать текущий № хода
+    Integer getCurrentStepCount();
 }

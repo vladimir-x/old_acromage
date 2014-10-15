@@ -20,6 +20,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 /**
  *
  * @author elduderino
@@ -38,6 +39,8 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
     Boolean isTurning;
 
+    Integer stepCounter;
+
     public Arcomage() {
 
         board = new Board(Deskzone.CENTER);
@@ -46,9 +49,9 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
         user = new User();
         opponent = new Computer();
-        
-        userHand = new Hand(Deskzone.SOUTH, board.getActiveSlot(),user);
-        opponentHand = new Hand(Deskzone.SOUTH, board.getActiveSlot(),opponent  );
+
+        userHand = new Hand(Deskzone.SOUTH, board.getActiveSlot(), board.getDeckSlot(), user);
+        opponentHand = new Hand(Deskzone.SOUTH, board.getActiveSlot(), board.getDeckSlot(), opponent);
         userHand.debugstr = "user";
         opponentHand.debugstr = "oppon";
 
@@ -59,15 +62,17 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         userHand.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
         opponentHand.setColor(Color.LIGHT_GRAY.sub(0, 0, 0, 0.5f));
 
-        
         isTurning = !true;//поменяется в  startGame()->swicthTurn()
-        startGame();
     }
 
-    private void startGame() {
+    public void startGame() {
 
         user.takeCard(AppImpl.settings.cardCount);
         opponent.takeCard(AppImpl.settings.cardCount);
+
+        update();
+        
+        stepCounter = 0;
 
         switchTurn();
     }
@@ -81,22 +86,23 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
             hand = opponentHand;
             player = opponent;
         }
+        ++stepCounter;
         board.passCard(hand);
+        board.clearPrevStep();
     }
 
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
-        
-                
+
         spriteBatch.begin();
         spriteBatch.draw(AppImpl.resources.boardTexture, 0, 0);
         spriteBatch.end();
-                
+
         board.render(renderer, spriteBatch);
         resLeft.render(renderer, spriteBatch);
         resRight.render(renderer, spriteBatch);
         hand.render(renderer, spriteBatch);
-       
+
     }
 
     @Override
@@ -128,8 +134,13 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
     }
 
     @Override
-    public boolean playCard(int r, Card card,boolean drop) {
-        return hand.promptToSelect(r, card,drop);
+    public boolean playCard(int r, Card card, boolean drop) {
+        return hand.promptToSelect(r, card, drop);
+    }
+
+    @Override
+    public Integer getCurrentStepCount() {
+        return stepCounter;
     }
 
 }

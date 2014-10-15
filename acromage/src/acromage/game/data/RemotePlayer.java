@@ -16,7 +16,7 @@ public class RemotePlayer extends Player{
 
 
     @Override
-    public void takeCard(int cnt) {
+    public Card takeCard(int cnt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
