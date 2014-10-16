@@ -5,11 +5,7 @@
  */
 package acromage.game.slot;
 
-import acromage.game.AppImpl;
 import acromage.game.interfaсe.Actionable;
-import acromage.game.interfaсe.Rendereble;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
@@ -22,6 +18,7 @@ public class FlySlot extends Slot implements Actionable {
 
     Slot destination;
     float remainingTime;
+    boolean hasOwer;
 
     public FlySlot(Slot source, Slot destination) {
         this.rect = new Rectangle(source.getRect());
@@ -31,6 +28,8 @@ public class FlySlot extends Slot implements Actionable {
         setCard(source.getCard());
         setDroped(source.getDroped());
         setPlayedStep(source.getPlayedStep());
+
+        hasOwer = false;
     }
 
     @Override
@@ -68,6 +67,10 @@ public class FlySlot extends Slot implements Actionable {
         destination.setPlayedStep(getPlayedStep());
         destination.onGetCard();
         setCard(null);
+        hasOwer = true;
     }
 
+    public boolean isOwer() {
+        return hasOwer;
+    }
 }

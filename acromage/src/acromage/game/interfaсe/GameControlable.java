@@ -7,6 +7,7 @@
 package acromage.game.interfaсe;
 
 import acromage.game.data.Card;
+import acromage.game.slot.FlySlot;
 
 /**
  *
@@ -17,7 +18,11 @@ public interface GameControlable {
     // передать ход
     void switchTurn();
 
+    //
     boolean playCard(int r, Card card,boolean drop);
+    
+    // 
+    void AnimateFlySlot(FlySlot slot,Runnable onFlyOver);
     
     // узнать текущий № хода
     Integer getCurrentStepCount();

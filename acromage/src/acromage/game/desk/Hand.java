@@ -31,6 +31,8 @@ public class Hand extends Deskzone implements Actionable {
     HandSlot emptySlot;
     Player player;
 
+    boolean waitingPlayer;
+
     public String debugstr;
 
     public Hand(int zone, ActiveSlot activeSlot, DeckSlot deckSlot, Player player) {
@@ -42,6 +44,7 @@ public class Hand extends Deskzone implements Actionable {
 
         selectedSlot = null;
         newCardSlot = null;
+        waitingPlayer = false;
     }
 
     public int getCount() {
@@ -74,52 +77,30 @@ public class Hand extends Deskzone implements Actionable {
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
         super.render(renderer, spriteBatch);
 
-        ArrayList<Card> cards = player.getCards();
-
         for (int i = 0; i < slots.size(); ++i) {
             HandSlot slot = slots.get(i);
-            //slot.setCard(cards.get(i));
             slot.render(renderer, spriteBatch);
         }
-
-        if (selectedSlot != null) {
-            selectedSlot.render(renderer, spriteBatch);
-        }
-        if (newCardSlot != null) {
-            newCardSlot.render(renderer, spriteBatch);
-        }
-
     }
 
     @Override
     public void action(float delta) {
-        if (selectedSlot != null) {
-            selectedSlot.action(delta);
-            if (selectedSlot.getCard() == null) {
-                selectedSlot = null;
-            }
-        }
 
-        if (newCardSlot != null) {
-            if (newCardSlot.getCard() == null) {
-                newCardSlot = null;
-            } else {
-                newCardSlot.action(delta);
-            }
-        }
     }
 
     public boolean promptToSelect(float propX, float propY, boolean drop) {
-        for (HandSlot handSlot : slots) {
-            if (handSlot.contains(propX, propY) && selectedSlot == null) {
-                return playSlot(handSlot, handSlot.getCard(), drop);
+        if (waitingPlayer) {
+            for (HandSlot handSlot : slots) {
+                if (handSlot.contains(propX, propY)) {
+                    return playSlot(handSlot, handSlot.getCard(), drop);
+                }
             }
         }
         return false;
     }
 
     public boolean promptToSelect(int position, Card card, boolean drop) {
-        if (position >= 0 && position < slots.size()) {
+        if (waitingPlayer && position >= 0 && position < slots.size()) {
             return playSlot(slots.get(position), card, drop);
         } else {
             return false;
@@ -127,13 +108,16 @@ public class Hand extends Deskzone implements Actionable {
     }
 
     public boolean playSlot(HandSlot handSlot, Card card, boolean drop) {
-        if (selectedSlot == null) {
+        if (waitingPlayer) {
 
             if (player.playable(card) || drop) {
-                selectedSlot = new FlySlot(handSlot, activeSlot);
+                waitingPlayer = false;
+                FlySlot selectedSlot = new FlySlot(handSlot, activeSlot);
                 selectedSlot.setPlayedStep(AppImpl.control.getCurrentStepCount());
                 selectedSlot.setDroped(drop);
                 selectedSlot.setCard(card);
+
+                AppImpl.control.AnimateFlySlot(selectedSlot, null);
 
                 player.removeCard(card);
 
@@ -148,9 +132,21 @@ public class Hand extends Deskzone implements Actionable {
     }
 
     public void takeCard() {
-        newCardSlot = new FlySlot(deckSlot, emptySlot);
-        Card card = player.takeCard();
+        FlySlot newCardSlot = new FlySlot(deckSlot, emptySlot);
+        final Card card = AppImpl.cardManager.selectRandomCard();
         newCardSlot.setCard(card);
+        AppImpl.control.AnimateFlySlot(newCardSlot, new Runnable() {
+
+            @Override
+            public void run() {
+                player.takeCard(card);
+            }
+        });
 
     }
+
+    public void setWaitingPlayer() {
+        waitingPlayer = true;
+    }
+
 }

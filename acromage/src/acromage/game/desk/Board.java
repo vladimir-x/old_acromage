@@ -26,6 +26,7 @@ public class Board extends Deskzone implements Actionable {
     public static final int CARDS_SPACE_X = 30;
     public static final int CARDS_SPACE_Y = 40;
 
+    
     DeckSlot deckSlot;
     ActiveSlot activeSlot;
 

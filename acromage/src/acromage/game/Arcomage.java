@@ -16,6 +16,7 @@ import acromage.game.desk.Hand;
 import acromage.game.desk.ResPanel;
 import acromage.game.interfaсe.GameControlable;
 import acromage.game.interfaсe.Rendereble;
+import acromage.game.slot.FlySlot;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,6 +27,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  * @author elduderino
  */
 public class Arcomage implements Rendereble, Actionable, GameControlable {
+
+    AnimPool animPool;
 
     ResPanel resLeft, resRight;
 
@@ -43,6 +46,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
     public Arcomage() {
 
+        animPool = new AnimPool();
         board = new Board(Deskzone.CENTER);
         resLeft = new ResPanel(Deskzone.WEST);
         resRight = new ResPanel(Deskzone.EAST);
@@ -71,8 +75,8 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         //opponent.takeCard(AppImpl.settings.cardCount);
         stepCounter = 0;
 
-        board.passCard(userHand,false);
-        board.passCard(opponentHand,false);
+        board.passCard(userHand, false);
+        board.passCard(opponentHand, false);
         update();
         switchTurn();
 
@@ -88,7 +92,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
             player = opponent;
         }
         ++stepCounter;
-        board.passCard(hand,true);
+        board.passCard(hand, true);
         board.clearPrevStep();
     }
 
@@ -103,6 +107,8 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         resLeft.render(renderer, spriteBatch);
         resRight.render(renderer, spriteBatch);
         hand.render(renderer, spriteBatch);
+        
+        animPool.render(renderer, spriteBatch);
 
     }
 
@@ -114,12 +120,15 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
         userHand.update();
         opponentHand.update();
+        
+        animPool.update();
     }
 
     @Override
     public void action(float delta) {
         board.action(delta);
         hand.action(delta);
+        animPool.action(delta);
     }
 
     public void promptToStep(float propX, float propY, int button) {
@@ -142,6 +151,11 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
     @Override
     public Integer getCurrentStepCount() {
         return stepCounter;
+    }
+
+    @Override
+    public void AnimateFlySlot(FlySlot slot, Runnable onFlyOver) {
+        animPool.putSlot(slot, onFlyOver);
     }
 
 }
