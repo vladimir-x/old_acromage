@@ -10,6 +10,7 @@ import acromage.game.interfaсe.Rendereble;
 import acromage.game.slot.FlySlot;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,14 +32,20 @@ public class AnimPool implements Actionable, Rendereble {
 
     @Override
     public void action(float delta) {
+        ArrayList<FlySlot> toDelete = new ArrayList<FlySlot>();
         for (FlySlot slot : fSlots.keySet()) {
             slot.action(delta);
             if (slot.isOwer()) {
                 if (fSlots.get(slot) != null) {
                     fSlots.get(slot).run();
                 }
-                fSlots.remove(slot);
+                toDelete.add(slot);
             }
+        }
+        
+        for (FlySlot slot : toDelete) {
+            fSlots.remove(slot);
+
         }
     }
 
