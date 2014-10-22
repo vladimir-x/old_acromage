@@ -75,8 +75,8 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         //opponent.takeCard(AppImpl.settings.cardCount);
         stepCounter = 0;
 
-        board.passCard(userHand, false);
-        board.passCard(opponentHand, false);
+        userHand.takeCard(false);
+        opponentHand.takeCard(false);
         update();
         switchTurn();
 
@@ -92,8 +92,9 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
             player = opponent;
         }
         ++stepCounter;
-        board.passCard(hand, true);
-        board.clearPrevStep();
+        //board.clearPrevStep();
+        hand.takeCard(true);
+        hand.setWaitingPlayer();
     }
 
     @Override
@@ -107,7 +108,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         resLeft.render(renderer, spriteBatch);
         resRight.render(renderer, spriteBatch);
         hand.render(renderer, spriteBatch);
-        
+
         animPool.render(renderer, spriteBatch);
 
     }
@@ -120,7 +121,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
 
         userHand.update();
         opponentHand.update();
-        
+
         animPool.update();
     }
 

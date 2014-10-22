@@ -63,14 +63,14 @@ public class Hand extends Deskzone implements Actionable {
     @Override
     public void update() {
         super.update();
-
-        slots.clear();
-        for (int i = 0; i < player.getCards().size(); ++i) {
-            HandSlot slot = new HandSlot(this, i);
-            slot.update();
-            slot.setCard(player.getCards().get(i));
-            slots.add(slot);
-        }
+        /*
+         slots.clear();
+         for (int i = 0; i < player.getCards().size(); ++i) {
+         HandSlot slot = new HandSlot(this, i);
+         slot.update();
+         slot.setCard(player.getCards().get(i));
+         slots.add(slot);
+         }*/
     }
 
     @Override
@@ -131,8 +131,21 @@ public class Hand extends Deskzone implements Actionable {
         return false;
     }
 
-    public void takeCard() {
-        FlySlot newCardSlot = new FlySlot(deckSlot, emptySlot);
+    public void takeCard(boolean setWaiting) {
+        if (emptySlot == null) {
+            for (int i = player.getCards().size(); i < AppImpl.settings.cardCount; ++i) {
+                HandSlot slot = new HandSlot(this, i);
+                slot.update();
+                slots.add(slot);
+                takeOneCard(slot, false);
+            }
+        } else {
+            takeOneCard(emptySlot, true);
+        }
+    }
+
+    private void takeOneCard(HandSlot handSlot, final boolean setWaiting) {
+        FlySlot newCardSlot = new FlySlot(deckSlot, handSlot);
         final Card card = AppImpl.cardManager.selectRandomCard();
         newCardSlot.setCard(card);
         AppImpl.control.AnimateFlySlot(newCardSlot, new Runnable() {
@@ -140,13 +153,16 @@ public class Hand extends Deskzone implements Actionable {
             @Override
             public void run() {
                 player.takeCard(card);
+                if (setWaiting) {
+                    setWaitingPlayer() ;
+                }
             }
         });
-
     }
 
     public void setWaitingPlayer() {
         waitingPlayer = true;
+        player.ding();
     }
 
 }

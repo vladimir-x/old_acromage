@@ -23,14 +23,11 @@ public abstract class Player {
         maskCards = new ArrayList<Card>();
     }
 
-    // при вставке первая карта - указана. Необходимо при сдаче однйо карты в начале хода
+    // при вставке первая карта - указана. 
     public Card takeCard(Card card) {
         Card lastCard = card;
-        for (int i = cards.size(); i < AppImpl.settings.cardCount; ++i) {
-            cards.add(lastCard);
-            maskCards.add(Card.getUndoCard());
-            lastCard = AppImpl.cardManager.selectRandomCard();
-        }
+        cards.add(lastCard);
+        maskCards.add(Card.getUndoCard());
         return lastCard;
     }
 

@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class FlySlot extends Slot implements Actionable {
 
-    private static float FLY_TIME = 0.30f;//количество секунд, зак оторые производится прохождение полного пути полёта
+    private static float FLY_TIME = 1f;//0.30f;//количество секунд, зак оторые производится прохождение полного пути полёта
 
     Slot destination;
     float remainingTime;

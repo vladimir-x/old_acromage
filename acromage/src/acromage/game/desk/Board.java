@@ -102,13 +102,6 @@ public class Board extends Deskzone implements Actionable {
         activeSlot.action(delta);
     }
 
-    public void passCard(Hand hand, boolean ding) {
-        hand.takeCard();
-        if (ding) {
-            hand.getPlayer().ding();
-        }
-    }
-
     /**
      * убрать с поля карты с предыдущего хода
      */

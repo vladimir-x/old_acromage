@@ -53,7 +53,6 @@ public abstract class Slot implements Rendereble {
 
                 renderer.begin(ShapeRenderer.ShapeType.Filled);
                 renderer.setColor(c);
-                //renderer.setColor(1, 0, 0, 0.3f);
                 renderer.rect(
                         rect.x,
                         rect.y,
@@ -62,7 +61,6 @@ public abstract class Slot implements Rendereble {
                 );
                 renderer.end();
                 Gdx.gl.glDisable(GL20.GL_BLEND);
-
             }
         }
     }
