@@ -34,7 +34,6 @@ public class AnimPool implements Actionable, Rendereble {
     public void action(float delta) {
         ArrayList<FlySlot> toDelete = new ArrayList<FlySlot>();
         for (FlySlot slot : fSlots.keySet()) {
-            System.out.println("x");
             slot.action(delta);
             if (slot.isOwer()) {
                 if (fSlots.get(slot) != null) {

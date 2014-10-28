@@ -19,7 +19,10 @@ public class Computer extends Player {
 
     @Override
     public void ding() {
+        System.out.println("st");
         randomStep();
+        System.out.println("en");
+
     }
 
     public void randomStep() {

@@ -131,7 +131,7 @@ public class Hand extends Deskzone implements Actionable {
         return false;
     }
 
-    public void takeCard(boolean setWaiting) {
+    public void takeCard(boolean atStep) {
         if (emptySlot == null) {
             for (int i = player.getCards().size(); i < AppImpl.settings.cardCount; ++i) {
                 HandSlot slot = new HandSlot(this, i);
@@ -144,17 +144,20 @@ public class Hand extends Deskzone implements Actionable {
         }
     }
 
-    private void takeOneCard(HandSlot handSlot, final boolean setWaiting) {
+    private void takeOneCard(HandSlot handSlot, final boolean atStep) {
         FlySlot newCardSlot = new FlySlot(deckSlot, handSlot);
         final Card card = AppImpl.cardManager.selectRandomCard();
         newCardSlot.setCard(card);
+        if (!atStep) {
+            player.takeCard(card);
+        }
         AppImpl.control.AnimateFlySlot(newCardSlot, new Runnable() {
 
             @Override
             public void run() {
-                player.takeCard(card);
-                if (setWaiting) {
-                    setWaitingPlayer() ;
+                if (atStep) {
+                    player.takeCard(card);
+                    setWaitingPlayer();
                 }
             }
         });

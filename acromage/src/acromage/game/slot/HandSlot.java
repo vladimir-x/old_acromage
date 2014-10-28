@@ -24,7 +24,6 @@ public class HandSlot extends Slot {
     private Hand hand;
     private int pos;
 
-
     public HandSlot(Hand hand, int pos) {
         this.hand = hand;
         this.pos = pos;
@@ -58,9 +57,9 @@ public class HandSlot extends Slot {
     @Override
     public void render(ShapeRenderer renderer, SpriteBatch spriteBatch) {
         super.render(renderer, spriteBatch);
-        
+
         renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.setColor(Color.GREEN);
+        renderer.setColor(Color.GREEN.cpy());
         renderer.rect(rect.x, rect.y, rect.width, rect.height);
         renderer.end();
     }

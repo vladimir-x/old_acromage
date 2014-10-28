@@ -88,6 +88,5 @@ public abstract class Slot implements Rendereble {
     public Integer getPlayedStep() {
         return playedStep;
     }
-    
-    
+
 }

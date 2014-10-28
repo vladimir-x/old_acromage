@@ -79,6 +79,7 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         opponentHand.takeCard(false);
         update();
         switchTurn();
+        hand.setWaitingPlayer();
 
     }
 
@@ -94,7 +95,6 @@ public class Arcomage implements Rendereble, Actionable, GameControlable {
         ++stepCounter;
         //board.clearPrevStep();
         hand.takeCard(true);
-        hand.setWaitingPlayer();
     }
 
     @Override
